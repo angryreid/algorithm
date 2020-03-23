@@ -1,0 +1,5 @@
+package emma;
+
+public interface List {
+
+}
