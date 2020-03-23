@@ -6,7 +6,15 @@
 <fullyQualifiedTypeName name="Times.Task"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="emma.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="javax.xml.soap.Node"/>
+<fullyQualifiedTypeName name="E"/>
+<fullyQualifiedTypeName name="emma.LinkedList.Node"/>
+<fullyQualifiedTypeName name="emma.ArrayList"/>
+<fullyQualifiedTypeName name="emma.List"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.NoClassDefFoundError"/>
+<fullyQualifiedTypeName name="emma.AbstractList"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="emma.LinkedList"/>
 </qualifiedTypeNameHistroy>
