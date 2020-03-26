@@ -1,5 +1,7 @@
 package emma;
 
+import javax.swing.border.Border;
+
 public class Main {
   static void test() {
     Queue<Integer> queue = new Queue<Integer>();
@@ -54,14 +56,59 @@ public class Main {
     }
   }
 
+  public static int numRookCaptures(char[][] board) {
+    // 1.Firstly, you should know the shape of the board in cartesian coordinate
+    // system.
+    // It might looks like this;
+    // 0------>y
+    // |
+    // |
+    // v
+    // x
+
+    // 2. Define 4 directions;
+    // top, right, bottom,left;
+    int[] dx = { -1, 0, 1, 0 };
+    int[] dy = { 0, 1, 0, -1 };
+
+    for (int i = 0; i < 8; i++) { // x
+      for (int j = 0; j < 8; j++) { // y
+        if (board[i][j] == 'R') { // Get R
+          int res = 0;
+          // Check 4 direction if there is a 'p' or 'B'
+          for (int k = 0; k < 4; k++) {
+            int x = i, y = j;
+            while (true) {
+              x += dx[k];
+              y += dy[k];
+              if (x < 0 || x >= 8 || y < 0 || y >= 8 || board[x][y] == 'B') {
+                break;
+              }
+              if (board[x][y] == 'p') {
+                res++;
+                break;
+              }
+            }
+          }
+          return res;
+        }
+      }
+    }
+    return 0;
+  }
+
   public static void main(String[] args) {
     // TODO Auto-generated method stub
 //    test();
 //    testMyQueue();
 //    int[] nums = { 1, 2, 2, 3, 8 };
 //    System.out.println(massage(nums));
-    
-    testDeque();
+    char[][] charArr = { { '.', '.', '.', '.', '.', '.', '.', '.' }, { '.', '.', '.', 'p', '.', '.', '.', '.' },
+        { '.', '.', '.', 'R', '.', '.', '.', 'p' }, { '.', '.', '.', '.', '.', '.', '.', '.' },
+        { '.', '.', '.', '.', '.', '.', '.', '.' }, { '.', '.', '.', 'p', '.', '.', '.', '.' },
+        { '.', '.', '.', '.', '.', '.', '.', '.' }, { '.', '.', '.', '.', '.', '.', '.', '.' } };
+//    testDeque();
+    System.out.println(numRookCaptures(charArr)); // 3
   }
 
 }
