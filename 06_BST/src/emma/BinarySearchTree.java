@@ -2,7 +2,9 @@ package emma;
 
 import java.util.Comparator;
 
-public class BinarySearchTree<E> {
+import printer.BinaryTreeInfo;
+
+public class BinarySearchTree<E> implements BinaryTreeInfo {
   private int size;
   Node<E> root;
   private Comparator<E> comparator;
@@ -10,7 +12,7 @@ public class BinarySearchTree<E> {
   public BinarySearchTree(Comparator<E> comparator) {
     this.comparator = comparator;
   }
-  
+
   public BinarySearchTree() {
     this(null);
   }
@@ -51,6 +53,7 @@ public class BinarySearchTree<E> {
       } else if (compareRes < 0) {
         node = node.left;
       } else { // equals
+        node.element = element;// Cover
         return;
       }
     }
@@ -72,10 +75,10 @@ public class BinarySearchTree<E> {
    * @return 0 el1 == el2 > 0 el1 > el2 < 0 el1 < el2
    */
   private int compare(E el1, E el2) {//
-    if(comparator != null) {
+    if (comparator != null) {
       return comparator.compare(el1, el2);
     }
-    return ((Comparable<E>)el1).compareTo(el2);
+    return ((java.lang.Comparable<E>) el1).compareTo(el2);
   }
 
   public void remove(E element) {
@@ -102,5 +105,30 @@ public class BinarySearchTree<E> {
       this.element = element;
       this.parent = parent;
     }
+  }
+
+  @Override
+  public Object root() {
+    return root;
+  }
+
+  @Override
+  public Object left(Object node) {
+    return ((Node<E>) node).left;
+  }
+
+  @Override
+  public Object right(Object node) {
+    return ((Node<E>) node).right;
+  }
+
+  @Override
+  public Object string(Object node) {
+    Node<E> myNode = (Node<E>) node;
+    String parentString = "null";
+    if (myNode.parent != null) {
+      parentString = myNode.parent.element.toString();
+    }
+    return myNode.element + "_p(" + parentString + ")";
   }
 }
