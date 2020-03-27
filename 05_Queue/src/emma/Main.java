@@ -1,7 +1,5 @@
 package emma;
 
-import javax.swing.border.Border;
-
 public class Main {
   static void test() {
     Queue<Integer> queue = new Queue<Integer>();
@@ -56,6 +54,12 @@ public class Main {
     }
   }
 
+  /**
+   * leetcode . 999
+   * 
+   * @param board
+   * @return
+   */
   public static int numRookCaptures(char[][] board) {
     // 1.Firstly, you should know the shape of the board in cartesian coordinate
     // system.
@@ -109,6 +113,8 @@ public class Main {
         { '.', '.', '.', '.', '.', '.', '.', '.' }, { '.', '.', '.', '.', '.', '.', '.', '.' } };
 //    testDeque();
     System.out.println(numRookCaptures(charArr)); // 3
+    System.out.println(Math.ceil(5 / 2));
+    System.out.println(Math.floor(5 / 2));
   }
 
 }
