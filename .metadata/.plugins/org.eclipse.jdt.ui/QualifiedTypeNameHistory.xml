@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.print.attribute.standard.Finishings"/>
-<fullyQualifiedTypeName name="Times"/>
-<fullyQualifiedTypeName name="Times.Task"/>
-<fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="javax.xml.soap.Node"/>
 <fullyQualifiedTypeName name="emma.LinkedList.Node"/>
 <fullyQualifiedTypeName name="emma.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.NoClassDefFoundError"/>
 <fullyQualifiedTypeName name="emma.AbstractList"/>
 <fullyQualifiedTypeName name="emma.LinkedList"/>
-<fullyQualifiedTypeName name="java.security.PublicKey"/>
 <fullyQualifiedTypeName name="emma.List"/>
 <fullyQualifiedTypeName name="circle.CircleLinkedList"/>
 <fullyQualifiedTypeName name="list.ArrayList"/>
@@ -27,7 +21,6 @@
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.PreAction"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Field"/>
 <fullyQualifiedTypeName name="list.LinkedList.Node"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.Stack"/>
 <fullyQualifiedTypeName name="java.sql.SQLNonTransientConnectionException"/>
@@ -35,10 +28,36 @@
 <fullyQualifiedTypeName name="list.List"/>
 <fullyQualifiedTypeName name="list.LinkedList"/>
 <fullyQualifiedTypeName name="emma.Queue"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="emma.Deque"/>
 <fullyQualifiedTypeName name="javax.swing.border.Border"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="E"/>
+<fullyQualifiedTypeName name="java.lang.invoke.ConstantCallSite"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.LineListener"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.security.PublicKey"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="emma.Comparator"/>
+<fullyQualifiedTypeName name="emma.Comparable"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
+<fullyQualifiedTypeName name="emma.Person"/>
+<fullyQualifiedTypeName name="emma.BinarySearchTree"/>
+<fullyQualifiedTypeName name="printer.BinaryTreeInfo"/>
+<fullyQualifiedTypeName name="java.lang.Comparable"/>
+<fullyQualifiedTypeName name="printer.BinaryTrees"/>
+<fullyQualifiedTypeName name="file.Files"/>
+<fullyQualifiedTypeName name="emma.Main.PersonComparator"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="emma.BinarySearchTree.Node"/>
+<fullyQualifiedTypeName name="E"/>
+<fullyQualifiedTypeName name="emma.BinarySearchTree.Accessor"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="javax.activation.MailcapCommandMap"/>
+<fullyQualifiedTypeName name="java.util.Queue"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.ArrayDeque"/>
+<fullyQualifiedTypeName name="java.awt.Point"/>
 </qualifiedTypeNameHistroy>
