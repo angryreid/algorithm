@@ -10,30 +10,34 @@ public class _5_LongestPalindromicSubstring {
    * @return 输入: "babad" 输出: "bab" 注意: "aba"也是一个有效答案。
    */
   public static String longestPalindrome(String s) {
-    if(s.equals("")) {
+    if (s.equals(""))
       return "";
-    }
-    String originString = s;
-    String reverString = new StringBuffer(s).reverse().toString();// reverse string.
+    String origin = s;
+    String reverse = new StringBuffer(s).reverse().toString();
     int length = s.length();
-    int[][] arr = new int[length][length];
+    int[] arr = new int[length];
     int maxLen = 0;
     int maxEnd = 0;
-    for (int i = 0; i < length; i++) {
-      for (int j = 0; j < length; j++) {
-        if(originString.charAt(i) == reverString.charAt(j)) {
-          if(i == 0 || j == 0) {
-            arr[i][j] = 1;
-          }else {
-            arr[i][j] = arr[i - 1][j - 1] + 1;
+    for (int i = 0; i < length; i++)
+      for (int j = length - 1; j >= 0; j--) {
+        if (origin.charAt(i) == reverse.charAt(j)) {
+          if (i == 0 || j == 0) {
+            arr[j] = 1;
+          } else {
+            arr[j] = arr[j - 1] + 1;
           }
+        } else {
+          arr[j] = 0;
         }
-        if (arr[i][j] > maxLen) {
-          maxLen = arr[i][j];
-          maxEnd = i; //以 i 位置结尾的字符
+        if (arr[j] > maxLen) {
+          int beforeRev = length - 1 - j;
+          if (beforeRev + arr[j] - 1 == i) {
+            maxLen = arr[j];
+            maxEnd = i;
+          }
+
         }
       }
-    }
     return s.substring(maxEnd - maxLen + 1, maxEnd + 1);
   }
 
@@ -50,8 +54,8 @@ public class _5_LongestPalindromicSubstring {
     int len = s.length();
     for (int i = 0; i < len; i++) {
       for (int j = 0; j <= len; j++) {
-        String test  = s.substring(i, j);
-        if(isPalinddromic(test) && test.length() > max) {
+        String test = s.substring(i, j);
+        if (isPalinddromic(test) && test.length() > max) {
           ans = s.substring(i, j);
           max = Math.max(max, ans.length());
         }
@@ -71,7 +75,7 @@ public class _5_LongestPalindromicSubstring {
   }
 
   public static void main(String[] args) {
-    String string = "";
-    System.out.println(longestPalindrome(string));
+    String string = "aacdefcaa";
+    System.out.println(longestPalindrome(string));// "aa"
   }
 }
