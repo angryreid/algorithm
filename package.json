@@ -1,0 +1,19 @@
+{
+  "name": "algorithm-java",
+  "version": "1.0.0",
+  "description": "算法",
+  "main": "index.js",
+  "scripts": {
+    "gp": "git add -A && git commit -m 'update' && git pull && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angryreid/algorithm-java.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angryreid/algorithm-java/issues"
+  },
+  "homepage": "https://github.com/angryreid/algorithm-java#readme"
+}

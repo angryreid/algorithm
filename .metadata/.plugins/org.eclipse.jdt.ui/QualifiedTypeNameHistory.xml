@@ -57,7 +57,7 @@
 <fullyQualifiedTypeName name="java.awt.Point"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 </qualifiedTypeNameHistroy>
