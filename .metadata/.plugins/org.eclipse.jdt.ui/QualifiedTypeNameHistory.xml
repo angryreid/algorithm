@@ -43,7 +43,6 @@
 <fullyQualifiedTypeName name="printer.BinaryTrees"/>
 <fullyQualifiedTypeName name="file.Files"/>
 <fullyQualifiedTypeName name="emma.Main.PersonComparator"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="emma.BinarySearchTree.Node"/>
 <fullyQualifiedTypeName name="E"/>
 <fullyQualifiedTypeName name="emma.BinarySearchTree.Accessor"/>
@@ -56,8 +55,9 @@
 <fullyQualifiedTypeName name="java.util.ArrayDeque"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>
