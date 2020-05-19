@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="emma.LinkedList.Node"/>
-<fullyQualifiedTypeName name="emma.ArrayList"/>
-<fullyQualifiedTypeName name="java.lang.NoClassDefFoundError"/>
 <fullyQualifiedTypeName name="emma.AbstractList"/>
 <fullyQualifiedTypeName name="emma.LinkedList"/>
 <fullyQualifiedTypeName name="emma.List"/>
@@ -48,7 +45,6 @@
 <fullyQualifiedTypeName name="emma.BinarySearchTree.Accessor"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="javax.activation.MailcapCommandMap"/>
 <fullyQualifiedTypeName name="java.util.Queue"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
@@ -59,5 +55,9 @@
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.lang.reflect.WildcardType"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>
