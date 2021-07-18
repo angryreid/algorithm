@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;ArrayList.java&apos; to &apos;03_LinkedList/src/emma&apos;&#x0A;- Original project: &apos;02_DynamicArray&apos;&#x0A;- Destination element: &apos;03_LinkedList/src/emma&apos;&#x0A;- Original element: &apos;emma.ArrayList.java&apos;" description="Copy compilation unit" destination="=03_LinkedList/src&lt;emma" element1="/src&lt;emma{ArrayList.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1584672343814" units="1" version="1.0"/>
-</session>
