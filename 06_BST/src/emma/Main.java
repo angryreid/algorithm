@@ -32,11 +32,13 @@ public class Main {
     BinarySearchTree<Integer> bstBinarySearchTree3 = new BinarySearchTree<Integer>();// Integer
     int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9 };
     for (int num : treeArray) {
+      bstBinarySearchTree.add(new Person(num));
       bstBinarySearchTree3.add(num);
     }
     BinaryTrees.print(bstBinarySearchTree3);
+    BinaryTrees.print(bstBinarySearchTree);
     String str = BinaryTrees.printString(bstBinarySearchTree3);
-    Files.writeToFile("/Users/mac005/Documents/bst.txt", str);
+    Files.writeToFile("/Users/lydia/Documents/repo/algorithm/06_BST/src/text/bst.txt", str);
   }
 
   public static void testOrderTraveral() {
@@ -68,5 +70,6 @@ public class Main {
 
   public static void main(String[] args) {
     testOrderTraveral();
+    testComparator();
   }
 }
