@@ -48,7 +48,7 @@ public class Main {
       bst.add(num);
     }
 
-    BinaryTrees.print(bst);
+//    BinaryTrees.print(bst);
     System.out.println("\n");
     // bst.preorderTraversal(); // preorder traversal
     // bst.inorderTraversal(); // inorder traversal
@@ -57,19 +57,61 @@ public class Main {
 
     // using Accessor
     bst.levelOrderTraversal(new Accessor<Integer>() {
-
       @Override
-      public void access(Integer el) {
-        // TODO Auto-generated method stub
-        System.out.print(el + "->");
+      boolean access(Integer el) {
+        if (el.equals(68)) return true;
+        return false;
       }
 
+//      @Override
+//      public void access(Integer el) {
+//        // TODO Auto-generated method stub
+//        System.out.print(el + "->");
+//      }
+
+    });
+    bst.showTravelOrder();
+
+    System.out.println("> postOrder:");
+    bst.accessPostorderTraversal(new Accessor<Integer>() {
+
+      @Override
+      boolean access(Integer el) {
+        if (el.equals(6)) return true;
+        return false;
+      }
     });
     bst.showTravelOrder();
   }
 
+  public static void testPreorder() {
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();// Integer
+    int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9 };
+    for (int num : treeArray) {
+      bst.add(num);
+    }
+//    bst.preorderTraversal();
+    BinaryTrees.print(bst);
+    System.out.println();
+    System.out.println(bst.toString());
+  }
+
+  public static void testHeight() {
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();// Integer
+    int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9, 7, 8 };
+    for (int num : treeArray) {
+      bst.add(num);
+    }
+
+    System.out.println(bst.height());
+    System.out.println(bst.heightLevel());
+    BinaryTrees.print(bst);
+  }
+
   public static void main(String[] args) {
-    testOrderTraveral();
-    testComparator();
+//    testOrderTraveral();
+//    testComparator();
+//    testPreorder();
+    testHeight();
   }
 }

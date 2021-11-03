@@ -104,6 +104,52 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     preorderTraversal(root);
   }
 
+  public int height() {
+    return height(root);
+  }
+
+  public int height(Node<E> node) {
+    if(node == null) return 0;
+    return Math.max(height(node.left), height(node.right)) +  1;
+  }
+
+  public int heightLevel() {
+    if(root == null) return 0;
+    int height = 0;
+    int levelSize = 1;
+    Queue<Node<E>> queue = new LinkedList<Node<E>>();
+    queue.offer(root); // enQueue
+    while (!queue.isEmpty()) {
+      int length = queue.size();
+      levelSize--;
+      Node<E> cNode = queue.poll();
+
+      if (cNode.left != null)
+        queue.offer(cNode.left);
+      if (cNode.right != null)
+        queue.offer(cNode.right);
+      if (levelSize == 0) {
+        height += 1 ;
+        levelSize = queue.size();
+      }
+    }
+    return height;
+  }
+
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    toString(root, sb, "");
+    return sb.toString();
+  }
+
+  public void toString(Node<E> node,StringBuilder sb, String prefix) {
+    if(node == null) return;
+//    sb.append(prefix).append(node.element).append("\n");
+    toString(node.left, sb, prefix + "L---");
+    sb.append(prefix).append(node.element).append("\n"); // Inorder of BST is sorted
+    toString(node.right, sb, prefix + "R---");
+  }
+
   /**
    * preorder traversal.
    * 
@@ -136,9 +182,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     inorderTraversal(node.right);
   }
 
-  public void postorderTraversal() {
+  public void accessPostorderTraversal(Accessor<E> accessor) {
     traversalOrderList.clear();
-    postorderTraversal(root);
+    postorderTraversal(root, accessor);
   }
 
   /**
@@ -146,13 +192,16 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
    * 
    * @param node
    */
-  private void postorderTraversal(Node<E> node) {
-    if (node == null)
+  private void postorderTraversal(Node<E> node, Accessor<E> accessor) {
+    if (node == null || accessor.stop)
       return;
-    postorderTraversal(node.left);
-    postorderTraversal(node.right);
+    postorderTraversal(node.left, accessor);
+    postorderTraversal(node.right, accessor);
+    if (accessor.stop) return;
+    accessor.stop = accessor.access(node.element);
     traversalOrderList.add(node.element);
   }
+
 
   public void levelOrderTraversal() {
     traversalOrderList.clear();
@@ -162,7 +211,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
   /**
    * level-order traversal
    * 
-   * @param node
+   * @param accessor
    */
   public void levelOrderTraversal(Accessor<E> accessor) {
     Queue<Node<E>> queue = new LinkedList<Node<E>>();
@@ -194,8 +243,9 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
   }
 
-  public static interface Accessor<E> {// Accessor，Customized data after getting
-    void access(E el);
+  public static abstract class Accessor<E> {// Accessor，Customized data after getting
+    boolean stop;
+    abstract boolean access(E el);
   }
 
   @Override
