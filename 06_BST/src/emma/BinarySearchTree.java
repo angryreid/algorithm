@@ -227,6 +227,27 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
   }
 
+  public boolean isComplete() {
+    Queue<Node<E>> queue = new LinkedList<Node<E>>();
+    queue.offer(root);
+
+    boolean foundLeaf = false;
+    while (queue.isEmpty()) {
+      Node<E> node = queue.poll();
+      if (foundLeaf && !node.isLeaf()) return false;
+
+      if (node.fullLeaf()) {
+        queue.offer(node.left);
+        queue.offer(node.right);
+      } else if (node.left == null && node.right != null) {
+        return false;
+      } else {
+        foundLeaf = true;
+      }
+    }
+    return true;
+  }
+
   public void showTravelOrder() {
     System.out.println(traversalOrderList.toString());
   }
@@ -241,6 +262,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
       this.element = element;
       this.parent = parent;
     }
+
+    public boolean isLeaf() {
+      return left == null && right == null;
+    }
+
+    public boolean fullLeaf() {
+      return left != null && right != null;
+    }
+
   }
 
   public static abstract class Accessor<E> {// Accessor，Customized data after getting
