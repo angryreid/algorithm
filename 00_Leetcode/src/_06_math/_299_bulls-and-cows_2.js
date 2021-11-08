@@ -15,11 +15,10 @@ function getHint(secret, guess) {
       const guessKey = guess[i];
       !secretMap.has(secretKey) && secretMap.set(secretKey, 0);
       !guessMap.has(guessKey) && guessMap.set(guessKey, 0);
-      secretMap.set(secretKey, secretMap.get(secret) + 1);
+      secretMap.set(secretKey, secretMap.get(secretKey) + 1);
       guessMap.set(guessKey, guessMap.get(guessKey) + 1);
     }
   }
-
   secretMap.forEach((count, key) => {
     if (guessMap.has(key)) {
       const guessCount = guessMap.get(key);
