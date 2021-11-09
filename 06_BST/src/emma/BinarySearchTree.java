@@ -227,21 +227,50 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
   }
 
+//  public boolean isComplete() {
+//    Queue<Node<E>> queue = new LinkedList<Node<E>>();
+//    queue.offer(root);
+//
+//    boolean foundLeaf = false;
+//    while (queue.isEmpty()) {
+//      Node<E> node = queue.poll();
+//      if (foundLeaf && !node.isLeaf()) return false;
+//
+//      if (node.fullLeaf()) {
+//        queue.offer(node.left);
+//        queue.offer(node.right);
+//      } else if (node.left == null && node.right != null) {
+//        return false;
+//      } else {
+//        foundLeaf = true;
+//        if (node.left != null) {
+//          queue.offer(node.left);// fix
+//        }
+//      }
+//    }
+//    return true;
+//  }
+
   public boolean isComplete() {
     Queue<Node<E>> queue = new LinkedList<Node<E>>();
     queue.offer(root);
-
     boolean foundLeaf = false;
     while (queue.isEmpty()) {
       Node<E> node = queue.poll();
-      if (foundLeaf && !node.isLeaf()) return false;
+      if (!node.isLeaf() && foundLeaf) return false;
 
-      if (node.fullLeaf()) {
+      if (node.left != null) {
         queue.offer(node.left);
-        queue.offer(node.right);
-      } else if (node.left == null && node.right != null) {
+      } else if (node.right != null) {
+        // node.left == null
         return false;
+      }
+
+      if (node.right != null) {
+        queue.offer(node.right);
       } else {
+        // node.left == null && node.right == null
+        // node.left != null && node.rgiht == null
         foundLeaf = true;
       }
     }
