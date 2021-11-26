@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="25aa4097-ce8b-4c46-95f9-b34b8dfce839" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emma/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emma/BinarySearchTree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +88,13 @@
       <workItem from="1636112219208" duration="501000" />
       <workItem from="1636169827389" duration="218000" />
       <workItem from="1636274397370" duration="1149000" />
-      <workItem from="1636462055474" duration="882000" />
+      <workItem from="1636462055474" duration="971000" />
+      <workItem from="1636719560520" duration="470000" />
+      <workItem from="1636770753483" duration="161000" />
+      <workItem from="1636803326238" duration="282000" />
+      <workItem from="1636804429902" duration="158000" />
+      <workItem from="1636813141317" duration="384000" />
+      <workItem from="1636850973556" duration="156000" />
     </task>
     <servers />
   </component>
