@@ -4,7 +4,7 @@
   "description": "算法",
   "main": "index.js",
   "scripts": {
-    "gp": "git add -A && git commit -m '反转单词两种方法实现' && git pull && git push"
+    "gp": "git add -A && git commit -m 'ransom node as map finding.' && git pull && git push"
   },
   "repository": {
     "type": "git",
