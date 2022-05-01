@@ -97,7 +97,7 @@
       <workItem from="1636804429902" duration="158000" />
       <workItem from="1636813141317" duration="384000" />
       <workItem from="1636850973556" duration="156000" />
-      <workItem from="1651319951304" duration="7509000" />
+      <workItem from="1651319951304" duration="11790000" />
     </task>
     <servers />
   </component>
@@ -117,22 +117,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1651332809672">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1651421488352">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1651332809672" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1651332809671">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1651421488352" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1651421488351">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1651332809671" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1651332809670">
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1651421488351" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1651421488351">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1651332809670" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1651332809671">
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1651421488351" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1651421488352">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1651332809671" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1651421488352" />
     <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1651332663306">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -153,16 +153,5 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="720" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1651332529727" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/emma/BinarySearchTree.java</url>
-          <line>214</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

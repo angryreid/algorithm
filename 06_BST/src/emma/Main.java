@@ -132,6 +132,11 @@ public class Main {
       }
     });
     BinaryTrees.print(bst);
+    System.out.println();
+    System.out.println(bst.getPredesessor(6));
+    System.out.println(bst.getPredesessor(44));
+    System.out.println(bst.getSubdesessor(8));
+    System.out.println(bst.getSubdesessor(74));
   }
 
   public static void main(String[] args) {

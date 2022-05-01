@@ -86,7 +86,93 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
   }
 
   public void remove(E element) {
+    remove(findNode(element));
+  }
 
+  private void remove(Node<E> node) {
+    if (node == null) return;
+    size--;
+    if (node.fullLeaf()) {
+
+    }
+  }
+
+  private Node<E> findNode(E element) {
+    Node<E> node = root;
+    while (node != null) {
+      if (node.element == element) return node;
+      int compareRes = compare(node.element, element);
+      if (compareRes > 0)
+        node = node.left;
+      else
+        node = node.right;
+    }
+    return null;
+  }
+
+  /**
+   * The pre node by inorder.
+   * @param node
+   * @return
+   */
+  private Node<E> predecessor(Node<E> node) {
+    if (node == null) return null;
+    Node<E> preNode = node.left;
+    if (preNode != null) {
+      while (preNode.right != null) {
+        preNode = preNode.right;
+      }
+    } else if (preNode == null && node.parent != null) {
+      preNode = node.parent;
+      while (compare(preNode.element, node.element) > 0) {
+        preNode = preNode.parent;
+        if (preNode == null) return null;
+      }
+    }
+    return preNode;
+  }
+
+  private Node<E> subdecessor(Node<E> node) {
+    if (node == null) return null;
+    Node<E> susNode = node.right;
+    if (susNode != null) {
+      while (susNode.left != null) {
+        susNode = susNode.left;
+      }
+    } else if (susNode == null && node.parent != null) {
+      susNode = node.parent;
+      while (compare(susNode.element, node.element) < 0) {
+        susNode = susNode.parent;
+        if (susNode == null) return null;
+      }
+    }
+    return susNode;
+  }
+
+  public E getRootPredecessor() {
+    return predecessor(root).element;
+  }
+
+  public E getPredesessor(E element) {
+    Node<E> p = predecessor(findNode(element));
+    if (p != null) {
+      return p.element;
+    } else {
+      return null;
+    }
+  }
+
+  public E getRootSubdecessor() {
+    return subdecessor(root).element;
+  }
+
+  public E getSubdesessor(E element) {
+    Node<E> s = subdecessor(findNode(element));
+    if (s != null) {
+      return s.element;
+    } else {
+      return null;
+    }
   }
 
   public boolean contains(E elemenet) {
@@ -340,7 +426,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     public boolean fullLeaf() {
       return left != null && right != null;
     }
-
   }
 
   public static abstract class Accessor<E> {// Accessor，Customized data after getting
@@ -372,6 +457,5 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 //    return myNode.element + "_p(" + parentString + ")";
     return myNode.element;
-
   }
 }
