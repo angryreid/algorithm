@@ -202,6 +202,19 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     traversalOrderList.add(node.element);
   }
 
+  public void postorderVisit(Visitor<E> visitor) {
+    if (visitor == null) return;
+    postorderVisitPrint(root, visitor);
+  }
+
+  private void postorderVisitPrint(Node<E> node, Visitor<E> visitor) {
+    if (node == null || visitor.stop) return;
+    postorderVisitPrint(node.left, visitor);
+    postorderVisitPrint(node.right, visitor);
+    if(visitor.stop) return;
+    visitor.stop = visitor.visit(node.element);
+  }
+
 
   public void levelOrderTraversal() {
     traversalOrderList.clear();
@@ -279,6 +292,34 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
   public void showTravelOrder() {
     System.out.println(traversalOrderList.toString());
+  }
+
+  public void levelVisit(Visitor<E> visitor) {
+    if (root == null || visitor == null) {
+      return;
+    }
+    Queue<Node<E>> queue = new LinkedList<Node<E>>();
+    queue.offer(root); // enQueue
+    while (!queue.isEmpty()) {
+      Node<E> cNode = queue.poll();
+      visitor.visit(cNode.element);
+//      traversalOrderList.add(cNode.element);
+//      accessor.access(cNode.element);
+      if (cNode.left != null)
+        queue.offer(cNode.left);
+      if (cNode.right != null)
+        queue.offer(cNode.right);
+    }
+  }
+
+  /**
+   *
+   * @param <E>
+   *     abstract class can declare variable
+   */
+  public static abstract class Visitor<E> {
+    boolean stop;
+    abstract boolean visit(E element);
   }
 
   private static class Node<E> {

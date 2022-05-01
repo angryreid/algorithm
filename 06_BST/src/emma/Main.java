@@ -105,6 +105,32 @@ public class Main {
 
     System.out.println(bst.height());
     System.out.println(bst.heightLevel());
+
+    bst.levelVisit(new BinarySearchTree.Visitor<Integer>() {
+      @Override
+      public boolean visit(Integer element) {
+        System.out.print(element + "_");
+        if (element == 6) {
+          System.out.println();
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
+    System.out.println();
+    bst.postorderVisit(new BinarySearchTree.Visitor<Integer>() {
+      @Override
+      boolean visit(Integer element) {
+        System.out.print(element + "_");
+        if (element == 24) {
+          System.out.println();
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
     BinaryTrees.print(bst);
   }
 
