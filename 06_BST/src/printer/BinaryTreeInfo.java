@@ -1,6 +1,6 @@
 package printer;
 
-public interface BinaryTreeInfo {
+public interface BinaryTreeInfo  {
 	/**
 	 * who is the root node
 	 */

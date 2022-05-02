@@ -2,7 +2,6 @@ package emma;
 
 import java.util.Comparator;
 
-import emma.BinarySearchTree.Accessor;
 import file.Files;
 import printer.BinaryTrees;
 
@@ -15,7 +14,6 @@ public class Main {
       // TODO Auto-generated method stub
       return el1.getAge() - el2.getAge();
     }
-
   }
 
   public static void testComparator() {
@@ -47,41 +45,21 @@ public class Main {
     for (int num : treeArray) {
       bst.add(num);
     }
+  }
 
-//    BinaryTrees.print(bst);
-    System.out.println("\n");
-    // bst.preorderTraversal(); // preorder traversal
-    // bst.inorderTraversal(); // inorder traversal
-    // bst.postorderTraversal(); // postorder traversal
-    // bst.levelOrderTraversal(); // level-order traversal
-
-    // using Accessor
-    bst.levelOrderTraversal(new Accessor<Integer>() {
+  public static void testInorder() {
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();// Integer
+    int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9 };
+    for (int num : treeArray) {
+      bst.add(num);
+    }
+    bst.inorder(new BinaryTree.Visitor<Integer>() {
       @Override
-      boolean access(Integer el) {
-        if (el.equals(68)) return true;
-        return false;
-      }
-
-//      @Override
-//      public void access(Integer el) {
-//        // TODO Auto-generated method stub
-//        System.out.print(el + "->");
-//      }
-
-    });
-    bst.showTravelOrder();
-
-    System.out.println("> postOrder:");
-    bst.accessPostorderTraversal(new Accessor<Integer>() {
-
-      @Override
-      boolean access(Integer el) {
-        if (el.equals(6)) return true;
+      boolean visit(Integer element) {
+        System.out.print("_" + element + "_");
         return false;
       }
     });
-    bst.showTravelOrder();
   }
 
   public static void testPreorder() {
@@ -90,10 +68,33 @@ public class Main {
     for (int num : treeArray) {
       bst.add(num);
     }
-//    bst.preorderTraversal();
-    BinaryTrees.print(bst);
-    System.out.println();
-    System.out.println(bst.toString());
+    bst.preorder(new BinaryTree.Visitor<Integer>() {
+      @Override
+      boolean visit(Integer element) {
+        System.out.print("_" + element + "_");
+        return false;
+      }
+    });
+  }
+
+  public static void testPostorder() {
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();// Integer
+    int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9 };
+    for (int num : treeArray) {
+      bst.add(num);
+    }
+    bst.postorder(new BinarySearchTree.Visitor<Integer>() {
+      @Override
+      boolean visit(Integer element) {
+        System.out.print(element + "_");
+        if (element == 24) {
+          System.out.println();
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
   }
 
   public static void testHeight() {
@@ -119,18 +120,7 @@ public class Main {
       }
     });
     System.out.println();
-    bst.postorderVisit(new BinarySearchTree.Visitor<Integer>() {
-      @Override
-      boolean visit(Integer element) {
-        System.out.print(element + "_");
-        if (element == 24) {
-          System.out.println();
-          return true;
-        } else {
-          return false;
-        }
-      }
-    });
+
     BinaryTrees.print(bst);
     System.out.println();
     System.out.println(bst.getPredesessor(6));
@@ -153,11 +143,21 @@ public class Main {
     BinaryTrees.print(bst);
   }
 
+  public static void testOrder() {
+    testPreorder();
+    System.out.println();
+    testInorder();
+    System.out.println();
+    testPostorder();
+  }
+
   public static void main(String[] args) {
 //    testOrderTraveral();
 //    testComparator();
-//    testPreorder();
+    testOrder();
 //    testHeight();
-    remove();
+
+
+//    remove();
   }
 }
