@@ -117,36 +117,46 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
    */
   private Node<E> predecessor(Node<E> node) {
     if (node == null) return null;
-    Node<E> preNode = node.left;
-    if (preNode != null) {
-      while (preNode.right != null) {
-        preNode = preNode.right;
+    Node<E> p = node.left;
+    if (p != null) {
+      while (p.right != null) {
+        p = p.right;
       }
-    } else if (preNode == null && node.parent != null) {
-      preNode = node.parent;
-      while (compare(preNode.element, node.element) > 0) {
-        preNode = preNode.parent;
-        if (preNode == null) return null;
-      }
+      return p;
     }
-    return preNode;
+//    if (node.left == null && node.parent != null) {
+//      preNode = node.parent;
+//      while (compare(preNode.element, node.element) > 0) {
+//        preNode = preNode.parent;
+//        if (preNode == null) return null;
+//      }
+//    }
+    while (node.parent != null && node == node.parent.left) {
+      node = node.parent;
+    }
+    return node.parent;
   }
 
   private Node<E> subdecessor(Node<E> node) {
     if (node == null) return null;
-    Node<E> susNode = node.right;
-    if (susNode != null) {
-      while (susNode.left != null) {
-        susNode = susNode.left;
+    Node<E> s = node.right;
+    if (s != null) {
+      while (s.left != null) {
+        s = s.left;
       }
-    } else if (susNode == null && node.parent != null) {
-      susNode = node.parent;
-      while (compare(susNode.element, node.element) < 0) {
-        susNode = susNode.parent;
-        if (susNode == null) return null;
-      }
+      return s;
     }
-    return susNode;
+//    if (susNode == null && node.parent != null) {
+//      susNode = node.parent;
+//      while (compare(susNode.element, node.element) < 0) {
+//        susNode = susNode.parent;
+//        if (susNode == null) return null;
+//      }
+//    }
+    while (node.parent != null && node == node.parent.right) {
+      node = node.parent;
+    }
+    return node.parent;
   }
 
   public E getRootPredecessor() {
