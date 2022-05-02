@@ -92,8 +92,30 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
   private void remove(Node<E> node) {
     if (node == null) return;
     size--;
-    if (node.fullLeaf()) {
+    if (node.fullLeaf()) { // Handing this case specially.
+      Node<E> pre = predecessor(node);
+      node.element = pre.element;
+      node = pre;// Binding the value to delete later.
+    }
 
+    // remove node.
+    if (node.isLeaf()) {
+      if (node.parent == null) node = null;
+      if (node == node.parent.left) {
+        node.parent.left = null;
+      } else {
+        node.parent.right = null;
+      }
+    } else {
+      Node<E> replaceNode = node.left != null ? node.left : node.right;
+      replaceNode.parent = node.parent;
+      if (node.parent == null) { // node is root and has only one child
+        root = replaceNode;
+      }else if (node == node.parent.left) {
+        node.parent.left = replaceNode;
+      } else {
+        node.parent.right = replaceNode;
+      }
     }
   }
 
@@ -112,6 +134,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
   /**
    * The pre node by inorder.
+   * if the child number of a node is 2. then the child number of it's predecessor
+   * or susdecessor must be 0 or 1.
    * @param node
    * @return
    */

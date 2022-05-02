@@ -139,10 +139,25 @@ public class Main {
     System.out.println(bst.getSubdesessor(54));
   }
 
+  public static void remove() {
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();// Integer
+    int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9, 7, 8 };
+    for (int num : treeArray) {
+      bst.add(num);
+    }
+    System.out.println("Before removing");
+    BinaryTrees.print(bst);
+    System.out.println("removed");
+    System.out.println();
+    bst.remove(24);
+    BinaryTrees.print(bst);
+  }
+
   public static void main(String[] args) {
 //    testOrderTraveral();
 //    testComparator();
 //    testPreorder();
-    testHeight();
+//    testHeight();
+    remove();
   }
 }
