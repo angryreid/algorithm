@@ -21,14 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="25aa4097-ce8b-4c46-95f9-b34b8dfce839" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/06_BST/emma/BinarySearchTree$Accessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/06_BST/emma/BinarySearchTree$Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/06_BST/emma/BinarySearchTree$Visitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/06_BST/emma/BinarySearchTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/06_BST/emma/BinarySearchTree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/06_BST/emma/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/06_BST/emma/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emma/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emma/BinarySearchTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emma/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emma/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/printer/BinaryTreeInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/printer/BinaryTreeInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +105,7 @@
       <workItem from="1636813141317" duration="384000" />
       <workItem from="1636850973556" duration="156000" />
       <workItem from="1651319951304" duration="11945000" />
-      <workItem from="1651472768882" duration="8205000" />
+      <workItem from="1651472768882" duration="9386000" />
     </task>
     <servers />
   </component>
@@ -133,25 +125,25 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="274" key="GridCell.Tab.0.bottom" timestamp="1651483988731">
+    <state width="1398" height="274" key="GridCell.Tab.0.bottom" timestamp="1651590933761">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="274" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1651483988731" />
+    <state width="1398" height="274" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1651590933761" />
     <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1651421675896" />
-    <state width="1398" height="274" key="GridCell.Tab.0.center" timestamp="1651483988729">
+    <state width="1398" height="274" key="GridCell.Tab.0.center" timestamp="1651590933760">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="274" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1651483988729" />
+    <state width="1398" height="274" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1651590933760" />
     <state width="1398" height="303" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1651421675893" />
-    <state width="1398" height="274" key="GridCell.Tab.0.left" timestamp="1651483988729">
+    <state width="1398" height="274" key="GridCell.Tab.0.left" timestamp="1651590933760">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="274" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1651483988729" />
+    <state width="1398" height="274" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1651590933760" />
     <state width="1398" height="303" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1651421675892" />
-    <state width="1398" height="274" key="GridCell.Tab.0.right" timestamp="1651483988730">
+    <state width="1398" height="274" key="GridCell.Tab.0.right" timestamp="1651590933761">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="274" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1651483988730" />
+    <state width="1398" height="274" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1651590933761" />
     <state width="1398" height="303" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1651421675893" />
     <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1651421675899">
       <screen x="0" y="25" width="1440" height="875" />
@@ -181,5 +173,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="720" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1651332529727" />
+    <state x="126" y="69" key="new project wizard" timestamp="1651590929372">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="126" y="69" key="new project wizard/0.0.1440.900@0.0.1440.900" timestamp="1651590929372" />
   </component>
 </project>

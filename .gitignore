@@ -1,7 +1,7 @@
 /.metadata/**
-**/.idea/**
 .gitignore
 .DS_Store
-/out
+out
+.idea
 *.iml
 *.xml
