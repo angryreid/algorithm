@@ -70,43 +70,35 @@ public class AVL<E> extends BST<E> {
     }
 
     private void rotateLeft(Node<E> node) {
-        Node<E> rightNode = node.right;
-        node.right = rightNode.left;
-        rightNode.left = node;
-        if (node == root) {
-            root = rightNode;
-            rightNode.parent = null;
-        } else {
-            if (node.isLeftChild()) {
-                node.parent.left = rightNode;
-            } else {
-                node.parent.right = rightNode;
-            }
-            rightNode.parent = node.parent;
-        }
-        node.parent = rightNode;
-        updateHeight(node);
-        updateHeight(rightNode);
+        Node<E> parent = node.right;
+        Node<E> child = parent.left;
+        node.right = parent.left;
+        parent.left = node;
+        afterRotate(node, parent, child);
     }
 
     private void rotateRight(Node<E> node) {
-        Node<E> leftNode = node.left;
-        node.left = leftNode.right;
-        leftNode.right = node;
-        if (node == root) {
-            root = leftNode;
-            leftNode.parent = null;
+        Node<E> parent = node.left;
+        Node<E> child = parent.right;
+        node.left = parent.right;
+        parent.right = node;
+        afterRotate(node, parent, child);
+    }
+    
+    public void afterRotate(Node<E> node, Node<E> parent, Node<E> child) {
+        if (node.isLeftChild()) {
+            node.parent.left = parent;
+        } else if (node.isRightChild()){
+            node.parent.right = parent;
         } else {
-            if (node.isLeftChild()) {
-                node.parent.left = leftNode;
-            } else {
-                node.parent.right = leftNode;
-            }
-            leftNode.parent = node.parent;
+            root = parent;
         }
-        node.parent = leftNode;
+        if (child != null)
+            child.parent = node;
+        parent.parent = node.parent;
+        node.parent = parent;
         updateHeight(node);
-        updateHeight(leftNode);
+        updateHeight(parent);
     }
 
     @Override
