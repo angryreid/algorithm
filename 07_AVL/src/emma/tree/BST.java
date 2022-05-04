@@ -13,16 +13,23 @@ public class BST<E> extends BinaryTree<E> {
     this(null);
   }
 
+  /**
+   * To AVL tree balance
+   * @param node new add node
+   */
+  protected void afterAdd(Node<E> node) {}
+
   public void add(E element) {
     checkElementNull(element);
 
     if (root == null) { // first node
-      root = new Node<E>(element, null);
+      root = createNode(element, null);
       size++;
+      afterAdd(root);
       return;
     }
 
-    // Add othre node
+    // Add other node
     // find parent
     Node<E> parent = null;
     Node<E> node = root;
@@ -43,13 +50,14 @@ public class BST<E> extends BinaryTree<E> {
     }
 
     // add to parent's left or right
-    Node<E> newNode = new Node<>(element, parent);
+    Node<E> newNode = createNode(element, parent);
     if (compareRes > 0) {
       parent.right = newNode;
     } else {
       parent.left = newNode;
     }
     size++;
+    afterAdd(newNode);
   }
 
   /**
