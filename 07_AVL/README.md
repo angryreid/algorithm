@@ -9,7 +9,7 @@ The height between any node's left tree and right tree.
 - The Balance Factor must be 1, 0, -1 which equals |factor| <= 1
 - The search, delete, add operation will cost O(logn)
 
-## Correct lose Balance
+## Correct lose Balance When add new Node
 
 ### LL
 
@@ -25,7 +25,15 @@ Rotation from the left
 
 RR -> LL
 
-## RL
+### RL
 
 LL -> RR
+
+## Balance when remove node
+
+At this condition, only parent node need to balance.
+
+- Removing a node may enable parent node losing balance.
+- The worst case is all parent node need to balance until the root.
+
 

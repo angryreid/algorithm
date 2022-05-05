@@ -77,6 +77,13 @@ public class BST<E> extends BinaryTree<E> {
     remove(findNode(element));
   }
 
+  /**
+   * interface function to call after removed node.
+   * Offer to instance use
+   * @param node
+   */
+  protected void afterRemove(Node<E> node) {}
+
   private void remove(Node<E> node) {
     if (node == null) return;
     size--;
@@ -105,6 +112,7 @@ public class BST<E> extends BinaryTree<E> {
         node.parent.right = replaceNode;
       }
     }
+    afterRemove(node);
   }
 
   private Node<E> findNode(E element) {
