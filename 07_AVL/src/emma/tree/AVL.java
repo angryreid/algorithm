@@ -51,7 +51,7 @@ public class AVL<E> extends BST<E> {
      *
      * @param grand height is the lowest and lost balance.
      */
-    private void rebalance(Node<E> grand) {
+    private void rebalance2(Node<E> grand) {
         Node<E> parent = ((AVLNode<E>)grand).tallerChild();
         Node<E> node = ((AVLNode<E>)parent).tallerChild();
         if (parent.isLeftChild()) {
@@ -67,6 +67,75 @@ public class AVL<E> extends BST<E> {
             }
             rotateLeft(grand);
         }
+    }
+
+    /**
+     *
+     * @param grand height is the lowest and lost balance.
+     */
+    private void rebalance(Node<E> grand) {
+        Node<E> parent = ((AVLNode<E>)grand).tallerChild();
+        Node<E> node = ((AVLNode<E>)parent).tallerChild();
+        if (parent.isLeftChild()) {
+            if (node.isLeftChild()) {
+                // LL
+                rotate(grand, node.left, node, node.right, parent, parent.right, grand, grand.right);
+            } else {
+                // LR
+                rotate(grand, parent.left, parent, node.left, node, node.right, grand, grand.right);
+            }
+        } else {
+            if (node.isLeftChild()) {
+                // RL
+                rotate(grand, grand.left, grand, node.left, node, node.right, parent, parent.right);
+            } else {
+                // RR
+                rotate(grand, grand.left, grand, parent.left, parent, node.left, node, node.right);
+            }
+        }
+    }
+
+    private void rotate(
+            Node<E> oRoot,
+            Node<E> lTreeLeft, Node<E> lTreeRoot, Node<E> lTreeRight,
+            Node<E> nRoot,
+            Node<E> rTreeLeft, Node<E> rTreeRoot, Node<E> rTreeRight
+    ) {
+        // New root settings
+        nRoot.parent = oRoot.parent;
+        if (oRoot.isLeftChild()) {
+            oRoot.parent.left = nRoot;
+        } else if (oRoot.isRightChild()) {
+            oRoot.parent.right = nRoot;
+        } else {
+            root = nRoot;
+        }
+
+        // New left tree settings
+        lTreeRoot.left = lTreeLeft;
+        lTreeRoot.right = lTreeRight;
+
+        if (lTreeLeft != null)
+            lTreeLeft.parent = lTreeRoot;
+        if (lTreeRight != null)
+            lTreeRight.parent = lTreeRoot;
+        updateHeight(lTreeRoot);
+
+        // New right tree settings
+        rTreeRoot.left = rTreeLeft;
+        rTreeRoot.right = rTreeRight;
+
+        if (rTreeLeft != null)
+            rTreeLeft.parent = rTreeRoot;
+        if (rTreeRight != null)
+            rTreeRight.parent = rTreeRoot;
+        updateHeight(rTreeRoot);
+
+        nRoot.left = lTreeRoot;
+        nRoot.right = rTreeRoot;
+        lTreeRoot.parent = nRoot;
+        rTreeRoot.parent = nRoot;
+        updateHeight(nRoot);
     }
 
     private void rotateLeft(Node<E> node) {
