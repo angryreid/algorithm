@@ -15,11 +15,12 @@ public class Main {
         });// Integer
         int[] treeArray = { 54, 24, 6, 68, 65, 44, 74, 60, 9, 7, 8, 1,2 };
         for (int num : treeArray) {
-            System.out.println("Add: " + num);
+//            System.out.println("Add: " + num);
             avl.add(num);
-            BinaryTrees.println(avl);
-            System.out.println("--------------Divider----------------");
+//            BinaryTrees.println(avl);
+//            System.out.println("--------------Divider----------------");
         }
+        BinaryTrees.println(avl);
     }
 
     public static void remove() {
@@ -36,12 +37,12 @@ public class Main {
 //        BinaryTrees.print(avl);
 //        System.out.println();
 //        System.out.println("removed");
-//        System.out.println();
-//        avl.remove(24);
+        System.out.println();
+        avl.remove(74);
         BinaryTrees.print(avl);
     }
     public static void main(String[] args) {
-//        remove();
-        show();
+        remove();
+//        show();
     }
 }
