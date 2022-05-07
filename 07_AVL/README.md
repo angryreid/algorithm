@@ -33,7 +33,16 @@ LL -> RR
 
 At this condition, only parent node need to balance.
 
-- Removing a node may enable parent node losing balance.
+- Removing a node may enable parent or ancestors node losing balance.
 - The worst case is all parent node need to balance until the root.
+
+## Summary
+
+The average time complexity 
+
+- Add O(logn)
+- remove O(logn)
+- find O(logn)
+
 
 
