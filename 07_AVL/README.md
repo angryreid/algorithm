@@ -45,4 +45,9 @@ The average time complexity
 - find O(logn)
 
 
+**visualization**
+
+https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+
+
 
