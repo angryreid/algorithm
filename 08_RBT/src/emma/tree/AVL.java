@@ -117,7 +117,7 @@ public class AVL<E> extends BBST<E> {
                 // To set height
                 updateHeight(node);
             } else {
-                rebalance(node);
+                rebalance2(node);
                 break;
             }
         }
@@ -130,7 +130,7 @@ public class AVL<E> extends BBST<E> {
                 // To set height
                 updateHeight(node);
             } else {
-                rebalance(node);
+                rebalance2(node);
             }
         }
     }

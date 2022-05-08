@@ -13,16 +13,29 @@ public class RBTree<E> extends BBST<E> {
     }
 
     private static class RBNode<E> extends Node<E> {
-        boolean color = true;
+        boolean color = RED;
 
         public RBNode(E element, Node<E> parent) {
             super(element, parent);
         }
+
+        @Override
+        public String toString() {
+            String str = "__";
+            if (color == BLACK) {
+                str = "R_";
+            }
+            return str + element.toString();
+        }
+    }
+
+    @Override
+    protected Node<E> createNode(E element, Node<E> parent) {
+        return new RBNode<>(element, parent);
     }
 
     private Node<E> coloring(Node<E> node, boolean color) {
-        RBNode<E> rbNode = (RBNode<E>)node;
-        rbNode.color = color;
+        ((RBNode<E>)node).color = color;
         return node;
     }
 
@@ -39,19 +52,20 @@ public class RBTree<E> extends BBST<E> {
     }
 
     private boolean isBlack(Node<E> node) {
-        return ((RBNode<E>)node).color == BLACK;
+        return colorOf(node) == BLACK;
     }
 
     private boolean isRed(Node<E> node) {
-        return ((RBNode<E>)node).color == RED;
+        return colorOf(node) == RED;
     }
 
-    @Override
+
     protected void afterAdd(Node<E> node) {
         Node<E> parent = node.parent;
         if (parent == null) {
             // Added root;
             black(node);
+            return;
         }
         // Parent is black node (4 cases)
         if (isBlack(parent)) {
@@ -59,17 +73,37 @@ public class RBTree<E> extends BBST<E> {
         }
 
         // Uncle color.
-        Node<E> uncle = node.sibling();
-        Node<E> grand = parent.parent;
+        Node<E> uncle = parent.sibling();
+        Node<E> grand = red(parent.parent);
         if (isRed(uncle)) { // overflow (4 case)
             black(parent);
             black(uncle);
             // Grand node recursevily handing
-            afterAdd(red(grand));
-        } else { // Uncle is black, rotating.
-
+            afterAdd(grand);
+            return;
         }
-
+        // Uncle is black, rotating.
+        if (parent.isLeftChild()) {
+            if (node.isLeftChild())  {
+                // LL
+                black(parent);
+            } else {
+                // LR
+                black(node);
+                rotateLeft(parent);
+            }
+            rotateRight(grand);
+        } else {
+            if (node.isLeftChild())  {
+                // RL
+                black(node);
+                rotateRight(parent);
+            } else {
+                // RR
+                black(parent);
+            }
+            rotateLeft(grand);
+        }
     }
 
     @Override
