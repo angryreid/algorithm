@@ -63,7 +63,7 @@ public class RBTree<E> extends BBST<E> {
     protected void afterAdd(Node<E> node) {
         Node<E> parent = node.parent;
         if (parent == null) {
-            // Added root;
+            // Added root or overflow reaching to root node.
             black(node);
             return;
         }
