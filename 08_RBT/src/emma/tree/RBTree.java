@@ -118,8 +118,65 @@ public class RBTree<E> extends BBST<E> {
         Node<E> parent = node.parent;
         // Remove root
         if (parent == null) return;
-        // Remove black node.
 
-
+        // Remove black node. And this node must be leaf node.
+        boolean left = parent.left == null || node.isLeftChild();
+//        Node<E> sibling = node.sibling();
+        Node<E> sibling = left ? parent.right : parent.left;
+        if (left) { // Deleted left node.
+            if (isRed(sibling)) { // Special case.
+                black(sibling);
+                red(parent);
+                rotateLeft(parent);
+                // To change sibling
+                sibling = parent.right;
+            }
+            // Sibling is black
+            if (isBlack(sibling.left) && isBlack(sibling.right)) {
+                // Sibling no red node. parent will underflow
+                boolean isBlackParent = isBlack(parent);
+                black(parent);
+                red(sibling);
+                if (isBlackParent) {
+                    afterRemove(parent, null);
+                }
+            } else { // Sibling has more then one red node. will borrow node from sibling.
+                if (isBlack(sibling.right)) {
+                    rotateRight(sibling);
+                    sibling = parent.right;
+                }
+                coloring(sibling, colorOf(parent));
+                black(sibling.right);
+                black(parent);
+                rotateRight(parent);
+            }
+        } else { // Deleted right node.
+            if (isRed(sibling)) { // Special case.
+                black(sibling);
+                red(parent);
+                rotateRight(parent);
+                // To change sibling
+                sibling = parent.left;
+            }
+            // Sibling is black
+            if (isBlack(sibling.left) && isBlack(sibling.right)) {
+                // Sibling no red node. parent will underflow
+                boolean isBlackParent = isBlack(parent);
+                black(parent);
+                red(sibling);
+                if (isBlackParent) {
+                    afterRemove(parent, null);
+                }
+            } else { // Sibling has more then one red node. will borrow node from sibling.
+                if (isBlack(sibling.left)) {
+                    rotateLeft(sibling);
+                    sibling = parent.left;
+                }
+                coloring(sibling, colorOf(parent));
+                black(sibling.left);
+                black(parent);
+                rotateRight(parent);
+            }
+        }
     }
 }
