@@ -80,9 +80,9 @@ public class BST<E> extends BinaryTree<E> {
   /**
    * interface function to call after removed node.
    * Offer to instance use
-   * @param node
+   * @param node deleted node or replacement node.
    */
-  protected void afterRemove(Node<E> node, Node<E> replaceNode) {}
+  protected void afterRemove(Node<E> node) {}
 
   private void remove(Node<E> node) {
     if (node == null) return;
@@ -101,7 +101,7 @@ public class BST<E> extends BinaryTree<E> {
       } else {
         node.parent.right = null;
       }
-      afterRemove(node, null);
+      afterRemove(node);
     } else {
       Node<E> replaceNode = node.left != null ? node.left : node.right;
       replaceNode.parent = node.parent;
@@ -112,7 +112,7 @@ public class BST<E> extends BinaryTree<E> {
       } else {
         node.parent.right = replaceNode;
       }
-      afterRemove(node, replaceNode);
+      afterRemove(replaceNode);
     }
   }
 
