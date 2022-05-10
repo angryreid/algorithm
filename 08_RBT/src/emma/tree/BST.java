@@ -82,7 +82,7 @@ public class BST<E> extends BinaryTree<E> {
    * Offer to instance use
    * @param node
    */
-  protected void afterRemove(Node<E> node) {}
+  protected void afterRemove(Node<E> node, Node<E> replaceNode) {}
 
   private void remove(Node<E> node) {
     if (node == null) return;
@@ -101,6 +101,7 @@ public class BST<E> extends BinaryTree<E> {
       } else {
         node.parent.right = null;
       }
+      afterRemove(node, null);
     } else {
       Node<E> replaceNode = node.left != null ? node.left : node.right;
       replaceNode.parent = node.parent;
@@ -111,8 +112,8 @@ public class BST<E> extends BinaryTree<E> {
       } else {
         node.parent.right = replaceNode;
       }
+      afterRemove(node, replaceNode);
     }
-    afterRemove(node);
   }
 
   private Node<E> findNode(E element) {

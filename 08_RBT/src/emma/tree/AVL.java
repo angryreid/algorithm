@@ -124,7 +124,7 @@ public class AVL<E> extends BBST<E> {
     }
 
     @Override
-    protected void afterRemove(Node<E> node) {
+    protected void afterRemove(Node<E> node, Node<E> replaceNode) {
         while ((node = node.parent) != null) {
             if (isBalance(node)) {
                 // To set height

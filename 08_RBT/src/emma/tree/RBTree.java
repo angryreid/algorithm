@@ -107,6 +107,19 @@ public class RBTree<E> extends BBST<E> {
     }
 
     @Override
-    protected void afterRemove(Node<E> node) {
+    protected void afterRemove(Node<E> node, Node<E> replaceNode) {
+        if (isRed(node)) return; // Removed red node.
+
+        if(isRed(replaceNode)) { // Replacement node
+            black(replaceNode);
+            return;
+        }
+
+        Node<E> parent = node.parent;
+        // Remove root
+        if (parent == null) return;
+        // Remove black node.
+
+
     }
 }
