@@ -40,8 +40,8 @@ At this condition, only parent node need to balance.
 
 The average time complexity 
 
-- Add O(logn)
-- remove O(logn)
+- Add O(logn) O(1) rotating cost
+- remove O(logn) O(logn) rotating cost
 - find O(logn)
 
 
