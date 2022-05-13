@@ -166,4 +166,8 @@ public class BST<E> extends BinaryTree<E> {
     sb.append(prefix).append(node.element).append("\n"); // Inorder of BST is sorted
     toString(node.right, sb, prefix + "R---");
   }
+
+  public boolean contains(E element) {
+    return findNode(element) != null;
+  }
 }

@@ -13,7 +13,7 @@ public class BinaryTree<E>  implements BinaryTreeInfo {
      */
     public static abstract class Visitor<E> {
         boolean stop;
-        abstract boolean visit(E element);
+        public abstract boolean visit(E element);
     }
 
     protected static class Node<E> {
@@ -79,10 +79,6 @@ public class BinaryTree<E>  implements BinaryTreeInfo {
         }
 //    return myNode.element + "_p(" + parentString + ")";
         return myNode.element;
-    }
-
-    public boolean contains(E elemenet) {
-        return false;
     }
 
     public int height() {
@@ -239,5 +235,18 @@ public class BinaryTree<E>  implements BinaryTreeInfo {
             if (cNode.right != null)
                 queue.offer(cNode.right);
         }
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        root = null;
+        size = 0;
     }
 }
