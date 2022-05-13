@@ -8,6 +8,9 @@ import emma.set.TreeSet;
 import emma.file.FileInfo;
 import emma.time.Times;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void testListSet() {
         Set<Integer> listSet = new ListSet<>();
@@ -61,17 +64,25 @@ public class Main {
         System.out.println("Lines: " + files.getLines());
         System.out.println("Words: " + files.words().length);
         String[] words = files.words();
+        List<String> newWords = new ArrayList<>();
+
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < words.length; j++) {
+                newWords.add(words[j]);
+            }
+        }
+        String[] wordsTimes = newWords.toArray(new String[newWords.size()]);
         Times.test("Test ListSet", new Times.Task() {
             @Override
             public void execute() {
-                testStringSet(new ListSet<>(), words);
+                testStringSet(new ListSet<>(), wordsTimes);
             }
         });
 
         Times.test("Test TreeSet", new Times.Task() {
             @Override
             public void execute() {
-                testStringSet(new TreeSet<>(), words);
+                testStringSet(new TreeSet<>(), wordsTimes);
             }
         });
     }
