@@ -53,7 +53,7 @@ public class BBST<E> extends BST<E> {
     protected void rotateLeft(Node<E> node) {
         Node<E> parent = node.right;
         Node<E> child = parent.left;
-        node.right = parent.left;
+        node.right = child;
         parent.left = node;
         afterRotate(node, parent, child);
     }
@@ -61,7 +61,7 @@ public class BBST<E> extends BST<E> {
     protected void rotateRight(Node<E> node) {
         Node<E> parent = node.left;
         Node<E> child = parent.right;
-        node.left = parent.right;
+        node.left = child;
         parent.right = node;
         afterRotate(node, parent, child);
     }

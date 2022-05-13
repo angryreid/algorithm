@@ -59,7 +59,6 @@ public class RBTree<E> extends BBST<E> {
         return colorOf(node) == RED;
     }
 
-
     protected void afterAdd(Node<E> node) {
         Node<E> parent = node.parent;
         if (parent == null) {
@@ -105,7 +104,7 @@ public class RBTree<E> extends BBST<E> {
             rotateLeft(grand);
         }
     }
-
+//
     @Override
     protected void afterRemove(Node<E> node) {
 //        if (isRed(node)) return; // Removed red node.can be combine with below case.
@@ -148,7 +147,7 @@ public class RBTree<E> extends BBST<E> {
                 coloring(sibling, colorOf(parent));
                 black(sibling.right);
                 black(parent);
-                rotateRight(parent);
+                rotateLeft(parent);
             }
         } else { // Deleted right node.
             if (isRed(sibling)) { // Special case.

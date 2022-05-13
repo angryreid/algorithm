@@ -70,7 +70,7 @@ public class BST<E> extends BinaryTree<E> {
     if (comparator != null) {
       return comparator.compare(el1, el2);
     }
-    return ((java.lang.Comparable<E>) el1).compareTo(el2);
+    return ((Comparable<E>) el1).compareTo(el2);
   }
 
   public void remove(E element) {
@@ -94,15 +94,19 @@ public class BST<E> extends BinaryTree<E> {
     }
 
     // remove node.
-    if (node.isLeaf()) {
-      if (node.parent == null) node = null;
-      if (node == node.parent.left) {
-        node.parent.left = null;
+    if (node.isLeaf()) { // remove leaf node case.
+      if (node.parent == null) {
+        root = null;
+        afterRemove(node);
       } else {
-        node.parent.right = null;
+        if (node == node.parent.left) {
+          node.parent.left = null;
+        } else {
+          node.parent.right = null;
+        }
+        afterRemove(node);
       }
-      afterRemove(node);
-    } else {
+    } else { // remove one child case.
       Node<E> replaceNode = node.left != null ? node.left : node.right;
       replaceNode.parent = node.parent;
       if (node.parent == null) { // node is root and has only one child

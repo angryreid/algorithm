@@ -1,9 +1,12 @@
 package emma;
 
+import emma.file.Files;
 import emma.set.ListSet;
 import emma.set.Set;
 import emma.set.Set.Visitor;
 import emma.set.TreeSet;
+import emma.file.FileInfo;
+import emma.time.Times;
 
 public class Main {
     public static void testListSet() {
@@ -40,9 +43,43 @@ public class Main {
         });
     }
 
+    public static void testStringSet(Set<String> set, String[] words) {
+        for (String word : words) {
+            set.add(word);
+        }
+        for (String word : words) {
+            set.contains(word);
+        }
+        for (String word : words) {
+            set.remove(word);
+        }
+    }
+
+    public static void testReadFile() {
+        FileInfo files = Files.read("/Users/lydia/Documents/repo/algorithm", new String[]{"java"});
+        System.out.println("File: " + files.getFiles());
+        System.out.println("Lines: " + files.getLines());
+        System.out.println("Words: " + files.words().length);
+        String[] words = files.words();
+        Times.test("Test ListSet", new Times.Task() {
+            @Override
+            public void execute() {
+                testStringSet(new ListSet<>(), words);
+            }
+        });
+
+        Times.test("Test TreeSet", new Times.Task() {
+            @Override
+            public void execute() {
+                testStringSet(new TreeSet<>(), words);
+            }
+        });
+    }
+
     public static void main(String[] args) {
 //        testListSet();
-        testTreeList();
+//        testTreeList();
+        testReadFile();
     }
 
 }
