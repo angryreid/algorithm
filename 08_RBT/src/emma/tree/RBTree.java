@@ -148,7 +148,7 @@ public class RBTree<E> extends BBST<E> {
                 coloring(sibling, colorOf(parent));
                 black(sibling.right);
                 black(parent);
-                rotateRight(parent);
+                rotateLeft(parent);
             }
         } else { // Deleted right node.
             if (isRed(sibling)) { // Special case.
