@@ -8,6 +8,18 @@ public class BinaryTree<E>  implements BinaryTreeInfo {
     protected int size;
     protected Node<E> root;
 
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        root = null;
+        size = 0;
+    }
     /**
      * abstract class can declare variable
      */
@@ -235,18 +247,5 @@ public class BinaryTree<E>  implements BinaryTreeInfo {
             if (cNode.right != null)
                 queue.offer(cNode.right);
         }
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public void clear() {
-        root = null;
-        size = 0;
     }
 }
