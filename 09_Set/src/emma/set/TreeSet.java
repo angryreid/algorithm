@@ -3,8 +3,19 @@ package emma.set;
 import emma.tree.BinaryTree;
 import emma.tree.RBTree;
 
+import java.util.Comparator;
+
 public class TreeSet<E> implements Set<E> {
-    private RBTree<E> tree = new RBTree<>();
+    private RBTree<E> tree;
+
+    public TreeSet() {
+        this(null); 
+    }
+
+    public TreeSet(Comparator comparator) {
+        tree = new RBTree<>(comparator);
+    }
+
     @Override
     public int size() {
         return tree.size();
