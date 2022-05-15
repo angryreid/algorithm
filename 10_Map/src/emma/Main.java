@@ -9,6 +9,8 @@ import java.util.List;
 
 import emma.map.Map;
 import emma.map.TreeMap;
+import emma.set.Set;
+import emma.set.TresSet;
 import emma.time.Times;
 
 public class Main {
@@ -91,9 +93,26 @@ public class Main {
 
     }
 
+    public static void testTreeSet() {
+        Set<Integer> treeSet = new TresSet<>();
+        treeSet.add(1);
+        treeSet.add(2);
+        treeSet.add(3);
+        treeSet.add(2);
+        System.out.println("Tree size: " + treeSet.size());
+        treeSet.traversal(new Set.Visitor<Integer>() {
+            @Override
+            public boolean visit(Integer element) {
+                System.out.println("Ele: " + element);
+                return false;
+            }
+        });
+    }
+
     public static void main(String[] args) {
 //        testTreeMap();
-        testReadFile();
+//        testReadFile();
+        testTreeSet();
     }
 
 }

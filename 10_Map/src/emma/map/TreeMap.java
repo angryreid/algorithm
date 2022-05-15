@@ -1,6 +1,5 @@
 package emma.map;
 
-import emma.tree.BinaryTree;
 
 import java.util.*;
 
