@@ -1,5 +1,12 @@
 package emma;
 
+import emma.model.Person;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Main {
    
 
@@ -48,11 +55,48 @@ public class Main {
         Long lum = 1209l;
         Double dum = 12.9d;
         String str = "emma";
+
         System.out.println(num.hashCode());
         System.out.println(fum.hashCode());
         System.out.println(lum.hashCode());
         System.out.println(dum.hashCode());
         System.out.println(str.hashCode());
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(1);
+        list.add(1);
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(1);
+        list2.add(1);
+        list2.add(1);
+        int listHash = list.hashCode();
+        int listTwoHash = list2.hashCode();
+        System.out.println("List hash: " + listHash);
+        System.out.println("List hash: " + listTwoHash);
+    }
+
+    public static void testPerson() {
+        Person nick = new Person("nick", 20, 1.75f);
+        Person emma = new Person("nick", 20, 1.75f);
+//        Person emma = new Person("emma", 19, 1.55f);
+//        System.out.println("Nick hashCode is: " + nick.hashCode());
+//        System.out.println("Emma hashCode is: " + emma.hashCode());
+        // Nick hashCode is: 1554874502
+        // Emma hashCode is: 1846274136
+
+        // With override hashCode
+        System.out.println("Nick hashCode is: " + nick.hashCode());
+        System.out.println("Emma hashCode is: " + emma.hashCode());
+        // Nick hashCode is: -1135353225
+        // Emma hashCode is: -1135353225
+        Map<Person, String> map = new HashMap<>();
+        map.put(nick, "nick");
+        map.put(emma, "emma");
+
+        System.out.println("Map size: " + map.size());
+        System.out.println("Map fetch Emma hashCode is: " + map.get(emma));
+        System.out.println("Map fetch Nick hashCode is: " + map.get(nick));
 
     }
 
@@ -60,6 +104,7 @@ public class Main {
     public static void main(String[] args) {
 //        testMagicNumber();
 //        System.out.println(hashStringCode("jack"));
-        testPrimerHash();
+//        testPrimerHash();
+        testPerson();
     }
 }
