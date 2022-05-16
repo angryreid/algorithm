@@ -109,10 +109,18 @@ public class Main {
         });
     }
 
+    public static void testFloatToInt() {
+        int code = Float.floatToIntBits(10.86f);
+        System.out.println(code);
+        System.out.println(Integer.toBinaryString(code));
+    }
+
     public static void main(String[] args) {
 //        testTreeMap();
 //        testReadFile();
-        testTreeSet();
+//        testTreeSet();
+        testFloatToInt();
     }
+
 
 }
