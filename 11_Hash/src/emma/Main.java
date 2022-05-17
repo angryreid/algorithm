@@ -94,7 +94,7 @@ public class Main {
         map.put(nick, "nick");
         map.put(emma, "emma");
 
-        System.out.println("Map size: " + map.size());
+        System.out.println("Map size: " + map.size());// 1, when equals function got override
         System.out.println("Map fetch Emma hashCode is: " + map.get(emma));
         System.out.println("Map fetch Nick hashCode is: " + map.get(nick));
 

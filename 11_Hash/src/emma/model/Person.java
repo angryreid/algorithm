@@ -22,7 +22,8 @@ public class Person {
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
-        if (obj == null || obj.getClass() != getClass()) return false;
+        if (obj == null || obj.getClass() != getClass()) return false; // Suggest
+//        if (obj == null || !(obj instanceof Person)) return false;
         Person pObj = (Person)obj;
         return pObj.age == age && pObj.height == height && valueEquasl(name, pObj.name);
     }
