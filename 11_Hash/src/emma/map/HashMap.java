@@ -80,7 +80,8 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        return null;
+        Node<K, V> node = node(key);
+        return node == null ? null : node.value;
     }
 
     @Override
@@ -90,7 +91,8 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+        Node<K, V> node = node(key);
+        return node == null ? false : true;
     }
 
     @Override
@@ -287,12 +289,13 @@ public class HashMap<K, V> implements Map<K, V> {
         node.parent = parent;
     }
 
-    private Node<K, V> node(K key, Node<K, V> root) {
-        Node<K, V> node = root;
+    private Node<K, V> node(K key) {
+        int index = index(key);
+        Node<K, V> node = table[index];
         int keyHash = keyHash(key);
         while (node != null) {
-            if (node.key.equals(key)) return node;
             int compareRes = compare(node.key, key, node.hash, keyHash);
+            if (compareRes == 0) return node;
             if (compareRes > 0)
                 node = node.left;
             else

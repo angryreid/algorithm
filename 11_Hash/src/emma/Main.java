@@ -90,8 +90,8 @@ public class Main {
         // Nick hashCode is: -1135353225
         // Emma hashCode is: -1135353225
         Map<Person, String> map = new HashMap<>();
-        map.put(nick, "nick");
         map.put(emma, "emma");
+        map.put(nick, "nick");
 
         System.out.println("Map size: " + map.size());// 1, when equals function got override
         System.out.println("Map fetch Emma hashCode is: " + map.get(emma));
@@ -99,11 +99,29 @@ public class Main {
 
     }
 
+    public static void testGetContains() {
+        Person nick = new Person("nick", 22, 1.75f);
+        Person emma = new Person("nick", 20, 1.75f);
+        Person demi = new Person("demi", 18, 1.75f);
+        Map<Person, String> map = new HashMap<>();
+        map.put(emma, "emma");
+        map.put(nick, "nick");
+
+        System.out.println("Map size: " + map.size());// 1, when equals function got override
+        System.out.println("Map get Emma: " + map.get(emma));
+        System.out.println("Map contains Emma: " + map.containsKey(emma));
+        System.out.println("Map get Nick: " + map.get(nick));
+        System.out.println("Map contains Nick: " + map.containsKey(nick));
+        System.out.println("Map get Demi: " + map.get(demi));
+        System.out.println("Map contains Demi: " + map.containsKey(demi));
+    }
+
 
     public static void main(String[] args) {
 //        testMagicNumber();
 //        System.out.println(hashStringCode("jack"));
 //        testPrimerHash();
-        testPerson();
+//        testPerson();
+        testGetContains();
     }
 }
