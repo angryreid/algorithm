@@ -106,14 +106,30 @@ public class Main {
         Map<Person, String> map = new HashMap<>();
         map.put(emma, "emma");
         map.put(nick, "nick");
+        map.put(null, "null is null");
 
-        System.out.println("Map size: " + map.size());// 1, when equals function got override
+        System.out.println("Map size: " + map.size());
         System.out.println("Map get Emma: " + map.get(emma));
         System.out.println("Map contains Emma: " + map.containsKey(emma));
         System.out.println("Map get Nick: " + map.get(nick));
         System.out.println("Map contains Nick: " + map.containsKey(nick));
         System.out.println("Map get Demi: " + map.get(demi));
         System.out.println("Map contains Demi: " + map.containsKey(demi));
+        System.out.println("Map get null: " + map.get(null));
+    }
+
+    public static void testRemove() {
+        Person nick = new Person("nick", 22, 1.75f);
+        Person emma = new Person("nick", 20, 1.75f);
+        Person demi = new Person("demi", 18, 1.75f);
+        Map<Person, String> map = new HashMap<>();
+        map.put(emma, " ");
+        map.put(nick, "nick");
+        map.put(null, "null is null");
+        System.out.println("Map size before removed: " + map.size());
+        String nickname = map.remove(emma);
+        System.out.println(nickname);
+        System.out.println("Map size after removed: " + map.size());
     }
 
 
@@ -122,6 +138,7 @@ public class Main {
 //        System.out.println(hashStringCode("jack"));
 //        testPrimerHash();
 //        testPerson();
-        testGetContains();
+//        testGetContains();
+        testRemove();
     }
 }

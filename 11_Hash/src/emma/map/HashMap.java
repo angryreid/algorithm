@@ -1,6 +1,8 @@
 package emma.map;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 public class HashMap<K, V> implements Map<K, V> {
     private static final boolean RED = false;
@@ -86,7 +88,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public V remove(K key) {
-        return null;
+        return remove(node(key));
     }
 
     @Override
@@ -97,6 +99,19 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean containValue(V value) {
+        if (size == 0) return false;
+
+        Queue<Node<K, V>> queue = new LinkedList<>();
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] == null) continue;
+            queue.offer(table[i]);
+            while (!queue.isEmpty()) {
+                Node<K, V> node = queue.poll();
+                if (Objects.equals(node.value, value)) return true;
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+        }
         return false;
     }
 
@@ -409,5 +424,46 @@ public class HashMap<K, V> implements Map<K, V> {
             node = node.parent;
         }
         return node.parent;
+    }
+
+    private V remove(Node<K, V> node) {
+        if (node == null) return null;
+        size--;
+
+        V oldValue = node.value;
+        if (node.fullLeaf()) { // Handing this case specially.
+            Node<K, V> pre = predecessor(node);
+            node.key = pre.key;
+            node.value = pre.value;
+            node = pre;// Binding the value to delete later.
+        }
+
+        // remove node.
+        int index = index(node);
+        if (node.isLeaf()) { // remove leaf node case.
+            if (node.parent == null) {
+                table[index] = null;
+                afterRemove(node);
+            } else {
+                if (node == node.parent.left) {
+                    node.parent.left = null;
+                } else {
+                    node.parent.right = null;
+                }
+                afterRemove(node);
+            }
+        } else { // remove one child case.
+            Node<K, V> replaceNode = node.left != null ? node.left : node.right;
+            replaceNode.parent = node.parent;
+            if (node.parent == null) { // node is root and has only one child
+                table[index] = replaceNode;
+            }else if (node == node.parent.left) {
+                node.parent.left = replaceNode;
+            } else {
+                node.parent.right = replaceNode;
+            }
+            afterRemove(replaceNode);
+        }
+        return oldValue;
     }
 }
