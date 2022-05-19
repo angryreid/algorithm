@@ -4,6 +4,8 @@ import emma.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import emma.map.*;
 
 public class Main {
@@ -132,6 +134,27 @@ public class Main {
         System.out.println("Map size after removed: " + map.size());
     }
 
+    public static void testTraversal() {
+        Person nick = new Person("nick", 22, 1.75f);
+        Person emma = new Person("emma", 20, 1.75f);
+        Map<Person, String> map = new HashMap<>();
+        map.put(emma, "emma");
+        map.put(nick, "nick");
+        map.put(null, "null is null");
+        System.out.println("Map size contains value: " + map.containValue("nick"));
+        System.out.println("Map size: " + map.size());
+        map.traversal(new Map.Visitor<Person, String>() {
+            @Override
+            public boolean visit(Person key, String value) {
+                if (key != null) {
+                    System.out.println(key.getDetail() + "__" +value);
+                }
+                if (Objects.equals(value, "nick")) return true;
+                return false;
+            }
+        });
+    }
+
 
     public static void main(String[] args) {
 //        testMagicNumber();
@@ -139,6 +162,7 @@ public class Main {
 //        testPrimerHash();
 //        testPerson();
 //        testGetContains();
-        testRemove();
+//        testRemove();
+        testTraversal();
     }
 }

@@ -11,6 +11,14 @@ public class Person {
         this.height = height;
     }
 
+    public String getDetail() {
+        String str = "";
+        str += name + " ";
+        str += age + " ";
+        str += height;
+        return str;
+    }
+
     @Override
     public int hashCode() {
         int hashCode = Integer.hashCode(age);
