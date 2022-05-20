@@ -155,6 +155,10 @@ public class Main {
         });
     }
 
+    public static void testSpecialCase() {
+
+    }
+
 
     public static void main(String[] args) {
 //        testMagicNumber();
@@ -163,6 +167,7 @@ public class Main {
 //        testPerson();
 //        testGetContains();
 //        testRemove();
-        testTraversal();
+//        testTraversal();
+        testSpecialCase();
     }
 }
