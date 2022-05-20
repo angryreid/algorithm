@@ -2,12 +2,12 @@ package emma.model;
 
 public class Key {
     private int value;
-    Key(int value) {
+    public Key(int value) {
         this.value = value;
     }
 
     public int  hashCode() {
-        return value / 10;
+        return value / 20;
     }
 
     @Override

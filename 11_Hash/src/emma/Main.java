@@ -1,5 +1,6 @@
 package emma;
 
+import emma.model.Key;
 import emma.model.Person;
 
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 
 import emma.map.*;
+import emma.printer.BinaryTreeInfo;
+import emma.printer.BinaryTrees;
 
 public class Main {
    
@@ -156,7 +159,14 @@ public class Main {
     }
 
     public static void testSpecialCase() {
-
+        HashMap<Object, Integer> map = new HashMap<>();
+        for (int i = 0; i < 19; i++) {
+            map.put(new Key(i), i);
+        }
+        System.out.println(map.size());// 10, all number saved at one bucket, one red black tree.
+        System.out.println(map.get(new Key(1)));
+        map.print();
+        System.out.println(map.get(new Key(1)));// null or 1
     }
 
 

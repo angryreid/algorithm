@@ -1,5 +1,8 @@
 package emma.map;
 
+import emma.printer.BinaryTreeInfo;
+import emma.printer.BinaryTrees;
+
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
@@ -132,6 +135,34 @@ public class HashMap<K, V> implements Map<K, V> {
         }
     }
 
+    public void print() {
+        if (size == 0) return;
+        for (int i = 0; i < table.length; i++) {
+            final Node<K, V> node = table[i];
+            BinaryTrees.println(new BinaryTreeInfo() {
+                @Override
+                public Object root() {
+                    return node;
+                }
+
+                @Override
+                public Object left(Object node) {
+                    return ((Node<K, V>)node).left;
+                }
+
+                @Override
+                public Object right(Object node) {
+                    return ((Node<K, V>)node).right;
+                }
+
+                @Override
+                public Object string(Object node) {
+                    return node;
+                }
+            });
+        }
+    }
+
     private static class Node<K, V> {
         K key;
         V value;
@@ -173,6 +204,11 @@ public class HashMap<K, V> implements Map<K, V> {
                 return parent.left;
             }
             return null;
+        }
+
+        @Override
+        public String toString() {
+            return "Node_" + key + "_" + value;
         }
     }
 
@@ -246,12 +282,9 @@ public class HashMap<K, V> implements Map<K, V> {
 
         if (Objects.equals(key1, key2)) return 0;
         // Same hash, diff equals
-        if (key1 != null && key2 != null) {
-            String key1ClsName = key1.getClass().getName();
-            String key2ClsName = key2.getClass().getName();
-            res = key1ClsName.compareTo(key2ClsName);
-            if (res != 0) return res;
-            // Same Class
+        if (key1 != null && key2 != null
+        && key1.getClass() == key2.getClass()
+        && key1 instanceof Comparable) {
             if (key1 instanceof Comparable) {
                 return ((Comparable) key1).compareTo(key2);
             }
@@ -316,17 +349,13 @@ public class HashMap<K, V> implements Map<K, V> {
         node.parent = parent;
     }
 
-    private Node<K, V> node(K key) {
-        int index = index(key);
+    private Node<K, V> node(K k1) {
+        int index = index(k1);
         Node<K, V> node = table[index];
-        int keyHash = keyHash(key);
+        int h1 = keyHash(k1);
         while (node != null) {
-            int compareRes = compare(node.key, key, node.hash, keyHash);
-            if (compareRes == 0) return node;
-            if (compareRes > 0)
-                node = node.left;
-            else
-                node = node.right;
+            K k2 = node.key;
+            int h2 = node.hash;
         }
         return null;
     }
@@ -478,4 +507,6 @@ public class HashMap<K, V> implements Map<K, V> {
         }
         return oldValue;
     }
+
+
 }
