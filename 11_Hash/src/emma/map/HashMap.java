@@ -59,6 +59,7 @@ public class HashMap<K, V> implements Map<K, V> {
         int cmp = 0;
         int h1 = key == null ? 0 : key.hashCode();
         K k1 = key;
+        boolean searched = false;
         do {
             parent = node;
             int h2 = node.hash;
@@ -73,10 +74,15 @@ public class HashMap<K, V> implements Map<K, V> {
                 } else if (k1 != null && k2 != null && k1.getClass() == k2.getClass() && k1 instanceof Comparable) {
                     cmp = ((Comparable) k1).compareTo(k2);
                 } else {
-                    if ((node.left != null && (target = node(node.left, k1)) != null)
-                            || (node.right != null && (target = node(node.right, k1)) != null)) {
-                        node = target;
-                        cmp = 0;
+                    if (!searched) {
+                        if ((node.left != null && (target = node(node.left, k1)) != null)
+                                || (node.right != null && (target = node(node.right, k1)) != null)) {
+                            node = target;
+                            cmp = 0;
+                        } else {
+                            searched = true;
+                            cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+                        }
                     } else {
                         cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
                     }
@@ -402,8 +408,9 @@ public class HashMap<K, V> implements Map<K, V> {
                 } else {
                     // Same hash, not comparable, not equals.
                     if (node.right != null && (target = node(node.right, k1)) != null) return target;
-                    if (node.left != null && (target = node(node.left, k1)) != null) return target;
-                    return null;// To break the while loop.
+                    node = node.left;
+//                    if (node.left != null && (target = node(node.left, k1)) != null) return target;
+//                    return null;// To break the while loop.
                 }
             }
         }
