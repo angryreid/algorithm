@@ -55,14 +55,37 @@ public class HashMap<K, V> implements Map<K, V> {
         Node<K, V> node = root;
 
         // compere
-        int compareRes = 0;
-        int keyHash = key == null ? 0 : key.hashCode();
+        Node<K, V> target = null;
+        int cmp = 0;
+        int h1 = key == null ? 0 : key.hashCode();
+        K k1 = key;
         do {
-            compareRes = compare(key, node.key, keyHash, node.hash);
             parent = node;
-            if (compareRes > 0) {
+            int h2 = node.hash;
+            K k2 = node.key;
+            if (h1 > h2) {
+                cmp = 1;
+            } else if (h1 < h2) {
+                cmp = -1;
+            } else {
+                if (Objects.equals(k1, k2)) {
+                    cmp = 0;
+                } else if (k1 != null && k2 != null && k1.getClass() == k2.getClass() && k1 instanceof Comparable) {
+                    cmp = ((Comparable) k1).compareTo(k2);
+                } else {
+                    if ((node.left != null && (target = node(node.left, k1)) != null)
+                            || (node.right != null && (target = node(node.right, k1)) != null)) {
+                        node = target;
+                        cmp = 0;
+                    } else {
+                        cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+                    }
+                }
+            }
+
+            if (cmp > 0) {
                 node = node.right;
-            } else if (compareRes < 0) {
+            } else if (cmp < 0) {
                 node = node.left;
             } else { // equals
                 V oldValue = node.value;
@@ -73,7 +96,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
         // add to parent's left or right
         Node<K, V> newNode = new Node<>(key, value, parent);
-        if (compareRes > 0) {
+        if (cmp > 0) {
             parent.right = newNode;
         } else {
             parent.left = newNode;
@@ -208,7 +231,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
         @Override
         public String toString() {
-            return "Node_" + key + "_" + value;
+            return "Node_K_" + key + "_V_" + value;
         }
     }
 
@@ -349,13 +372,40 @@ public class HashMap<K, V> implements Map<K, V> {
         node.parent = parent;
     }
 
-    private Node<K, V> node(K k1) {
-        int index = index(k1);
-        Node<K, V> node = table[index];
+    private Node<K, V> node(K key) {
+        int index = index(key);
+        Node<K, V> root = table[index];
+        return root == null ? null : node(root, key);
+    }
+
+    private Node<K, V> node(Node<K, V> node, K k1) {
         int h1 = keyHash(k1);
+        Node<K, V> target = null;
         while (node != null) {
             K k2 = node.key;
             int h2 = node.hash;
+            // Compare Hashcode
+            if (h1 > h2) {
+                node = node.right;
+            } else if (h1 < h2) {
+                node = node.left;
+            } else {
+                if (Objects.equals(k1, k2)) return node;
+                if (k1 != null
+                        && k2 != null
+                        && k1.getClass() == k2.getClass()
+                        && k1 instanceof Comparable) {
+                    int cmp = ((Comparable) k1).compareTo(k2);
+                    if (cmp > 0) node = node.right;
+                    if (cmp < 0) node = node.left;
+                    return node;
+                } else {
+                    // Same hash, not comparable, not equals.
+                    if (node.right != null && (target = node(node.right, k1)) != null) return target;
+                    if (node.left != null && (target = node(node.left, k1)) != null) return target;
+                    return null;// To break the while loop.
+                }
+            }
         }
         return null;
     }

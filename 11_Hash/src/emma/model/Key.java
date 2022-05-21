@@ -19,6 +19,6 @@ public class Key {
 
     @Override
     public String toString() {
-        return "v(" + value + ")v";
+        return "(" + value + ")";
     }
 }

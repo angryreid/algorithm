@@ -179,5 +179,6 @@ public class Main {
 //        testRemove();
 //        testTraversal();
         testSpecialCase();
+        System.out.println("Done.");
     }
 }
