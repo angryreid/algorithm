@@ -1,5 +1,7 @@
 package emma;
 
+import emma.file.FileInfo;
+import emma.file.Files;
 import emma.model.Key;
 import emma.model.Person;
 
@@ -169,6 +171,23 @@ public class Main {
         System.out.println(map.get(new Key(1)));// null or 1
     }
 
+    public static void testReadFile() {
+        FileInfo files = Files.read("/Users/lydia/Documents/repo/algorithm", new String[]{"java"});
+        System.out.println("File: " + files.getFiles());
+        System.out.println("Lines: " + files.getLines());
+        System.out.println("Words: " + files.words().length);
+        String[] words = files.words();
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String word : words) {
+            Integer count = map.get(word);
+            count = (count == null) ? 1 : count + 1;
+            map.put(word, count);
+        }
+
+        System.out.println("Map Words: " + map.size()); // 994
+        map.print();
+    }
+
 
     public static void main(String[] args) {
 //        testMagicNumber();
@@ -178,7 +197,8 @@ public class Main {
 //        testGetContains();
 //        testRemove();
 //        testTraversal();
-        testSpecialCase();
+//        testSpecialCase();
+        testReadFile();
         System.out.println("Done.");
     }
 }

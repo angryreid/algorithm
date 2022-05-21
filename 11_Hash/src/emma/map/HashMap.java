@@ -171,6 +171,7 @@ public class HashMap<K, V> implements Map<K, V> {
     public void print() {
         if (size == 0) return;
         for (int i = 0; i < table.length; i++) {
+            System.out.println("[" + i + "]");
             final Node<K, V> node = table[i];
             BinaryTrees.println(new BinaryTreeInfo() {
                 @Override
@@ -193,6 +194,7 @@ public class HashMap<K, V> implements Map<K, V> {
                     return node;
                 }
             });
+            System.out.println("===========>><<============");
         }
     }
 
