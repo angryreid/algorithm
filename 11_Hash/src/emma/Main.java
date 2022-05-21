@@ -190,6 +190,24 @@ public class Main {
         map.print();
     }
 
+    public static void testLinkedHashMap() {
+        HashMap<String, Integer> map = new LinkedHashMap<>();
+        map.put("Nick", 1);
+        map.put("Emma", 2);
+        map.put("Demi", 3);
+        map.put("Rick", 4);
+        map.print();
+        map.remove("Rick");
+        System.out.println("Map size : " + map.size());
+        map.traversal(new Map.Visitor<String, Integer>() {
+            @Override
+            public boolean visit(String key, Integer value) {
+                System.out.println("Put order: " + key + "_" + value);
+                return false;
+            }
+        });
+    }
+
 
     public static void main(String[] args) {
 //        testMagicNumber();
@@ -200,7 +218,8 @@ public class Main {
 //        testRemove();
 //        testTraversal();
 //        testSpecialCase();
-        testReadFile();
-//        System.out.println("Done.");
+//        testReadFile();
+        testLinkedHashMap();
+        System.out.println("Done.");
     }
 }

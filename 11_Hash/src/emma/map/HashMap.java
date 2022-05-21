@@ -44,10 +44,10 @@ public class HashMap<K, V> implements Map<K, V> {
         int index = index(key); // hash code is not equals index.
         Node<K, V> root = table[index];
         if (root == null) {
-            root = new Node<>(key, value, null);
+            root = createNode(key, value, null);
             table[index] = root;
             size++;
-            afterPut(root);
+            fixAfterPut(root);
             return null;
         }
         // Hash Conflict, Need to add new Node to Red Black Tree
@@ -101,14 +101,14 @@ public class HashMap<K, V> implements Map<K, V> {
         } while (node != null);
 
         // add to parent's left or right
-        Node<K, V> newNode = new Node<>(key, value, parent);
+        Node<K, V> newNode = createNode(key, value, parent);
         if (cmp > 0) {
             parent.right = newNode;
         } else {
             parent.left = newNode;
         }
         size++;
-        afterPut(newNode);
+        fixAfterPut(newNode);
         return null;
     }
 
@@ -194,7 +194,7 @@ public class HashMap<K, V> implements Map<K, V> {
         }
     }
 
-    private static class Node<K, V> {
+    protected static class Node<K, V> {
         K key;
         V value;
         int hash;
@@ -244,6 +244,10 @@ public class HashMap<K, V> implements Map<K, V> {
         }
     }
 
+    protected Node<K, V> createNode(K key, V value, Node<K, V> parent) {
+        return new Node<>(key, value, parent);
+    }
+
     private void resize() {
         // load factor minor then 0.75
         if (size / table.length <= DEFAULT_LOAD_FACTOR) return;
@@ -275,7 +279,7 @@ public class HashMap<K, V> implements Map<K, V> {
         if (root == null) {
             root = oldNode;
             table[index] = root;
-            afterPut(root);
+            fixAfterPut(root);
             return;
         }
         // Hash Conflict, Need to add new Node to Red Black Tree
@@ -318,7 +322,7 @@ public class HashMap<K, V> implements Map<K, V> {
             parent.left = oldNode;
         }
         oldNode.parent = parent;
-        afterPut(oldNode);
+        fixAfterPut(oldNode);
     }
 
     /**
@@ -342,7 +346,7 @@ public class HashMap<K, V> implements Map<K, V> {
         return node.hash & (table.length - 1);
     }
 
-    private void afterPut(Node<K, V> node) {
+    private void fixAfterPut(Node<K, V> node) {
         Node<K, V> parent = node.parent;
         if (parent == null) {
             // Added root or overflow reaching to root node.
@@ -361,7 +365,7 @@ public class HashMap<K, V> implements Map<K, V> {
             black(parent);
             black(uncle);
             // Grand node recursevily handing
-            afterPut(grand);
+            fixAfterPut(grand);
             return;
         }
         // Uncle is black, rotating.
@@ -503,7 +507,7 @@ public class HashMap<K, V> implements Map<K, V> {
         return null;
     }
 
-    private void afterRemove(Node<K, V> node) {
+    private void fixAfterRemove(Node<K, V> node) {
 //        if (isRed(node)) return; // Removed red node.can be combine with below case.
 
         if(isRed(node)) { // Replacement node
@@ -534,7 +538,7 @@ public class HashMap<K, V> implements Map<K, V> {
                 black(parent);
                 red(sibling);
                 if (isBlackParent) {
-                    afterRemove(parent);
+                    fixAfterRemove(parent);
                 }
             } else { // Sibling has more then one red node. will borrow node from sibling.
                 if (isBlack(sibling.right)) {
@@ -561,7 +565,7 @@ public class HashMap<K, V> implements Map<K, V> {
                 black(parent);
                 red(sibling);
                 if (isBlackParent) {
-                    afterRemove(parent);
+                    fixAfterRemove(parent);
                 }
             } else { // Sibling has more then one red node. will borrow node from sibling.
                 if (isBlack(sibling.left)) {
@@ -606,6 +610,14 @@ public class HashMap<K, V> implements Map<K, V> {
         return node.parent;
     }
 
+    protected void afterRemove(Node<K, V> node) {
+
+    }
+
+    protected void afterReplace(Node<K, V> node, Node<K, V> replaceNode) {
+
+    }
+
     private V remove(Node<K, V> node) {
         if (node == null) return null;
         size--;
@@ -617,6 +629,7 @@ public class HashMap<K, V> implements Map<K, V> {
             node.key = pre.key;
             node.value = pre.value;
             node = pre;// Binding the value to delete later.
+            afterReplace(node, pre);
         }
 
         // remove node.
@@ -624,14 +637,14 @@ public class HashMap<K, V> implements Map<K, V> {
         if (node.isLeaf()) { // remove leaf node case.
             if (node.parent == null) {
                 table[index] = null;
-                afterRemove(node);
+                fixAfterRemove(node);
             } else {
                 if (node == node.parent.left) {
                     node.parent.left = null;
                 } else {
                     node.parent.right = null;
                 }
-                afterRemove(node);
+                fixAfterRemove(node);
             }
         } else { // remove one child case.
             Node<K, V> replaceNode = node.left != null ? node.left : node.right;
@@ -643,10 +656,9 @@ public class HashMap<K, V> implements Map<K, V> {
             } else {
                 node.parent.right = replaceNode;
             }
-            afterRemove(replaceNode);
+            fixAfterRemove(replaceNode);
         }
+        afterRemove(node);
         return oldValue;
     }
-
-
 }
