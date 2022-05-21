@@ -8,3 +8,14 @@ function
 ```java
 key1.equals(key2)
 ```
+
+## Comparing with TreeMap
+
+TreeMap requires element's key must can be compared.
+
+HashMap no requires for element's key.
+HashMap will using equals function to judge if same element.
+
+##  TODO
+
+- Add Test Case.

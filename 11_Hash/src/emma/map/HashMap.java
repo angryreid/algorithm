@@ -71,8 +71,12 @@ public class HashMap<K, V> implements Map<K, V> {
             } else {
                 if (Objects.equals(k1, k2)) {
                     cmp = 0;
-                } else if (k1 != null && k2 != null && k1.getClass() == k2.getClass() && k1 instanceof Comparable) {
-                    cmp = ((Comparable) k1).compareTo(k2);
+                } else if (k1 != null
+                        && k2 != null
+                        && k1.getClass() == k2.getClass()
+                        && k1 instanceof Comparable
+                        && (cmp = ((Comparable) k1).compareTo(k2)) != 0) {
+                    ;
                 } else {
                     if (!searched) {
                         if ((node.left != null && (target = node(node.left, k1)) != null)
@@ -305,6 +309,14 @@ public class HashMap<K, V> implements Map<K, V> {
         }
     }
 
+    /**
+     * Deprecated
+     * @param key1
+     * @param key2
+     * @param hashKey1
+     * @param hashKey2
+     * @return
+     */
     private int compare(K key1, K key2, int hashKey1, int hashKey2) {
         int res = hashKey1 - hashKey2;
         if (res != 0) return res;
@@ -397,14 +409,14 @@ public class HashMap<K, V> implements Map<K, V> {
                 node = node.left;
             } else {
                 if (Objects.equals(k1, k2)) return node;
+                int cmp = 0;
                 if (k1 != null
                         && k2 != null
                         && k1.getClass() == k2.getClass()
-                        && k1 instanceof Comparable) {
-                    int cmp = ((Comparable) k1).compareTo(k2);
+                        && k1 instanceof Comparable
+                        && (cmp = ((Comparable) k1).compareTo(k2)) != 0) { // Exclude compareTo 0
                     if (cmp > 0) node = node.right;
                     if (cmp < 0) node = node.left;
-                    return node;
                 } else {
                     // Same hash, not comparable, not equals.
                     if (node.right != null && (target = node(node.right, k1)) != null) return target;
@@ -531,6 +543,7 @@ public class HashMap<K, V> implements Map<K, V> {
         V oldValue = node.value;
         if (node.fullLeaf()) { // Handing this case specially.
             Node<K, V> pre = predecessor(node);
+            node.hash = pre.hash;
             node.key = pre.key;
             node.value = pre.value;
             node = pre;// Binding the value to delete later.
