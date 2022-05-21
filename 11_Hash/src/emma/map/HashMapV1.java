@@ -7,14 +7,14 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
-public class HashMap<K, V> implements Map<K, V> {
+public class HashMapV1<K, V> implements Map<K, V> {
     private static final boolean RED = false;
     private static final boolean BLACK = true;
     public static final int DEFAULT_CAPACITY = 1 << 5;
     private int size;
     private Node<K, V>[] table;
-    
-    public HashMap() {
+
+    public HashMapV1() {
         table = new Node[DEFAULT_CAPACITY];
     }
 
@@ -65,21 +65,31 @@ public class HashMap<K, V> implements Map<K, V> {
             int h2 = node.hash;
             K k2 = node.key;
             if (h1 > h2) {
-                node = node.right;
-            } else if (h1 < h2) {
-                node = node.left;
-            }else if (Objects.equals(k1, k2)) {
-                cmp = 0;
-            } else if (searched){
                 cmp = 1;
+            } else if (h1 < h2) {
+                cmp = -1;
             } else {
-                if ((node.left != null && (target = node(node.left, k1)) != null)
-                        || (node.right != null && (target = node(node.right, k1)) != null)) {
-                    node = target;
+                if (Objects.equals(k1, k2)) {
                     cmp = 0;
+                } else if (k1 != null
+                        && k2 != null
+                        && k1.getClass() == k2.getClass()
+                        && k1 instanceof Comparable
+                        && (cmp = ((Comparable) k1).compareTo(k2)) != 0) {
+                    ;
                 } else {
-                    searched = true;
-                    cmp = 1;
+                    if (!searched) {
+                        if ((node.left != null && (target = node(node.left, k1)) != null)
+                                || (node.right != null && (target = node(node.right, k1)) != null)) {
+                            node = target;
+                            cmp = 0;
+                        } else {
+                            searched = true;
+                            cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+                        }
+                    } else {
+                        cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+                    }
                 }
             }
 
@@ -316,8 +326,8 @@ public class HashMap<K, V> implements Map<K, V> {
         if (Objects.equals(key1, key2)) return 0;
         // Same hash, diff equals
         if (key1 != null && key2 != null
-        && key1.getClass() == key2.getClass()
-        && key1 instanceof Comparable) {
+                && key1.getClass() == key2.getClass()
+                && key1 instanceof Comparable) {
             if (key1 instanceof Comparable) {
                 return ((Comparable) key1).compareTo(key2);
             }
@@ -395,9 +405,28 @@ public class HashMap<K, V> implements Map<K, V> {
             K k2 = node.key;
             int h2 = node.hash;
             // Compare Hashcode
-            if (Objects.equals(k1, k2)) return node;
-            if (node.right != null && (target = node(node.right, k1)) != null) return target;
-            node = node.left;
+            if (h1 > h2) {
+                node = node.right;
+            } else if (h1 < h2) {
+                node = node.left;
+            } else {
+                if (Objects.equals(k1, k2)) return node;
+                int cmp = 0;
+                if (k1 != null
+                        && k2 != null
+                        && k1.getClass() == k2.getClass()
+                        && k1 instanceof Comparable
+                        && (cmp = ((Comparable) k1).compareTo(k2)) != 0) { // Exclude compareTo 0
+                    if (cmp > 0) node = node.right;
+                    if (cmp < 0) node = node.left;
+                } else {
+                    // Same hash, not comparable, not equals.
+                    if (node.right != null && (target = node(node.right, k1)) != null) return target;
+                    node = node.left;
+//                    if (node.left != null && (target = node(node.left, k1)) != null) return target;
+//                    return null;// To break the while loop.
+                }
+            }
         }
         return null;
     }
