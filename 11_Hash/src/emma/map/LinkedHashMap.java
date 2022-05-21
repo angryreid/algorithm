@@ -1,5 +1,7 @@
 package emma.map;
 
+import java.util.Objects;
+
 public class LinkedHashMap<K, V> extends HashMap<K, V> {
     private LinkedNode<K, V> head;
     private LinkedNode<K, V> tail;
@@ -41,6 +43,16 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> {
     }
 
     @Override
+    public boolean containValue(V value) {
+        LinkedNode<K, V> node = head;
+        while (node != null) {
+            if (Objects.equals(value, node.value)) return true;
+            node = node.next;
+        }
+        return false;
+    }
+
+    @Override
     protected void afterRemove(Node<K, V> node) {
         LinkedNode<K, V> linkedNode = (LinkedNode<K, V>)node;
         LinkedNode<K, V> prev = linkedNode.prev;
@@ -79,7 +91,7 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> {
 
         LinkedNode<K, V> tempNext = node1.prev;
         node1.next = node2.next;
-        node2.next = tempNext;
+        node2.next = tempNext ;
         if (node1.next == null) {
             tail = node1;
         } else {
