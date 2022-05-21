@@ -177,15 +177,16 @@ public class Main {
         System.out.println("Lines: " + files.getLines());
         System.out.println("Words: " + files.words().length);
         String[] words = files.words();
-        HashMap<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMapV1<>();
         for (String word : words) {
             Integer count = map.get(word);
             count = (count == null) ? 1 : count + 1;
             map.put(word, count);
         }
 
-        System.out.println("Map Words: " + map.size()); // 994
-        map.print();
+        System.out.println("Map Words: " + map.size()); // 995
+        System.out.println("Map java Words: " + map.get("java"));
+//        map.print();
     }
 
 
@@ -199,6 +200,6 @@ public class Main {
 //        testTraversal();
 //        testSpecialCase();
         testReadFile();
-        System.out.println("Done.");
+//        System.out.println("Done.");
     }
 }

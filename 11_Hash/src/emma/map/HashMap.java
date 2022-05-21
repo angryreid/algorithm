@@ -57,7 +57,7 @@ public class HashMap<K, V> implements Map<K, V> {
         // compere
         Node<K, V> target = null;
         int cmp = 0;
-        int h1 = key == null ? 0 : key.hashCode();
+        int h1 = hash(key);
         K k1 = key;
         boolean searched = false;
         do {
@@ -65,13 +65,17 @@ public class HashMap<K, V> implements Map<K, V> {
             int h2 = node.hash;
             K k2 = node.key;
             if (h1 > h2) {
-                node = node.right;
+                cmp = 1;
             } else if (h1 < h2) {
-                node = node.left;
+                cmp = -1;
             }else if (Objects.equals(k1, k2)) {
                 cmp = 0;
+            } else if(k1 != null && k2 != null
+                    && k1.getClass() == k2.getClass()
+                    && k1 instanceof Comparable
+                    && (cmp = ((Comparable) k1).compareTo(k2)) != 0){
             } else if (searched){
-                cmp = 1;
+                cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
             } else {
                 if ((node.left != null && (target = node(node.left, k1)) != null)
                         || (node.right != null && (target = node(node.right, k1)) != null)) {
@@ -79,7 +83,7 @@ public class HashMap<K, V> implements Map<K, V> {
                     cmp = 0;
                 } else {
                     searched = true;
-                    cmp = 1;
+                    cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
                 }
             }
 
@@ -198,8 +202,9 @@ public class HashMap<K, V> implements Map<K, V> {
         Node<K, V> parent;
 
         public Node(K key, V value, Node<K, V> parent) {
+            int hash = key == null ? 0 : key.hashCode();
             this.key = key;
-            this.hash = key == null ? 0 : key.hashCode();
+            this.hash = (hash ^ (hash >>> 16));
             this.value = value;
             this.parent = parent;
         }
@@ -243,16 +248,19 @@ public class HashMap<K, V> implements Map<K, V> {
      * @return
      */
     private int index(K key) {
-        if (key == null) return 0;
-        int hash = key.hashCode();
+        return hash(key) & (table.length - 1);
+    }
+
+    private int hash(K key) {
         // ^ will use the high 16bit ^ with the low 16bit
         // & will limit the hash code smaller then table size
-        return (hash ^ (hash >>> 16)) & (table.length - 1);
+        if (key == null) return 0;
+        int hash = key.hashCode();
+        return (hash ^ (hash >>> 16));
     }
 
     private int index(Node<K, V> node) {
-        int hash = node.hash;
-        return (hash ^ (hash >>> 16)) & (table.length - 1);
+        return node.hash & (table.length - 1);
     }
 
     private void afterPut(Node<K, V> node) {
@@ -389,21 +397,31 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     private Node<K, V> node(Node<K, V> node, K k1) {
-        int h1 = keyHash(k1);
+        int h1 = hash(k1);
         Node<K, V> target = null;
+        int cmp = 0;
         while (node != null) {
             K k2 = node.key;
             int h2 = node.hash;
             // Compare Hashcode
-            if (Objects.equals(k1, k2)) return node;
-            if (node.right != null && (target = node(node.right, k1)) != null) return target;
-            node = node.left;
+            if (h1 > h2) {
+                node = node.right;
+            } else if (h1 < h2) {
+                node = node.left;
+            } else if (Objects.equals(k1, k2)) {
+                return node;
+            } else if (k1 != null && k2 != null
+                    && k1.getClass() == k2.getClass()
+                    && k1 instanceof Comparable
+                    && (cmp = ((Comparable) k1).compareTo(k2)) != 0){
+                if (cmp > 0) node = node.right;
+                if (cmp < 0) node = node.left;
+            } else {
+                if (node.right != null && (target = node(node.right, k1)) != null) return target;
+                node = node.left;
+            }
         }
         return null;
-    }
-
-    private int keyHash(K key) {
-        return key == null ? 0 : key.hashCode();
     }
 
     private void afterRemove(Node<K, V> node) {
