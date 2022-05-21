@@ -11,6 +11,7 @@ public class HashMap<K, V> implements Map<K, V> {
     private static final boolean RED = false;
     private static final boolean BLACK = true;
     public static final int DEFAULT_CAPACITY = 1 << 5;
+    public static final float DEFAULT_LOAD_FACTOR = 0.75f; // size / table.length
     private int size;
     private Node<K, V>[] table;
     
@@ -39,6 +40,7 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public V put(K key, V value) {
+        resize();
         int index = index(key); // hash code is not equals index.
         Node<K, V> root = table[index];
         if (root == null) {
@@ -240,6 +242,83 @@ public class HashMap<K, V> implements Map<K, V> {
         public String toString() {
             return "Node_K_" + key + "_V_" + value;
         }
+    }
+
+    private void resize() {
+        // load factor minor then 0.75
+        if (size / table.length <= DEFAULT_LOAD_FACTOR) return;
+        Node<K, V>[] oldTable = table;
+        table = new Node[oldTable.length << 1];
+
+        Queue<Node<K, V>> queue = new LinkedList<>();
+        for (int i = 0; i < oldTable.length; i++) {
+            if (oldTable[i] == null) continue;
+            queue.offer(oldTable[i]);
+            while (!queue.isEmpty()) {
+                Node<K, V> node = queue.poll();
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+                moveNode(node);
+            }
+        }
+    }
+
+    private void moveNode(Node<K, V> oldNode) {
+        // clear node reference.
+        oldNode.parent = null;
+        oldNode.left = null;
+        oldNode.right = null;
+        oldNode.color = RED;
+
+        int index = index(oldNode); // hash code is not equals index.
+        Node<K, V> root = table[index];
+        if (root == null) {
+            root = oldNode;
+            table[index] = root;
+            afterPut(root);
+            return;
+        }
+        // Hash Conflict, Need to add new Node to Red Black Tree
+        // Add other node
+        // find parent
+        Node<K, V> parent = null;
+        Node<K, V> node = root;
+
+        // compere
+        int cmp = 0;
+        int h1 = oldNode.hash;
+        K k1 = oldNode.key;
+        do {
+            parent = node;
+            int h2 = node.hash;
+            K k2 = node.key;
+            if (h1 > h2) {
+                cmp = 1;
+            } else if (h1 < h2) {
+                cmp = -1;
+            } else if (k1 != null && k2 != null
+                    && k1.getClass() == k2.getClass()
+                    && k1 instanceof Comparable
+                    && (cmp = ((Comparable) k1).compareTo(k2)) != 0){
+            } else {
+                cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+            }
+
+            if (cmp > 0) {
+                node = node.right;
+            } else if (cmp < 0) {
+                node = node.left;
+            }
+        } while (node != null);
+
+
+        if (cmp > 0) {
+            parent.right = oldNode;
+        } else {
+            parent.left = oldNode;
+        }
+        oldNode.parent = parent;
+        afterPut(oldNode);
     }
 
     /**

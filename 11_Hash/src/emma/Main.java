@@ -177,8 +177,9 @@ public class Main {
         System.out.println("Lines: " + files.getLines());
         System.out.println("Words: " + files.words().length);
         String[] words = files.words();
-        Map<String, Integer> map = new HashMapV1<>();
+        HashMap<String, Integer> map = new HashMap<>();
         for (String word : words) {
+//            if (word.equals("")) continue;
             Integer count = map.get(word);
             count = (count == null) ? 1 : count + 1;
             map.put(word, count);
@@ -186,7 +187,7 @@ public class Main {
 
         System.out.println("Map Words: " + map.size()); // 995
         System.out.println("Map java Words: " + map.get("java"));
-//        map.print();
+        map.print();
     }
 
 
