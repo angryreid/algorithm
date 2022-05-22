@@ -40,12 +40,24 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
 
     @Override
     public E remove() {
-        return null;
+        if (size == 0) return null;
+        E head = elements[0];
+        int tailIndex = --size;
+        elements[0] = elements[tailIndex];
+        elements[tailIndex] = null;
+        siftDown(0);
+        return head;
     }
 
     @Override
     public E replace(E element) {
-        return null;
+        if (size == 0) return null;
+        E head = elements[0];
+        int tailIndex = --size;
+        elements[0] = elements[tailIndex];
+        elements[tailIndex] = null;
+        siftDown(0);
+        return head;
     }
 
     public void print() {
@@ -79,6 +91,27 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
             if (compare(father, element) >= 0) break;
             elements[index] = father;
             index = fatherIndex;
+        }
+        elements[index] = element;
+    }
+
+    private void siftDown(int index) {
+        E element = elements[index];
+        int half = size >> 1;
+        while (index < half) { // index is not leaf node which equals the number of parent nodes.
+            // one child.
+            // two child
+            int childIndex = (index << 1) + 1;
+            E child = elements[childIndex];
+            int rightIndex = childIndex + 1;
+            E rightChild = elements[rightIndex];
+            if (rightIndex < size && compare(rightChild, child) > 0) {
+                childIndex = rightIndex;
+                child = rightChild;
+            }
+            if (compare(element, child) >= 0) break;
+            elements[index] = child;
+            index = childIndex;
         }
         elements[index] = element;
     }
