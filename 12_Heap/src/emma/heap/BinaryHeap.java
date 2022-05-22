@@ -34,13 +34,13 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
 
     @Override
     public E get() {
-        if (size == 0) return null;
+        emptyCheck();
         return elements[0];
     }
 
     @Override
     public E remove() {
-        if (size == 0) return null;
+        emptyCheck();
         E head = elements[0];
         int tailIndex = --size;
         elements[0] = elements[tailIndex];
@@ -51,12 +51,16 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
 
     @Override
     public E replace(E element) {
-        if (size == 0) return null;
-        E head = elements[0];
-        int tailIndex = --size;
-        elements[0] = elements[tailIndex];
-        elements[tailIndex] = null;
-        siftDown(0);
+        if (element == null) return null;
+        E head = null;
+        if (size == 0) {
+            elements[0] = element;
+            size++;
+        } else {
+            head = elements[0];
+            elements[0] = element;
+            siftDown(0);
+        }
         return head;
     }
 
@@ -114,6 +118,12 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
             index = childIndex;
         }
         elements[index] = element;
+    }
+
+    private void emptyCheck() {
+        if (size == 0) {
+            throw new OutOfMemoryError("Heap is empty");
+        }
     }
 
     @Override
