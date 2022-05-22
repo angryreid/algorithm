@@ -41,9 +41,16 @@ public class Main {
         BinaryTrees.println(heap);
     }
 
+    public static void testHeapify() {
+        Integer[] list = {22,33,44,11,66,77,88,555};
+        BinaryHeap<Integer> heap = new BinaryHeap<>(list);
+        BinaryTrees.println(heap);
+    }
+
     public static void main(String[] args) {
 //        testAdd();//
 //        testRemove();
-        testReplace();
+//        testReplace();
+        testHeapify();
     }
 }
