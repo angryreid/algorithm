@@ -3,29 +3,17 @@ package emma.heap;
 import emma.printer.BinaryTreeInfo;
 import java.util.Comparator;
 
-public class BinaryHeap<E> implements Heap<E>, BinaryTreeInfo {
+public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
     private E elements[];
-    private int size;
-    private Comparator<E> comparator;
-    private static final int DEFAULT_CAPACITY = 10;
 
+    private static final int DEFAULT_CAPACITY = 10;
     public BinaryHeap(Comparator<E> comparator) {
-        this.comparator = comparator;
+        super(comparator);
         this.elements = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
     public BinaryHeap() {
         this(null);
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
     }
 
     @Override
@@ -67,14 +55,6 @@ public class BinaryHeap<E> implements Heap<E>, BinaryTreeInfo {
         System.out.println();
     }
 
-    private int compare(E e1, E e2) {
-        if (comparator == null) {
-            return ((Comparable<E>)e1).compareTo(e2);
-        } else {
-            return comparator.compare(e1, e2);
-        }
-    }
-
     private void ensureCapacity(int capacity) {
         int oldCapacity = elements.length;
         if (oldCapacity >= capacity) return;
@@ -101,15 +81,6 @@ public class BinaryHeap<E> implements Heap<E>, BinaryTreeInfo {
             index = fatherIndex;
         }
         elements[index] = element;
-//        if (i == 0) return;
-//        int fatherIndex = (int)Math.floor((i-1)/2);
-//        while (fatherIndex > 0 && compare(elements[fatherIndex], elements[i]) > 0) {
-//            E temp = elements[fatherIndex];
-//            elements[fatherIndex] = elements[i];
-//            elements[i] = temp;
-//            i = fatherIndex;
-//            fatherIndex = (int)Math.floor((i-1)/2);
-//        }
     }
 
     @Override
@@ -119,21 +90,18 @@ public class BinaryHeap<E> implements Heap<E>, BinaryTreeInfo {
 
     @Override
     public Object left(Object node) {
-        int index = (int) node;
-        int leftIndex = (index << 1) + 1;
+        int leftIndex = ((int) node << 1) + 1;
         return leftIndex > size - 1 ? null : leftIndex;
     }
 
     @Override
     public Object right(Object node) {
-        int index = (int) node;
-        int rightIndex = (index << 1) + 2;
+        int rightIndex = ((int) node << 1) + 2;
         return rightIndex > size - 1 ? null : rightIndex;
     }
 
     @Override
     public Object string(Object node) {
-        int index = (int) node;
-        return elements[index];
+        return elements[(int) node];
     }
 }
