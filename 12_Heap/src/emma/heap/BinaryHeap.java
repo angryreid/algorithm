@@ -1,8 +1,9 @@
-package heap;
+package emma.heap;
 
+import emma.printer.BinaryTreeInfo;
 import java.util.Comparator;
 
-public class BinaryHeap<E> implements Heap<E> {
+public class BinaryHeap<E> implements Heap<E>, BinaryTreeInfo {
     private E elements[];
     private int size;
     private Comparator<E> comparator;
@@ -59,6 +60,13 @@ public class BinaryHeap<E> implements Heap<E> {
         return null;
     }
 
+    public void print() {
+        for (int i = 0; i < size; i++) {
+            System.out.print("->" + elements[i]);
+        }
+        System.out.println();
+    }
+
     private int compare(E e1, E e2) {
         if (comparator == null) {
             return ((Comparable<E>)e1).compareTo(e2);
@@ -81,7 +89,7 @@ public class BinaryHeap<E> implements Heap<E> {
 
     /**
      * O(logn)
-     * @param i
+     * @param index
      */
     private void siftUp(int index) {
         E element = elements[index];
@@ -102,5 +110,30 @@ public class BinaryHeap<E> implements Heap<E> {
 //            i = fatherIndex;
 //            fatherIndex = (int)Math.floor((i-1)/2);
 //        }
+    }
+
+    @Override
+    public Object root() {
+        return 0;
+    }
+
+    @Override
+    public Object left(Object node) {
+        int index = (int) node;
+        int leftIndex = (index << 1) + 1;
+        return leftIndex > size - 1 ? null : leftIndex;
+    }
+
+    @Override
+    public Object right(Object node) {
+        int index = (int) node;
+        int rightIndex = (index << 1) + 2;
+        return rightIndex > size - 1 ? null : rightIndex;
+    }
+
+    @Override
+    public Object string(Object node) {
+        int index = (int) node;
+        return elements[index];
     }
 }

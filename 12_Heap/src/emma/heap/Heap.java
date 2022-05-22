@@ -1,4 +1,4 @@
-package heap;
+package emma.heap;
 
 public interface Heap<E> {
     int size();
