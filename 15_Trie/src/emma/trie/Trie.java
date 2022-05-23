@@ -4,8 +4,9 @@ public interface Trie<V> {
     int size();
     boolean isEmpty();
     void clear();
-    boolean contains(String str);
-    V add(String str, V value);
-    V remove(String str);
+    V get(String key);
+    boolean contains(String key);
+    V add(String key, V value);
+    V remove(String key);
     boolean startsWith(String prefix);
 }
