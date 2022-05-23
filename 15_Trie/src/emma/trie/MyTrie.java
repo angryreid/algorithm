@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class MyTrie<V> implements Trie<V> {
     private int size;
-    private Node<V> root;
+    private Node<V> root = new Node<>();
     @Override
     public int size() {
         return size;
@@ -42,7 +42,7 @@ public class MyTrie<V> implements Trie<V> {
             boolean emptyChildren = node.children == null;
             Node<V> childNode = emptyChildren ? null : node.children.get(c);
             if (childNode == null) {
-                childNode = new Node<>(node);
+                childNode = new Node<>();
                 node.children = emptyChildren ? new HashMap<>() : node.children;
                 node.children.put(c, childNode);
             }
@@ -91,11 +91,11 @@ public class MyTrie<V> implements Trie<V> {
 
     private static class Node<V> {
         HashMap<Character, Node<V>> children;
-        Node<V> parent;
+//        Node<V> parent;
         boolean word;
         V value;
-        public Node(Node<V> parent) {
-            this.parent = parent;
-        }
+//        public Node(Node<V> parent) {
+//            this.parent = parent;
+//        }
     }
 }

@@ -8,8 +8,9 @@ public class Main {
         trie.add("a", "a");
         trie.add("ab", "ab");
         trie.add("abc", "abc");
-        trie.add("abcd", "abcd");
+        trie.add("abcd", "abcd-9876");
         System.out.println(trie.get("a"));
+        System.out.println(trie.get("abcd"));
         System.out.println(trie.size());
         System.out.println(trie.contains("ab"));
     }
