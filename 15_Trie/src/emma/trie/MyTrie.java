@@ -1,10 +1,11 @@
 package emma.trie;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class MyTrie<V> implements Trie<V> {
     private int size;
-    private Node<V> root = new Node<>();
+    private Node<V> root;
     @Override
     public int size() {
         return size;
@@ -24,17 +25,21 @@ public class MyTrie<V> implements Trie<V> {
     @Override
     public V get(String key) {
         Node<V> node = node(key);
-        return node == null ? null : node.value;
+        return nodeIsWord(node) ? null : node.value;
     }
 
     @Override
     public boolean contains(String key) {
-        return node(key) != null;
+        Node<V> node = node(key);
+        return nodeIsWord(node);
     }
 
     @Override
     public V add(String key, V value) {
         keyCheck(key);
+        if(root == null) {
+            root = new Node<>(null, null);
+        }
         Node<V> node = root;
         int len = key.length();
         for (int i = 0; i < len; i++) {
@@ -42,7 +47,7 @@ public class MyTrie<V> implements Trie<V> {
             boolean emptyChildren = node.children == null;
             Node<V> childNode = emptyChildren ? null : node.children.get(c);
             if (childNode == null) {
-                childNode = new Node<>();
+                childNode = new Node<>(node, c);
                 node.children = emptyChildren ? new HashMap<>() : node.children;
                 node.children.put(c, childNode);
             }
@@ -61,13 +66,41 @@ public class MyTrie<V> implements Trie<V> {
     }
 
     @Override
-    public V remove(String key) {
-        return null;
+    public V remove(String key) { // remove word
+        Node<V> node = node(key);
+        if (node == null || !node.word) return null; // Not a word
+        size--;
+        V oldValue = node.value;
+        if (node.children != null && !node.children.isEmpty()) { // Removing node has children.
+            node.word = false;
+            node.value = null;
+            return oldValue;
+        }
+
+        // Removing node has no children.
+        Node<V> parent = node.parent;
+        while (parent != null) {
+            parent.children.remove(node.c);
+            if(parent.word || !parent.children.isEmpty()) break;// Parent has other children.
+            // Parent has one child only.
+            node = parent;
+            parent = node.parent;
+        }
+
+//        Node<V> parent = null;
+//        while ((parent = node.parent) != null) {
+//            parent.children.remove(node.c);
+//            if(parent.word || !parent.children.isEmpty()) break;// Parent has other children.
+//            // Parent has one child only.
+//            node = parent;
+//        }
+        return oldValue;
     }
 
     @Override
     public boolean startsWith(String prefix) {
-        return false;
+        keyCheck(prefix);
+        return node(prefix) != null;
     }
 
     private Node<V> node(String key) {
@@ -75,12 +108,11 @@ public class MyTrie<V> implements Trie<V> {
         Node<V> node = root;
         int len = key.length();
         for (int i = 0; i < len; i++) {
+            if (node == null || node.children == null || node.children.isEmpty()) return null;
             char c = key.charAt(i);
-            if (node.children == null) return null;
             node = node.children.get(c);
-            if (node == null) return null;
         }
-        return node.word ? node : null;
+        return node;
     }
 
     private void keyCheck(String key) {
@@ -91,11 +123,17 @@ public class MyTrie<V> implements Trie<V> {
 
     private static class Node<V> {
         HashMap<Character, Node<V>> children;
-//        Node<V> parent;
+        Node<V> parent;
+        Character c;
         boolean word;
         V value;
-//        public Node(Node<V> parent) {
-//            this.parent = parent;
-//        }
+        public Node(Node<V> parent, Character c) {
+            this.parent = parent;
+            this.c = c;
+        }
+    }
+
+    private boolean nodeIsWord(Node<V> node) {
+        return node != null && node.word;
     }
 }
