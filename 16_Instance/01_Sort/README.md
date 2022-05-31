@@ -1,5 +1,8 @@
 # Sort
 
+In-place algorithm
+Dependency only from existing source, using output to cover input source.
+
 ## Bubble Sort
 
 The average O -> O(n^2)
