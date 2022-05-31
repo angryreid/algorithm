@@ -2,6 +2,9 @@
 
 ## Bubble Sort
 
+The average O -> O(n^2)
+Stability -> Stable (The key point is when the numbers exchange their positions)
+
 Case 1
 
 ```java
