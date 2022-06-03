@@ -5,7 +5,8 @@ Dependency only from existing source, using output to cover input source.
 
 ## Bubble Sort
 
-The average O -> O(n^2)
+The average time big O -> O(n^2)
+The Space big O -> O(1)
 Stability -> Stable (The key point is when the numbers exchange their positions)
 
 Case 1
@@ -69,6 +70,10 @@ public class Main {
 ```
 
 ## Selection sort
+
+The average time big O -> O(n^2)
+The Space big O -> O(1)
+Stability -> Stable (The key point is when the numbers exchange their positions)
 
 ```java
 public class Selection {
