@@ -1,6 +1,7 @@
 package emma;
 
 import emma.bubble.Bubble;
+import emma.selection.Selection;
 import emma.tool.Integers;
 import emma.tool.Times;
 
@@ -23,8 +24,17 @@ public class Main {
         });
     }
 
+    public static void testSelection() {
+        Integer[] list = Integers.random(100, 1, 200);
+        Times.test("Selection test", () -> {
+            Selection.selectAsc(list);
+        });
+        Integers.println(list);
+    }
+
 
     public static void main(String[] args) {
-        testBubble();
+//        testBubble();
+        testSelection();
     }
 }
