@@ -1,15 +1,13 @@
-package emma.bubble;
+package emma.sort;
 
-public class Bubble {
+public class BubbleSort extends Sort {
 
-    public static void bubbleSwap(Integer[] list) {
+    public void sort() {
         for (int i = list.length - 1; i > 0; i--) {
             boolean sort = true;
             for (int j = 1; j <= i; j++) {
-                if (list[j] < list[j - 1]) {
-                    int temp = list[j];
-                    list[j] = list[j - 1];
-                    list[j - 1] = temp;
+                if (cmp(j, j - 1) < 0) {
+                   swap(j, j - 1);
                     sort = false;
                 }
             }

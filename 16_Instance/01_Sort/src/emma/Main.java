@@ -1,7 +1,8 @@
 package emma;
 
-import emma.bubble.Bubble;
-import emma.selection.Selection;
+import emma.sort.BubbleSort;
+import emma.sort.HeapSort;
+import emma.sort.SelectionSort;
 import emma.tool.Asserts;
 import emma.tool.Integers;
 import emma.tool.Times;
@@ -13,22 +14,23 @@ public class Main {
         Integer[] list2 = Integers.copy(list);
         Integer[] list3 = Integers.copy(list);
         Times.test("Bubble Sort Swap", () -> {
-            Bubble.bubbleSwap(list);
-        });
-
-        Times.test("Bubble Sort Asc", () -> {
-            Bubble.bubbleAsc(list2);
-        });
-
-        Times.test("Bubble Sort Sorted Index", () -> {
-            Bubble.bubbleSortedIndex(list3);
+            new BubbleSort().sort(list);
         });
     }
 
     public static void testSelection() {
         Integer[] list = Integers.random(100, 1, 200);
         Times.test("Selection test", () -> {
-            Selection.selectAsc(list);
+            new SelectionSort().sort(list);
+        });
+        Asserts.test(Integers.isAscOrder(list));
+    }
+
+    public static void testHeapSort() {
+        Integer[] list = Integers.random(100, 1, 200);
+//        Integer[] list = {2,3,1,4,5};
+        Times.test("Selection test", () -> {
+            new HeapSort().sort(list);
         });
         Asserts.test(Integers.isAscOrder(list));
     }
@@ -36,6 +38,7 @@ public class Main {
 
     public static void main(String[] args) {
 //        testBubble();
-        testSelection();
+//        testSelection();
+        testHeapSort();
     }
 }
