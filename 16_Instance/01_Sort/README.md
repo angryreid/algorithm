@@ -94,3 +94,7 @@ public class Selection {
 ```
 
 - The swaping time will extremely less than Bubble sort. So the performance will be enhanced.
+
+### Enhancement
+
+To use `HEAP` to select the `max` number, then the Time Big O -> O(nlogn)
