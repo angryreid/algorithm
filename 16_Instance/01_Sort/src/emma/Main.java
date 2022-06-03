@@ -2,6 +2,7 @@ package emma;
 
 import emma.bubble.Bubble;
 import emma.selection.Selection;
+import emma.tool.Asserts;
 import emma.tool.Integers;
 import emma.tool.Times;
 
@@ -29,7 +30,7 @@ public class Main {
         Times.test("Selection test", () -> {
             Selection.selectAsc(list);
         });
-        Integers.println(list);
+        Asserts.test(Integers.isAscOrder(list));
     }
 
 
