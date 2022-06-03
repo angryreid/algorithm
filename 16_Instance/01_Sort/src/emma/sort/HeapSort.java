@@ -26,7 +26,7 @@ public class HeapSort extends Sort {
             int childIndex = (index << 1) + 1;
             Integer child = list[childIndex];
             int rightIndex = childIndex + 1;
-//            Integer rightChild = list[rightIndex]; Not working ???
+//            Integer rightChild = list[rightIndex]; // Not working ??? Fix: The right size maybe out of bound
 //            if (rightIndex < size && cmpEl(rightChild, child) > 0) {
 //                child = list[childIndex = rightIndex];
 //            }
