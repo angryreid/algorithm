@@ -13,7 +13,6 @@ public class HeapSort extends Sort {
         while (size > 1) {
             // Heap excludes the max number by reduce the size
             swap(0, --size);
-
             // One time siftDown will move the max number to the top
             siftDown(0);
         }
@@ -26,10 +25,6 @@ public class HeapSort extends Sort {
             int childIndex = (index << 1) + 1;
             Integer child = list[childIndex];
             int rightIndex = childIndex + 1;
-//            Integer rightChild = list[rightIndex]; // Not working ??? Fix: The right size maybe out of bound
-//            if (rightIndex < size && cmpEl(rightChild, child) > 0) {
-//                child = list[childIndex = rightIndex];
-//            }
             if (rightIndex < size && cmpEl(list[rightIndex], child) > 0) {
                 child = list[childIndex = rightIndex];
             }

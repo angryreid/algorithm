@@ -3,6 +3,7 @@ package emma;
 import emma.sort.BubbleSort;
 import emma.sort.HeapSort;
 import emma.sort.SelectionSort;
+import emma.sort.Sort;
 import emma.tool.Asserts;
 import emma.tool.Integers;
 import emma.tool.Times;
@@ -35,10 +36,23 @@ public class Main {
         Asserts.test(Integers.isAscOrder(list));
     }
 
+    public static void testSort(Integer[] list, Sort... sorts) {
+        for (Sort sort : sorts) {
+            sort.sort(Integers.copy(list));
+            System.out.println(sort);
+        }
+    }
+
+    public static void test() {
+        Integer[] list = Integers.random(10000, 1, 20000);
+        testSort(list, new BubbleSort(), new SelectionSort(), new HeapSort());
+    }
+
 
     public static void main(String[] args) {
 //        testBubble();
 //        testSelection();
-        testHeapSort();
+//        testHeapSort();
+        test();
     }
 }
