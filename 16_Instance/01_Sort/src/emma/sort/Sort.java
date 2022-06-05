@@ -1,5 +1,7 @@
 package emma.sort;
 
+import emma.model.Student;
+
 import java.text.DecimalFormat;
 
 public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E>> {
@@ -58,9 +60,9 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
         String timeStr = "Cost：" + (time / 1000.0) + "s(" + time + "ms)";
         String compareCountStr = "Compared count：" + numberString(cmpCount);
         String swapCountStr = "Swap count：" + numberString(swapCount);
-//        String stableStr = "稳定性：" + isStable();
+        String stableStr = "Stable：" + isStable();
         return "[" + getClass().getSimpleName() + "]\n"
-//                + stableStr + " \t"
+                + stableStr + " \t"
                 + timeStr + " \t"
                 + compareCountStr + "\t "
                 + swapCountStr + "\n"
@@ -73,5 +75,22 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
         if (number < 1000000) return fmt.format(number / 1000.0) + "k";;
         if (number < 1000000000) return fmt.format(number / 1000000.0) + "m";
         return fmt.format(number / 1000000000.0) + "b";
+    }
+
+    private boolean isStable() {
+        Student[] students = new Student[20];
+        for (int i = 0; i < students.length; i++) {
+            students[i] = new Student(i * 10, 10);
+        }
+        sort((E[])students);
+        for (int i = 1; i < students.length; i++) {
+            int score = students[i].getScore();
+            int preScore = students[i - 1].getScore();
+            if (score != preScore + 10) return false;
+        }
+//        for (int i = 0; i < students.length; i++) {
+//            System.out.print("score -> " + students[i].getScore() + "-");
+//        }
+        return true;
     }
 }
