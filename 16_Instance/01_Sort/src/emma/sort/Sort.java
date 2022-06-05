@@ -2,7 +2,7 @@ package emma.sort;
 
 import java.text.DecimalFormat;
 
-public abstract class Sort {
+public abstract class Sort implements Comparable<Sort> {
     protected Integer[] list;
     private int cmpCount;
     private int swapCount;
@@ -14,6 +14,15 @@ public abstract class Sort {
         long begin = System.currentTimeMillis();
         sort();
         time = System.currentTimeMillis() - begin;
+    }
+
+    @Override
+    public int compareTo(Sort o) {
+        int res = (int)(time - o.time);
+        if (res != 0) return res;
+        res = cmpCount - o.cmpCount;
+        if (res != 0) return res;
+        return swapCount - o.swapCount;
     }
 
     protected abstract void sort();
@@ -49,7 +58,7 @@ public abstract class Sort {
         String compareCountStr = "Compared count：" + numberString(cmpCount);
         String swapCountStr = "Swap count：" + numberString(swapCount);
 //        String stableStr = "稳定性：" + isStable();
-        return "【" + getClass().getSimpleName() + "】\n"
+        return "[" + getClass().getSimpleName() + "]\n"
 //                + stableStr + " \t"
                 + timeStr + " \t"
                 + compareCountStr + "\t "

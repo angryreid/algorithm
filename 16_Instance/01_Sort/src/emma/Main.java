@@ -8,6 +8,8 @@ import emma.tool.Asserts;
 import emma.tool.Integers;
 import emma.tool.Times;
 
+import java.util.Arrays;
+
 public class Main {
     public static void testBubble() {
 //        Integer[] list = Integers.random(10000, 1, 12000);
@@ -39,6 +41,11 @@ public class Main {
     public static void testSort(Integer[] list, Sort... sorts) {
         for (Sort sort : sorts) {
             sort.sort(Integers.copy(list));
+        }
+
+        Arrays.sort(sorts);
+
+        for (Sort sort : sorts) {
             System.out.println(sort);
         }
     }
