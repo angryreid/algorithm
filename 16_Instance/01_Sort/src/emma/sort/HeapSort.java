@@ -1,6 +1,6 @@
 package emma.sort;
 
-public class HeapSort extends Sort {
+public class HeapSort<E extends Comparable<E>> extends Sort<E> {
     private int size;
 
     public void sort() {
@@ -19,16 +19,16 @@ public class HeapSort extends Sort {
     }
 
     private void siftDown(int index) {
-        Integer element = list[index];
+        E element = list[index];
         int half = size >> 1;
         while (index < half) {
             int childIndex = (index << 1) + 1;
-            Integer child = list[childIndex];
+            E child = list[childIndex];
             int rightIndex = childIndex + 1;
-            if (rightIndex < size && cmpEl(list[rightIndex], child) > 0) {
+            if (rightIndex < size && cmp(list[rightIndex], child) > 0) {
                 child = list[childIndex = rightIndex];
             }
-            if (cmpEl(element, child) >= 0) break;
+            if (cmp(element, child) >= 0) break;
             list[index] = child;
             index = childIndex;
         }

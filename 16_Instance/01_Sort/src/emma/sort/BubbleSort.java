@@ -1,6 +1,6 @@
 package emma.sort;
 
-public class BubbleSort extends Sort {
+public class BubbleSort<E extends Comparable<E>> extends Sort<E> {
 
     public void sort() {
         for (int i = list.length - 1; i > 0; i--) {

@@ -40,7 +40,9 @@ public class Main {
 
     public static void testSort(Integer[] list, Sort... sorts) {
         for (Sort sort : sorts) {
-            sort.sort(Integers.copy(list));
+            Integer[] newArray = Integers.copy(list);
+            sort.sort(newArray);
+            Asserts.test(Integers.isAscOrder(newArray));
         }
 
         Arrays.sort(sorts);
