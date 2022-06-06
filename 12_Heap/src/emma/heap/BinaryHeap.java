@@ -126,10 +126,8 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
             int childIndex = (index << 1) + 1;
             E child = elements[childIndex];
             int rightIndex = childIndex + 1;
-            E rightChild = elements[rightIndex];
-            if (rightIndex < size && compare(rightChild, child) > 0) {
-                childIndex = rightIndex;
-                child = rightChild;
+            if (rightIndex < size && compare(elements[rightIndex], child) > 0) {
+                child = elements[childIndex = rightIndex];
             }
             if (compare(element, child) >= 0) break;
             elements[index] = child;
