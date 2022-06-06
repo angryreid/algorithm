@@ -1,9 +1,6 @@
 package emma;
 
-import emma.sort.BubbleSort;
-import emma.sort.HeapSort;
-import emma.sort.SelectionSort;
-import emma.sort.Sort;
+import emma.sort.*;
 import emma.tool.Asserts;
 import emma.tool.Integers;
 import emma.tool.Times;
@@ -54,7 +51,7 @@ public class Main {
 
     public static void test() {
         Integer[] list = Integers.random(10000, 1, 20000);
-        testSort(list, new BubbleSort(), new SelectionSort(), new HeapSort());
+        testSort(list, new BubbleSort(), new SelectionSort(), new HeapSort(), new InsertionSort());
     }
 
 
