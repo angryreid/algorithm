@@ -161,8 +161,45 @@ Cost：0.547s(547ms) 	Compared count：49.99m	 Swap count：24.89m
 
 ## Insertion Sort
 
-
+The average time big O -> O(n^2)
+the best time big O -> O(n)
+The Space big O -> O(1)
+Stability -> Stable
 
 ```java
+public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
+    @Override
+    protected void sort() {
+        for (int head = 1; head < list.length; head++) {
+            int tail = head;
+            while (tail > 0 && cmp(tail, tail - 1) < 0) {
+                swap(tail, tail - 1);
+                tail--;
+            }
+        }
+    }
+}
+```
 
+### Enhancement
+
+#### Case 1
+
+To reduce exchange times.
+
+```java
+public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
+    @Override
+    protected void sort() {
+        for (int head = 1; head < list.length; head++) {
+            int tail = head;
+            E copyHead = list[tail];
+            while (tail > 0 && cmp(copyHead, list[tail - 1]) < 0) {
+                list[tail] = list[tail - 1];
+                tail--;
+            }
+            list[tail] = copyHead;
+        }
+    }
+}
 ```

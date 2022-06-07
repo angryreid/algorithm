@@ -5,10 +5,12 @@ public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
     protected void sort() {
         for (int head = 1; head < list.length; head++) {
             int tail = head;
-            while (tail > 0 && cmp(tail, tail - 1) < 0) {
-                swap(tail, tail - 1);
+            E copyHead = list[tail];
+            while (tail > 0 && cmp(copyHead, list[tail - 1]) < 0) {
+                list[tail] = list[tail - 1];
                 tail--;
             }
+            list[tail] = copyHead;
         }
     }
 }
