@@ -2,6 +2,7 @@ package emma;
 
 import emma.sort.*;
 import emma.tool.Asserts;
+import emma.tool.BinarySearch;
 import emma.tool.Integers;
 import emma.tool.Times;
 
@@ -35,6 +36,16 @@ public class Main {
         Asserts.test(Integers.isAscOrder(list));
     }
 
+    public static void testBinarySearch() {
+        int[] list = {1,2,3,4,5,6,7};
+        Asserts.test(BinarySearch.indexOf(list, 4) == 3);
+        Asserts.test(BinarySearch.indexOf(list, 1) == 0);
+        Asserts.test(BinarySearch.indexOf(list, 7) == 6);
+        Asserts.test(BinarySearch.indexOf(list, 2) == 1);
+        Asserts.test(BinarySearch.indexOf(list, 43) == -1);
+    }
+
+
     public static void testSort(Integer[] list, Sort... sorts) {
         for (Sort sort : sorts) {
             Integer[] newArray = Integers.copy(list);
@@ -59,6 +70,7 @@ public class Main {
 //        testBubble();
 //        testSelection();
 //        testHeapSort();
-        test();
+//        test();
+        testBinarySearch();
     }
 }
