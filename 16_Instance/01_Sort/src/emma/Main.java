@@ -43,6 +43,12 @@ public class Main {
         Asserts.test(BinarySearch.indexOf(list, 7) == 6);
         Asserts.test(BinarySearch.indexOf(list, 2) == 1);
         Asserts.test(BinarySearch.indexOf(list, 43) == -1);
+
+        Asserts.test(BinarySearch.search(list, 4) == 4);
+        Asserts.test(BinarySearch.search(list, 1) == 1);
+        Asserts.test(BinarySearch.search(list, 7) == 7);
+        Asserts.test(BinarySearch.search(list, 2) == 2);
+        Asserts.test(BinarySearch.search(list, 43) == 7);
     }
 
 
@@ -70,7 +76,7 @@ public class Main {
 //        testBubble();
 //        testSelection();
 //        testHeapSort();
-//        test();
-        testBinarySearch();
+//        testBinarySearch();
+        test();
     }
 }
