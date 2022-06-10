@@ -28,6 +28,22 @@ public class MergeSort<E extends Comparable<E>> extends Sort<E> {
      * @param end
      */
     private void merge(int start, int mid, int end) {
+        int leftStart = 0, leftEnd = mid, rightStart = mid, rightEnd = end, index = start;
+        // Copy left array.
+        for (int i = leftStart; i < leftEnd; i++) {
+            leftArray[i] = list[index + i];
+        }
 
+        while (leftStart < leftEnd) {
+            if(cmp(leftArray[leftStart], list[rightStart]) < 0) {
+                list[index++] = leftArray[leftStart++];
+//                leftStart++;
+//                index++;
+            } else {
+                list[index++] = list[rightStart++];
+//                rightStart++;
+//                index++;
+            }
+        }
     }
 }
