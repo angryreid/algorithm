@@ -4,7 +4,7 @@ public class MergeSort<E extends Comparable<E>> extends Sort<E> {
     private E[] leftArray;
     @Override
     protected void sort() {
-        leftArray = (E[]) new Object[list.length >> 1];
+        leftArray = (E[]) new Comparable[list.length >> 1];
         sort(0, list.length);
     }
 
@@ -28,21 +28,17 @@ public class MergeSort<E extends Comparable<E>> extends Sort<E> {
      * @param end
      */
     private void merge(int start, int mid, int end) {
-        int leftStart = 0, leftEnd = mid, rightStart = mid, rightEnd = end, index = start;
+        int leftStart = 0, leftEnd = mid - start, rightStart = mid, rightEnd = end, index = start;
         // Copy left array.
         for (int i = leftStart; i < leftEnd; i++) {
             leftArray[i] = list[index + i];
         }
 
         while (leftStart < leftEnd) {
-            if(cmp(leftArray[leftStart], list[rightStart]) < 0) {
-                list[index++] = leftArray[leftStart++];
-//                leftStart++;
-//                index++;
-            } else {
+            if(rightStart < rightEnd && cmp(list[rightStart], leftArray[leftStart]) < 0) {
                 list[index++] = list[rightStart++];
-//                rightStart++;
-//                index++;
+            } else {
+                list[index++] = leftArray[leftStart++];
             }
         }
     }

@@ -68,7 +68,7 @@ public class Main {
 
     public static void test() {
         Integer[] list = Integers.random(10000, 1, 20000);
-        testSort(list, new BubbleSort(), new SelectionSort(), new HeapSort(), new InsertionSort());
+        testSort(list, new BubbleSort(), new SelectionSort(), new HeapSort(), new InsertionSort(), new MergeSort());
     }
 
 
