@@ -74,8 +74,14 @@ public class Main {
     }
 
     public static void test() {
-        Integer[] list = Integers.random(10000, 1, 20000);
-        testSort(list, new BubbleSort(), new SelectionSort(), new HeapSort(), new InsertionSort(), new MergeSort());
+        Integer[] list = Integers.random(10000, 1, 10000);
+        testSort(list,
+                new BubbleSort(),
+                new SelectionSort(),
+                new HeapSort(),
+                new InsertionSort(),
+                new MergeSort(),
+                new QuickSort());
     }
 
 
@@ -84,7 +90,7 @@ public class Main {
 //        testSelection();
 //        testHeapSort();
 //        testBinarySearch();
-        testThreadSort();
-//        test();
+//        testThreadSort();
+        test();
     }
 }
