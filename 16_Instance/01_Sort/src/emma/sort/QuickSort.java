@@ -27,6 +27,8 @@ public class QuickSort<E extends Comparable<E>> extends Sort<E> {
      * @return Index of pivot
      */
     private int pivotIndex(int start, int end) {
+        // Select pivot with random
+        swap(start, start + (int)(Math.random() * (end - start)));
         E pivotValue = list[start];
         end--;// Point at the last element position
         while (start < end) {

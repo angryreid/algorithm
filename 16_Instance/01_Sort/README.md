@@ -5,6 +5,9 @@ Dependency only from existing source, using output to cover input source.
 
 ## Bubble Sort
 
+Author:
+Date: 
+
 The average time big O -> O(n^2)
 The Space big O -> O(1)
 Stability -> Stable (The key point is when the numbers exchange their positions)
@@ -71,6 +74,9 @@ public class Main {
 
 ## Selection sort
 
+Author:
+Date:
+
 The average time big O -> O(n^2)
 The Space big O -> O(1)
 Stability -> Stable (The key point is when the numbers exchange their positions)
@@ -103,7 +109,7 @@ To use `HEAP` to select the `max` number, then the Time Big O -> O(nlogn)
 
 The average time big O -> O(nlogn)
 The Space big O -> O(1)
-Stability -> not Stable
+Stability -> Not Stable
 
 ```java
 public class HeapSort extends Sort {
@@ -160,6 +166,9 @@ Cost：0.547s(547ms) 	Compared count：49.99m	 Swap count：24.89m
 `
 
 ## Insertion Sort
+
+Author:
+Date:
 
 The average time big O -> O(n^2)
 the best time big O -> O(n)
@@ -249,6 +258,9 @@ public class InsertionSort<E extends Comparable<E>> extends Sort<E> {
 
 ## Merge Sort
 
+Author: John von Neumanen
+Date: 1945
+
 The average time big O -> O(nlogn)
 the best time big O -> O(nlogn)
 The Space big O -> O(n)
@@ -298,4 +310,70 @@ public class MergeSort<E extends Comparable<E>> extends Sort<E> {
         }
     }
 }
+```
+
+## Quick Sort
+
+Author: Tony Hoare
+Date: 1960
+
+The average time big O -> O(nlogn)
+the best time big O -> O(nlogn)
+the baddest time big O -> O(n^2)
+The Space big O -> O(nlogn)
+Stability -> Not Stable
+
+```java
+public class QuickSort<E extends Comparable<E>> extends Sort<E> {
+    @Override
+    protected void sort() {
+        sort(0, list.length);
+    }
+
+    /**
+     * [start, end)
+     * @param start
+     * @param end
+     */
+    private void sort(int start, int end) {
+        if (end - start < 2) return;// At lest 2 elements required.
+        // 1. Find the pivot
+        int pivot = pivotIndex(start, end);
+        // 2. Sort sub list
+        sort(start, pivot);
+        sort(pivot + 1, end);
+    }
+
+    /**
+     * Find the pivot from [start, end)
+     * @param start
+     * @param end
+     * @return Index of pivot
+     */
+    private int pivotIndex(int start, int end) {
+        E pivotValue = list[start];
+        end--;// Point at the last element position
+        while (start < end) {
+            while (start < end) {
+                if (cmp(pivotValue, list[end]) < 0) {
+                    end--;
+                } else {
+                    list[start++] = list[end];
+                    break;
+                }
+            }
+            while (start < end) {
+                if (cmp(pivotValue, list[start]) > 0) {
+                    start++;
+                } else {
+                    list[end--] = list[start];
+                    break;
+                }
+            }
+        }
+        list[end] = pivotValue;
+        return end;
+    }
+}
+
 ```
