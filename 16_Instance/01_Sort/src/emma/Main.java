@@ -51,6 +51,13 @@ public class Main {
         Asserts.test(BinarySearch.search(list, 43) == 7);
     }
 
+    public static void testThreadSort() {
+        int[] list = {5,7,3,9,1};
+        for (int i = 0; i < list.length; i++) {
+//            new ThreadSort(list[i]).run();
+            new ThreadSort(list[i]).start();
+        }
+    }
 
     public static void testSort(Integer[] list, Sort... sorts) {
         for (Sort sort : sorts) {
@@ -77,6 +84,7 @@ public class Main {
 //        testSelection();
 //        testHeapSort();
 //        testBinarySearch();
-        test();
+        testThreadSort();
+//        test();
     }
 }
