@@ -6,7 +6,7 @@ Dependency only from existing source, using output to cover input source.
 ## Bubble Sort
 
 Author:
-Date: 
+Date:
 
 The average time big O -> O(n^2)
 The Space big O -> O(1)
@@ -375,5 +375,20 @@ public class QuickSort<E extends Comparable<E>> extends Sort<E> {
         return end;
     }
 }
+
+```
+
+## Shell Sort
+
+Author: Donald Shell
+Date: 1959
+
+The average time big O -> O(nlogn)
+the best time big O -> O(nlogn)
+the baddest time big O -> O(n^2)
+The Space big O -> O(nlogn)
+Stability -> Not Stable
+
+```java
 
 ```

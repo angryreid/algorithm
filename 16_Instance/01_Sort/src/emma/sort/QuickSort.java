@@ -33,7 +33,7 @@ public class QuickSort<E extends Comparable<E>> extends Sort<E> {
         end--;// Point at the last element position
         while (start < end) {
             while (start < end) {
-                if (cmp(pivotValue, list[end]) < 0) {
+                if (cmp(pivotValue, list[end]) < 0) { // Think if using <= at here, what will happen ?
                     end--;
                 } else {
                     list[start++] = list[end];
@@ -41,7 +41,7 @@ public class QuickSort<E extends Comparable<E>> extends Sort<E> {
                 }
             }
             while (start < end) {
-                if (cmp(pivotValue, list[start]) > 0) {
+                if (cmp(pivotValue, list[start]) > 0) { // Think if using >= at here, what will happen ?
                     start++;
                 } else {
                     list[end--] = list[start];
