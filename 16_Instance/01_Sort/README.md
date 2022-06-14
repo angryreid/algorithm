@@ -380,6 +380,8 @@ public class QuickSort<E extends Comparable<E>> extends Sort<E> {
 
 ## Shell Sort
 
+Diminishing increment Sort
+
 Author: Donald Shell
 Date: 1959
 
