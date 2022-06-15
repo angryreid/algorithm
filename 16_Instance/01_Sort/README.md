@@ -385,10 +385,10 @@ Diminishing increment Sort
 Author: Donald Shell
 Date: 1959
 
-The average time big O -> O(nlogn)
-the best time big O -> O(nlogn)
-the baddest time big O -> O(n^2)
-The Space big O -> O(nlogn)
+The average time big O -> Depends on Step Sequence
+the best time big O -> O(n)
+the baddest time big O -> O(n^(4/3)) ~ O(n^2)
+The Space big O -> O(1)
 Stability -> Not Stable
 
 **Step Sequence**
