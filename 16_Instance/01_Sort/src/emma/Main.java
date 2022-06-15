@@ -81,7 +81,8 @@ public class Main {
                 new HeapSort(),
                 new InsertionSort(),
                 new MergeSort(),
-                new QuickSort());
+                new QuickSort(),
+                new ShellSort());
     }
 
 
