@@ -1,6 +1,7 @@
 package emma;
 
 import emma.sort.*;
+import emma.sort.cmp.*;
 import emma.tool.Asserts;
 import emma.tool.BinarySearch;
 import emma.tool.Integers;
@@ -82,7 +83,8 @@ public class Main {
                 new InsertionSort(),
                 new MergeSort(),
                 new QuickSort(),
-                new ShellSort());
+                new ShellSort(),
+                new CountingSort());
     }
 
 

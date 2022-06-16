@@ -1,4 +1,6 @@
-package emma.sort;
+package emma.sort.cmp;
+
+import emma.sort.Sort;
 
 import java.util.ArrayList;
 import java.util.List;

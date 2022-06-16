@@ -1,4 +1,6 @@
-package emma.sort;
+package emma.sort.cmp;
+
+import emma.sort.Sort;
 
 public class BubbleSort<E extends Comparable<E>> extends Sort<E> {
 

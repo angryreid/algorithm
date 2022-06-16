@@ -1,4 +1,4 @@
-package emma.sort;
+package emma.sort.cmp;
 
 public class ThreadSort extends Thread{
     private int value;

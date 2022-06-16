@@ -1,7 +1,7 @@
 package emma.sort;
 
 import emma.model.Student;
-import jdk.nashorn.tools.Shell;
+import emma.sort.cmp.ShellSort;
 
 import java.text.DecimalFormat;
 
@@ -80,6 +80,7 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
 
     private boolean isStable() {
         if (this instanceof ShellSort) return false;
+        if (this instanceof CountingSort) return false;
         Student[] students = new Student[20];
         for (int i = 0; i < students.length; i++) {
             students[i] = new Student(i * 10, 10);
