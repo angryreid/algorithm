@@ -463,11 +463,6 @@ Date: 1954
 
 Applying for sorting **integer** in area `[a, b]`
 
-The average time big O ->
-the best time big O ->
-The Space big O ->
-Stability -> Not Stable
-
 ### Code
 
 #### Case 1
@@ -476,6 +471,7 @@ Stability -> Not Stable
 
 - Wasting too much space
 - Can not to sort negative integer
+- Not stable
 
 ```java
 public class CountingSort extends Sort<Integer>{
@@ -503,5 +499,58 @@ public class CountingSort extends Sort<Integer>{
         }
     }
 }
+
+```
+
+#### Case 2
+
+The average time big O -> O(n + k)
+the best time big O -> O(n + k)
+The Space big O -> O(n + k)
+Stability -> Stable
+
+**Defects**
+
+- Wasting too much space: fixed
+- Can not to sort negative integer: fixed
+- Not stable: stable
+
+```java
+public class CountingSort extends Sort<Integer>{
+    @Override
+    protected void sort() {
+        // Find the max, min integer.
+        int max = list[0];
+        int min = list[0];
+        for (int i = 1; i < list.length; i++) {
+            if (list[i] > max) {
+                max = list[i];
+            }
+            if (list[i] < min) {
+                min = list[i];
+            }
+        }
+        // Create a new Array.
+        int[] counts = new int[max - min + 1];
+        for (int i = 0; i < list.length; i++) {
+            counts[list[i] - min]++;
+        }
+        // Accumulation counts
+        for (int i = 1; i < counts.length; i++) {
+            counts[i] += counts[i - 1];
+        }
+        // Sort from tail to head to make sure the stability
+
+        int[] sortedList = new int[list.length];
+        for (int i = list.length - 1; i >= 0; i--) {
+            sortedList[--counts[list[i] - min]] = list[i];
+        }
+
+        for (int i = 0; i < sortedList.length; i++) {
+            list[i] = sortedList[i];
+        }
+    }
+}
+
 
 ```
