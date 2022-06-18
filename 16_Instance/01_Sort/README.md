@@ -463,6 +463,11 @@ Date: 1954
 
 Applying for sorting **integer** in area `[a, b]`
 
+The average time big O -> O(n + k)
+the best time big O -> O(n + k)
+The Space big O -> O(n + k)
+Stability -> Stable
+
 ### Code
 
 #### Case 1
@@ -561,6 +566,12 @@ Author:
 Date:
 
 Applying for sorting **integer**, especial negative integer sorting.
+
+The average time big O -> O(d(n + k)) d -> numbers length, `(n + k)` is counting sort
+the best time big O -> O(d(n + k))
+the baddest time big O -> O(d(n + k))
+The Space big O -> O(n + k)
+Stability -> Stable
 
 **Mod**
 
