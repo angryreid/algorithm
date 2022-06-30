@@ -1,10 +1,10 @@
 package emma;
 
-import emma.union.UnionFind;
+import emma.union.QuickFind;
 
 public class Main {
     public static void main(String[] args) {
-        UnionFind uf = new UnionFind(12);
+        QuickFind uf = new QuickFind(12);
         uf.union(0, 1);
         uf.union(0, 3);
         uf.union(0, 4);

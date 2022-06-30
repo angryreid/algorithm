@@ -1,7 +1,7 @@
 package emma.union;
 
-public class UnionFind {
-    private int[] parents;
+public abstract class UnionFind {
+    protected int[] parents;
 
     public UnionFind(int capacity) {
         if (capacity < 0) {
@@ -18,10 +18,7 @@ public class UnionFind {
      * @param v
      * @return
      */
-    public int find(int v) {
-        rangeCheck(v);
-        return parents[v];
-    }
+    public abstract int find(int v);
 
     /**
      * Check if v1 & v2 belong to the same data set
@@ -38,19 +35,9 @@ public class UnionFind {
      * @param v1
      * @param v2
      */
-    public void union(int v1, int v2) {
-        int p1 = find(v1);
-        int p2 = find(v2);
-        if (p1 == p2) return;
+    public abstract void union(int v1, int v2);
 
-        for (int i = 0; i < parents.length; i++) {
-            if (parents[i] == p1) {
-                parents[i] = p2;
-            }
-        }
-    }
-
-    private void rangeCheck(int v) {
+    protected void rangeCheck(int v) {
         if (v < 0 || v >= parents.length) {
             throw new IllegalArgumentException("Parameter is out of bounds");
         }
