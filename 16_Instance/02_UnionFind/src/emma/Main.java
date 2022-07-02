@@ -1,5 +1,6 @@
 package emma;
 
+import emma.model.Student;
 import emma.tool.Asserts;
 import emma.tool.Times;
 import emma.union.*;
@@ -34,12 +35,28 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        testUnionFind(new QuickFind(count));
-        testUnionFind(new QuickUnion(count));
-        testUnionFind(new QuickUnionSize(count));
-        testUnionFind(new QuickUnionRank(count));
-        testUnionFind(new QuickUnionRankPathCompress(count));
-        testUnionFind(new QuickUnionRankPathSplit(count));
-        testUnionFind(new QuickUnionRankPathHalf(count));
+//        testUnionFind(new QuickFind(count));
+//        testUnionFind(new QuickUnion(count));
+//        testUnionFind(new QuickUnionSize(count));
+//        testUnionFind(new QuickUnionRank(count));
+//        testUnionFind(new QuickUnionRankPathCompress(count));
+//        testUnionFind(new QuickUnionRankPathSplit(count));
+//        testUnionFind(new QuickUnionRankPathHalf(count));
+        GenericUnionFind<Student> guf = new GenericUnionFind<>();
+        Student nick = new Student(16, "Nick");
+        Student emma = new Student(15, "Emma");
+        Student jack = new Student(17, "Jack");
+        Student rose = new Student(18, "Rose");
+        guf.makeSet(nick);
+        guf.makeSet(emma);
+        guf.makeSet(rose);
+        guf.makeSet(jack);
+
+        guf.union(nick, emma);
+        guf.union(jack, rose);
+        guf.union(emma, rose);
+        Asserts.test(guf.isSame(nick, emma));
+        Asserts.test(guf.isSame(jack, rose));
+        Asserts.test(guf.isSame(nick, jack));
     }
 }
