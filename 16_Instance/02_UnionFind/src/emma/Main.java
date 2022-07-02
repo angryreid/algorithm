@@ -2,13 +2,10 @@ package emma;
 
 import emma.tool.Asserts;
 import emma.tool.Times;
-import emma.union.QuickFind;
-import emma.union.QuickUnion;
-import emma.union.QuickUnionSize;
-import emma.union.UnionFind;
+import emma.union.*;
 
 public class Main {
-    private static int count = 50000;
+    private static int count = 100000;
 
     public static void testUnionFind(UnionFind uf) {
         uf.union(0, 1);
@@ -43,9 +40,11 @@ public class Main {
         testUnionFind(new QuickFind(12));
         testUnionFind(new QuickUnion(12));
         testUnionFind(new QuickUnionSize(12));
+        testUnionFind(new QuickUnionRank(12));
 
         testUnionFindPerformance(new QuickFind(count));
         testUnionFindPerformance(new QuickUnion(count));
         testUnionFindPerformance(new QuickUnionSize(count));
+        testUnionFindPerformance(new QuickUnionRank(count));
     }
 }
