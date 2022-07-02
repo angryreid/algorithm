@@ -34,6 +34,35 @@ public class Main {
         });
     }
 
+    public static void testGenericUnionFind(GenericUnionFind<Integer> uf) {
+        for (int i = 0; i < count; i++) {
+            uf.makeSet(i);
+        }
+        uf.union(0, 1);
+        uf.union(0, 3);
+        uf.union(0, 4);
+        uf.union(2, 3);
+        uf.union(2, 5);
+
+        uf.union(6, 7);
+
+        uf.union(8, 10);
+        uf.union(9, 10);
+        uf.union(9, 11);
+
+        Asserts.test(uf.isSame(0, 5));
+        Asserts.test(!uf.isSame(0, 6));
+        Times.test(uf.getClass().getSimpleName(), () -> {
+            for (int i = 0; i < count; i++) {
+                uf.union((int)(Math.random() * count), (int)(Math.random() * count));
+            }
+
+            for (int i = 0; i < count; i++) {
+                uf.isSame((int)(Math.random() * count), (int)(Math.random() * count));
+            }
+        });
+    }
+
     public static void main(String[] args) {
 //        testUnionFind(new QuickFind(count));
 //        testUnionFind(new QuickUnion(count));
@@ -42,6 +71,7 @@ public class Main {
 //        testUnionFind(new QuickUnionRankPathCompress(count));
 //        testUnionFind(new QuickUnionRankPathSplit(count));
 //        testUnionFind(new QuickUnionRankPathHalf(count));
+        testGenericUnionFind(new GenericUnionFind<Integer>());
         GenericUnionFind<Student> guf = new GenericUnionFind<>();
         Student nick = new Student(16, "Nick");
         Student emma = new Student(15, "Emma");
