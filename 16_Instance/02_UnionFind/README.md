@@ -37,23 +37,38 @@ Count 10 000
 
 ```txt
 [QuickFind]
-Start time: 16:15:51.327
-End time: 16:15:55.677
-Cost: 4.35s
+Start time: 16:45:38.032
+End time: 16:45:38.081
+Cost: 0.049s
 -------------------------------------
 [QuickUnion]
-Start time: 16:15:55.680
-End time: 16:16:04.549
-Cost: 8.869s
+Start time: 16:45:38.084
+End time: 16:45:38.115
+Cost: 0.031s
 -------------------------------------
 [QuickUnionSize]
-Start time: 16:16:04.551
-End time: 16:16:04.568
-Cost: 0.017s
+Start time: 16:45:38.116
+End time: 16:45:38.119
+Cost: 0.003s
 -------------------------------------
 [QuickUnionRank]
-Start time: 16:16:04.569
-End time: 16:16:04.585
-Cost: 0.016s
+Start time: 16:45:38.120
+End time: 16:45:38.122
+Cost: 0.002s
+-------------------------------------
+[QuickUnionRankPathCompress]
+Start time: 16:45:38.123
+End time: 16:45:38.125
+Cost: 0.002s
+-------------------------------------
+[QuickUnionRankPathSplit]
+Start time: 16:45:38.126
+End time: 16:45:38.129
+Cost: 0.003s
+-------------------------------------
+[QuickUnionRankPathHalf]
+Start time: 16:45:38.129
+End time: 16:45:38.132
+Cost: 0.003s
 -------------------------------------
 ```
