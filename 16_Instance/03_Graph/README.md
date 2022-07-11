@@ -12,7 +12,15 @@ E -> Edge
 
 DAG: Any vertex can not get back itself with any edge
 
+#### Strongly Connected Graph
+
+Vertex `x` can reach to `y` with edges.
+
+Any two vertexes is connected.
+
 ### Undirected Graph
+
+#### Connected Component
 
 ### Mixed Graph
 
@@ -33,3 +41,20 @@ If vertexes number is `n`, then all edges are `n * (n - 1)`
 ### Weighted Graph
 
 Edge has weight.
+
+### Connected Graph
+
+Vertex `x` can reach to `y` with edges.
+
+Any two vertexes is connected.
+
+## Implementation
+
+### Adjacency Matrix
+
+- One level List saves the vertexes
+- Two level List saves the edges
+
+### Adjacency List
+
+- Linked list saves each path
