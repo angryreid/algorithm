@@ -34,7 +34,7 @@ If vertexes number is `n`, then all edges are `n * (n - 1) / 2`
 
 ### Directed Completed Graph
 
-Any two vertexes have two diff direction edge.
+Any two vertices have two diff direction edge.
 
 If vertexes number is `n`, then all edges are `n * (n - 1)`
 
