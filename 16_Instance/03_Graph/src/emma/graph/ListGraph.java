@@ -1,9 +1,6 @@
 package emma.graph;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ListGraph<V, E> implements Graph<V, E> {
     private Map<V, Vertex<V, E>> vertices = new HashMap<>();
@@ -42,6 +39,9 @@ public class ListGraph<V, E> implements Graph<V, E> {
             vertices.put(to, toVertex);
         }
 
+        // 2. To check if Edges existing or not
+        if (fromVertex.outEdges.contains(toVertex)) return;
+
 
     }
 
@@ -63,6 +63,17 @@ public class ListGraph<V, E> implements Graph<V, E> {
         public Vertex(V value) {
             this.value = value;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            Vertex<V, E> vertex = (Vertex<V, E>) obj;
+            return Objects.equals(value, vertex.value);
+        }
+
+        @Override
+        public int hashCode() {
+            return value == null ? 0 : value.hashCode();
+        }
     }
 
     private static class Edge<V, E> {
@@ -72,6 +83,17 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
         public Edge(E weight) {
             this.weight = weight;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            Edge<V, E> edge = (Edge<V, E>) obj;
+            return Objects.equals(from, edge.from) && Objects.equals(end, edge.end);
+        }
+
+        @Override
+        public int hashCode() {
+            return from.hashCode() * 31 + end.hashCode();
         }
     }
 }
