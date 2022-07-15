@@ -40,9 +40,15 @@ public class ListGraph<V, E> implements Graph<V, E> {
         }
 
         // 2. To check if Edges existing or not
-        if (fromVertex.outEdges.contains(toVertex)) return;
-
-
+//        if (fromVertex.outEdges.contains(edge)) return;
+        Edge<V, E> edge = new Edge<>(fromVertex, toVertex, weight);
+//        fromVertex.outEdges.remove(edge);
+//        toVertex.inEdges.remove(edge);
+        if (fromVertex.outEdges.remove(edge)) {
+            toVertex.inEdges.remove(edge);
+        }
+        fromVertex.outEdges.add(edge);
+        toVertex.inEdges.add(edge);
     }
 
     @Override
@@ -79,21 +85,23 @@ public class ListGraph<V, E> implements Graph<V, E> {
     private static class Edge<V, E> {
         E weight;
         Vertex<V, E> from;
-        Vertex<V, E> end;
+        Vertex<V, E> to;
 
-        public Edge(E weight) {
+        public Edge(Vertex<V, E> from, Vertex<V, E> to, E weight) {
+            this.from = from;
+            this.to = to;
             this.weight = weight;
         }
 
         @Override
         public boolean equals(Object obj) {
             Edge<V, E> edge = (Edge<V, E>) obj;
-            return Objects.equals(from, edge.from) && Objects.equals(end, edge.end);
+            return Objects.equals(from, edge.from) && Objects.equals(to, edge.to);
         }
 
         @Override
         public int hashCode() {
-            return from.hashCode() * 31 + end.hashCode();
+            return from.hashCode() * 31 + to.hashCode();
         }
     }
 }
