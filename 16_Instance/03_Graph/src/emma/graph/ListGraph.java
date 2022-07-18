@@ -4,6 +4,17 @@ import java.util.*;
 
 public class ListGraph<V, E> implements Graph<V, E> {
     private Map<V, Vertex<V, E>> vertices = new HashMap<>();
+    private Set<Edge<V, E>> edges = new HashSet<>();
+
+    public void print() {
+        vertices.forEach((V key, Vertex<V, E> vertex) -> {
+            System.out.println(key);
+        });
+
+        edges.forEach((Edge<V, E> edge) -> {
+            System.out.println(edge);
+        });
+    }
     @Override
     public int verticesSize() {
         return vertices.size();
@@ -11,7 +22,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
     @Override
     public int edgesSize() {
-        return 0;
+        return edges.size();
     }
 
     @Override
@@ -46,9 +57,11 @@ public class ListGraph<V, E> implements Graph<V, E> {
 //        toVertex.inEdges.remove(edge);
         if (fromVertex.outEdges.remove(edge)) {
             toVertex.inEdges.remove(edge);
+            edges.remove(edge);
         }
         fromVertex.outEdges.add(edge);
         toVertex.inEdges.add(edge);
+        edges.add(edge);
     }
 
     @Override
@@ -80,6 +93,11 @@ public class ListGraph<V, E> implements Graph<V, E> {
         public int hashCode() {
             return value == null ? 0 : value.hashCode();
         }
+
+        @Override
+        public String toString() {
+            return value == null ? "null" : value.toString();
+        }
     }
 
     private static class Edge<V, E> {
@@ -102,6 +120,15 @@ public class ListGraph<V, E> implements Graph<V, E> {
         @Override
         public int hashCode() {
             return from.hashCode() * 31 + to.hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return "Edge{" +
+                    "weight=" + weight +
+                    ", from=" + from +
+                    ", to=" + to +
+                    '}';
         }
     }
 }
