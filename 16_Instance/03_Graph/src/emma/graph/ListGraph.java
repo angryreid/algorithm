@@ -8,7 +8,13 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
     public void print() {
         vertices.forEach((V key, Vertex<V, E> vertex) -> {
-            System.out.println(key);
+            System.out.println("====================================");
+            System.out.println("Vertex:" + key);
+            System.out.println("In Edges:");
+            System.out.println(vertex.inEdges);
+            System.out.println("Out Edges:");
+            System.out.println(vertex.outEdges);
+            System.out.println("====================================");
         });
 
         edges.forEach((Edge<V, E> edge) -> {
