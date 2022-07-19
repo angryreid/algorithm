@@ -13,6 +13,9 @@ public class Main {
         graph.addEdge("v0", "v4", 6);
         graph.addEdge("v3", "v4", 1);
         graph.addEdge("v2", "v3", 5);
+
+        graph.removeEdge("v0", "v4");
         graph.print();
+
     }
 }
