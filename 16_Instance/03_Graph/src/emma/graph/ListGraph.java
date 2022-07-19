@@ -77,7 +77,15 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
     @Override
     public void removeEdge(V from, V to) {
+        Vertex<V, E> fromVertex = vertices.get(from);
+        Vertex<V, E> toVertex = vertices.get(to);
+        if (fromVertex == null || toVertex == null) return;
 
+        Edge<V, E> edge = new Edge<>(fromVertex, toVertex);
+        if (fromVertex.outEdges.remove(edge)) {
+            toVertex.inEdges.remove(edge);
+            edges.remove(edge);
+        }
     }
 
     private static class Vertex<V, E> {
@@ -110,6 +118,11 @@ public class ListGraph<V, E> implements Graph<V, E> {
         E weight;
         Vertex<V, E> from;
         Vertex<V, E> to;
+
+        public Edge(Vertex<V, E> from, Vertex<V, E> to) {
+            this.from = from;
+            this.to = to;
+        }
 
         public Edge(Vertex<V, E> from, Vertex<V, E> to, E weight) {
             this.from = from;
