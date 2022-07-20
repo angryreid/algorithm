@@ -72,7 +72,22 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
     @Override
     public void removeVertex(V v) {
+        Vertex<V, E> vertex = vertices.remove(v);
+        if (vertex == null) return;
 
+        for (Iterator<Edge<V, E>> iterator = vertex.outEdges.iterator(); iterator.hasNext();) {
+            Edge<V, E> edge = iterator.next();
+            edge.to.inEdges.remove(edge);
+            iterator.remove();// remove current element from current collection
+            edges.remove(edge);
+        }
+
+        for (Iterator<Edge<V, E>> iterator = vertex.inEdges.iterator(); iterator.hasNext();) {
+            Edge<V, E> edge = iterator.next();
+            edge.from.outEdges.remove(edge);
+            iterator.remove();// remove current element from current collection
+            edges.remove(edge);
+        }
     }
 
     @Override
