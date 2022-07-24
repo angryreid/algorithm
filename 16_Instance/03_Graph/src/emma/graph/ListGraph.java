@@ -103,6 +103,29 @@ public class ListGraph<V, E> implements Graph<V, E> {
         }
     }
 
+    @Override
+    public void bfs(V begin) {
+        Vertex<V, E> headVertex = vertices.get(begin);
+        if (headVertex == null) return;
+
+        Set<Vertex<V, E>> visitedVertices = new HashSet<>();
+        Queue<Vertex<V, E>> queue = new LinkedList<>();
+        queue.offer(headVertex);
+        visitedVertices.add(headVertex);
+
+        while (!queue.isEmpty()) {
+            Vertex<V, E> vertex = queue.poll();
+            System.out.println(vertex.value);
+
+            for (Edge<V, E> edge : vertex.outEdges) {
+                if (!visitedVertices.contains(edge.to)) {
+                    queue.offer(edge.to);
+                    visitedVertices.add(edge.to);
+                }
+            }
+        }
+    }
+
     private static class Vertex<V, E> {
         V value;
         Set<Edge<V, E>> inEdges = new HashSet<>();

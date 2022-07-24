@@ -15,8 +15,9 @@ public class Main {
         graph.addEdge("v2", "v3", 5);
 
 //        graph.removeEdge("v0", "v4");
-        graph.removeVertex("v0");
-        graph.print();
+//        graph.removeVertex("v0");
+//        graph.print();
 
+        graph.bfs("v1");
     }
 }
