@@ -150,7 +150,7 @@ public class Data {
     };
 
     /**
-     * 有负权环
+     * Negative weight cycle
      */
     public static final Object[][] NEGATIVE_WEIGHT2 = {
             {0, 1, 1},
