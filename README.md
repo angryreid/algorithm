@@ -69,3 +69,7 @@ int[] arr = new Array[]{1,2,3};
 
 elements = (E[]) new Object[capaticy];//
 ```
+
+## Reference
+
+1. [Love IT site](http://520it.com/)
