@@ -43,7 +43,8 @@ public class Main {
         }
         return graph;
     }
-    public static void main(String[] args) {
+
+    public static void test() {
         ListGraph<String, Integer> graph = new ListGraph<>();
         // Create Direction Weight Graph as asset png
         graph.addEdge("v1", "v0", 9);
@@ -58,5 +59,8 @@ public class Main {
 //        graph.print();
 
         graph.bfs("v1");
+    }
+    public static void main(String[] args) {
+        test();
     }
 }
