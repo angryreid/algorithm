@@ -2,6 +2,7 @@ package emma;
 
 import emma.graph.Graph;
 import emma.graph.ListGraph;
+import emma.model.Data;
 
 public class Main {
     /**
@@ -60,7 +61,33 @@ public class Main {
 
         graph.bfs("v1");
     }
+
+    public static void testUndirectedBFS() {
+        Graph graph = undirectedGraph(Data.BFS_01);
+        graph.bfs("A");
+        /**
+         * A
+         * B,F
+         * C,I,G,E
+         * D,H
+         */
+    }
+
+    public static void testDirectedBFS() {
+        Graph graph = directedGraph(Data.BFS_02);
+        graph.bfs(0);
+        /**
+         * 0
+         * 1,4
+         * 2,6,7
+         * 5
+         * 3
+         */
+    }
+
     public static void main(String[] args) {
-        test();
+//        test();
+//        testUndirectedBFS();
+        testDirectedBFS();
     }
 }
