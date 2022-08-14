@@ -85,9 +85,38 @@ public class Main {
          */
     }
 
+    public static void testUndirectedDFS() {
+        Graph graph = undirectedGraph(Data.DFS_01);
+        graph.dfs(1);
+        /**
+         * 1
+         * 2
+         * 4
+         * 3
+         * 7
+         * 5
+         * 6
+         * 0
+         */
+    }
+
+    public static void testDirectedDFS() {
+        Graph graph = directedGraph(Data.DFS_02);
+        graph.dfs("a");
+        /**
+         * a
+         * b
+         * e
+         * f
+         * c
+         */
+    }
+
     public static void main(String[] args) {
 //        test();
 //        testUndirectedBFS();
-        testDirectedBFS();
+//        testDirectedBFS();
+//        testUndirectedDFS();
+        testDirectedDFS();
     }
 }
