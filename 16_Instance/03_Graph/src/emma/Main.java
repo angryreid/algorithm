@@ -101,8 +101,9 @@ public class Main {
     }
 
     public static void testDirectedDFS() {
-        Graph graph = directedGraph(Data.DFS_02);
+        ListGraph<Object, Double> graph = (ListGraph<Object, Double>)directedGraph(Data.DFS_02);
         graph.dfs("a");
+        graph.dfs2("a");
         /**
          * a
          * b
