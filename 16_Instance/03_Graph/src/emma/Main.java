@@ -142,6 +142,7 @@ public class Main {
     }
 
     public static void testTopologicalSort() {
+        // AOV net
         Graph<Object, Double> graph = directedGraph(Data.TOPO);
         List<Object> list = graph.topologicalSort();
         System.out.println(list);
