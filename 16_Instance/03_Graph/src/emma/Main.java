@@ -5,6 +5,7 @@ import emma.graph.Graph.VertexVisitor;
 import emma.graph.ListGraph;
 import emma.model.Data;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Main {
@@ -140,11 +141,18 @@ public class Main {
          */
     }
 
+    public static void testTopologicalSort() {
+        Graph<Object, Double> graph = directedGraph(Data.TOPO);
+        List<Object> list = graph.topologicalSort();
+        System.out.println(list);
+    }
+
     public static void main(String[] args) {
 //        test();
 //        testUndirectedBFS();
 //        testDirectedBFS();
 //        testUndirectedDFS();
-        testDirectedDFS();
+//        testDirectedDFS();
+        testTopologicalSort();
     }
 }

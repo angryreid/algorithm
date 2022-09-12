@@ -153,6 +153,35 @@ public class ListGraph<V, E> implements Graph<V, E> {
         }
     }
 
+    @Override
+    public List<V> topologicalSort() {
+        List<V> list = new ArrayList<>();
+        Queue<Vertex<V, E>> queue = new LinkedList<>();
+        Map<Vertex<V, E>, Integer> ins = new HashMap<>();
+        vertices.forEach((V v, Vertex<V, E> vertex) -> {
+            int in = vertex.inEdges.size();
+            if (in == 0) {
+                queue.offer(vertex);
+            } else {
+                ins.put(vertex, in);
+            }
+        });
+
+        while (!queue.isEmpty()) {
+            Vertex<V, E> vertex = queue.poll();
+            list.add(vertex.value);
+            for (Edge<V, E> edge: vertex.outEdges) {
+                int inEdgesSize = ins.get(edge.to) - 1;
+                if (inEdgesSize == 0) {
+                    queue.offer(edge.to);
+                } else {
+                    ins.put(edge.to, inEdgesSize);
+                }
+            }
+        }
+        return list;
+    }
+
     public void dfs2(V begin) {
         Set<Vertex<V, E>> visitedVertices = new HashSet<>();
         Vertex<V, E> beginVertex = vertices.get(begin);
