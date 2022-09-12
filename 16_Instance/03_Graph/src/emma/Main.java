@@ -1,8 +1,11 @@
 package emma;
 
 import emma.graph.Graph;
+import emma.graph.Graph.VertexVisitor;
 import emma.graph.ListGraph;
 import emma.model.Data;
+
+import java.util.Objects;
 
 public class Main {
     /**
@@ -59,12 +62,18 @@ public class Main {
 //        graph.removeVertex("v0");
 //        graph.print();
 
-        graph.bfs("v1");
+        graph.bfs("v1", (String v) -> {
+            System.out.println(v);
+            return false;
+        });
     }
 
     public static void testUndirectedBFS() {
         Graph graph = undirectedGraph(Data.BFS_01);
-        graph.bfs("A");
+        graph.bfs("A", (Object v) -> {
+            System.out.println(v);
+            return false;
+        });
         /**
          * A
          * B,F
@@ -75,7 +84,19 @@ public class Main {
 
     public static void testDirectedBFS() {
         Graph graph = directedGraph(Data.BFS_02);
-        graph.bfs(0);
+//        graph.bfs(0);
+//        graph.bfs(0, new VertexVisitor<Integer>() {
+//
+//            @Override
+//            public boolean visit(Integer integer) {
+//                System.out.println(integer);
+//                return false;
+//            }
+//        });
+        graph.bfs(0, (Object v) -> {
+            System.out.println(v);
+            return false;
+        });
         /**
          * 0
          * 1,4
@@ -87,7 +108,10 @@ public class Main {
 
     public static void testUndirectedDFS() {
         Graph graph = undirectedGraph(Data.DFS_01);
-        graph.dfs(1);
+        graph.dfs(1, (Object v) -> {
+            System.out.println(v);
+            return false;
+        });
         /**
          * 1
          * 2
@@ -102,7 +126,10 @@ public class Main {
 
     public static void testDirectedDFS() {
         ListGraph<Object, Double> graph = (ListGraph<Object, Double>)directedGraph(Data.DFS_02);
-        graph.dfs("a");
+        graph.dfs("a", (Object v) -> {
+            System.out.println(v);
+            return false;
+        });
         graph.dfs2("a");
         /**
          * a
