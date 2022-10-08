@@ -12,3 +12,5 @@ function advantageCount(nums1: number[], nums2: number[]): number[] {
     }
     return ans
 };
+
+console.log(advantageCount([2, 7, 11, 15], [1, 10, 4, 11]));
