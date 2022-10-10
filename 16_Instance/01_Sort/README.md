@@ -79,7 +79,7 @@ Date:
 
 The average time big O -> O(n^2)
 The Space big O -> O(1)
-Stability -> Stable (The key point is when the numbers exchange their positions)
+Stability -> Not Stable (The key point is when the numbers exchange their positions)
 
 ```java
 public class Selection {
@@ -99,7 +99,7 @@ public class Selection {
 }
 ```
 
-- The swaping time will extremely less than Bubble sort. So the performance will be enhanced.
+-   The swaping time will extremely less than Bubble sort. So the performance will be enhanced.
 
 ### Enhancement
 
@@ -155,14 +155,20 @@ To compare 10000 numbers
 
 `
 [HeapSort]
-Cost：0.004s(4ms) 	Compared count：235.29k	 Swap count：10.00k
-------------------------------------------------------------------
+Cost：0.004s(4ms) Compared count：235.29k Swap count：10.00k
+
+---
+
 [SelectionSort]
-Cost：0.091s(91ms) 	Compared count：49.99m	 Swap count：10.00k
-------------------------------------------------------------------
+Cost：0.091s(91ms) Compared count：49.99m Swap count：10.00k
+
+---
+
 [BubbleSort]
-Cost：0.547s(547ms) 	Compared count：49.99m	 Swap count：24.89m
-------------------------------------------------------------------
+Cost：0.547s(547ms) Compared count：49.99m Swap count：24.89m
+
+---
+
 `
 
 ## Insertion Sort
@@ -393,8 +399,8 @@ Stability -> Not Stable
 
 **Step Sequence**
 
-- Shell Sequence: The baddest time complexity -> O(n^2)
-- Robert Sedgewick: The baddest time complexity -> O(n^(4/3))
+-   Shell Sequence: The baddest time complexity -> O(n^2)
+-   Robert Sedgewick: The baddest time complexity -> O(n^(4/3))
 
 ```java
 public class ShellSort<E extends Comparable<E>> extends Sort<E> {
@@ -474,9 +480,9 @@ Stability -> Stable
 
 **Defects**
 
-- Wasting too much space
-- Can not to sort negative integer
-- Not stable
+-   Wasting too much space
+-   Can not to sort negative integer
+-   Not stable
 
 ```java
 public class CountingSort extends Sort<Integer>{
@@ -516,9 +522,9 @@ Stability -> Stable
 
 **Defects**
 
-- Wasting too much space: fixed
-- Can not to sort negative integer: fixed
-- Not stable: stable
+-   Wasting too much space: fixed
+-   Can not to sort negative integer: fixed
+-   Not stable: stable
 
 ```java
 public class CountingSort extends Sort<Integer>{
@@ -624,6 +630,7 @@ public class RadixSort extends Sort<Integer>{
     }
 }
 ```
+
 #### Case 2
 
 TO DO: Create 10 Array to implement Radix Sort
@@ -640,7 +647,6 @@ the best time big O -> O(n + k)
 the baddest time big O -> O(n + k)
 The Space big O -> O(n + m) m is the size of bucket
 Stability -> Stable
-
 
 ### Code
 
