@@ -81,3 +81,7 @@ Topo Sort
 Crossing Edge: if there is one edge with two vertex belongs to diff Cut area, this edge is Crossing Edge.
 
 Cut Theory: The minimum weight edge in any Cut area must be the part of MST
+
+#### Prim Algorithm
+
+#### Kruskal Algorithm

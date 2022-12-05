@@ -166,7 +166,7 @@ public class Main {
     }
 
     public static void testMST() {
-        Graph<Object, Double> graph = undirectedGraph(Data.MST_02);
+        Graph<Object, Double> graph = undirectedGraph(Data.MST_01);
         Set<EdgeInfo<Object, Double>> mst = graph.mst();
         for (EdgeInfo<Object, Double> info : mst) {
             System.out.println(info);

@@ -1,6 +1,7 @@
 package emma.graph;
 
 import emma.heap.MinHeap;
+import emma.union.UnionFind;
 
 import java.util.*;
 
@@ -169,7 +170,8 @@ public class ListGraph<V, E> extends Graph<V, E> {
 
     @Override
     public Set<EdgeInfo<V, E>> mst() {
-        return prim();
+//        return prim();
+        return kruskal();
     }
 
     public Set<EdgeInfo<V, E>> prim() {
@@ -195,11 +197,28 @@ public class ListGraph<V, E> extends Graph<V, E> {
     }
 
     public Set<EdgeInfo<V, E>> kruskal() {
-        return null;
+        int edgeSize = vertices.size() - 1;
+        if (edgeSize <= 1) return null;
+
+        Set<EdgeInfo<V, E>> edgeInfos = new HashSet<>();
+        MinHeap<Edge<V, E>> heap = new MinHeap<>(edges, edgeComparator);
+        UnionFind<Vertex<V, E>> uf = new UnionFind<>();
+        vertices.forEach((V v, Vertex<V, E> vertex) -> {
+            uf.makeSet(vertex);
+        });
+
+        while (!heap.isEmpty() && edgeInfos.size() < edgeSize)  {
+            Edge<V, E> edge = heap.remove();
+            if(uf.isSame(edge.from, edge.to)) continue;
+            edgeInfos.add(edge.info());
+            uf.union(edge.from, edge.to);
+        }
+        return edgeInfos;
     }
 
     public void dfs2(V begin) {
         Set<Vertex<V, E>> visitedVertices = new HashSet<>();
+        Set<Vertex<V, E>> addedVertices = new HashSet<>();
         Vertex<V, E> beginVertex = vertices.get(begin);
         if (beginVertex != null)
             dfs2(beginVertex, visitedVertices);
