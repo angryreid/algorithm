@@ -1,6 +1,7 @@
 package emma.graph;
 
 import java.util.List;
+import java.util.Set;
 
 public interface Graph<V, E>{
     int verticesSize();
@@ -16,9 +17,23 @@ public interface Graph<V, E>{
     void bfs(V begin, VertexVisitor<V> visitor);
     void dfs(V begin, VertexVisitor<V> visitor);
 
+    Set<EdgeInfo<V, E>> mst();
+
     List<V> topologicalSort();
 
     interface VertexVisitor<V> {
         boolean visit(V v);
+    }
+
+    class EdgeInfo<V, E> {
+        V from;
+        V to;
+        E weight;
+
+        public EdgeInfo(V from, V to, E weight) {
+            this.from = from;
+            this.to = to;
+            this.weight = weight;
+        }
     }
 }

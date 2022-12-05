@@ -153,6 +153,11 @@ public class ListGraph<V, E> implements Graph<V, E> {
         }
     }
 
+    @Override
+    public Set<EdgeInfo<V, E>> mst() {
+        return null;
+    }
+
     public void dfs2(V begin) {
         Set<Vertex<V, E>> visitedVertices = new HashSet<>();
         Vertex<V, E> beginVertex = vertices.get(begin);

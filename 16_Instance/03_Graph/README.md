@@ -58,3 +58,26 @@ Any two vertexes is connected.
 ### Adjacency List
 
 - Linked list saves each path
+
+## AOV
+
+Activity on Vertex Network -> Directed Acyclic Graph
+
+1962 Kahn Algorithm
+
+Topo Sort
+
+1. Find the entry, no dependency. In edges are 0
+2. Removed the setp 1 vertex and remove related edges
+3. Until no In edges vertex.
+
+
+## Spanning Tree
+
+### Minimum Spanning Tree
+
+#### Cut Theory
+
+Crossing Edge: if there is one edge with two vertex belongs to diff Cut area, this edge is Crossing Edge.
+
+Cut Theory: The minimum weight edge in any Cut area must be the part of MST
