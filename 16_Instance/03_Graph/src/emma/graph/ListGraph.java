@@ -196,22 +196,25 @@ public class ListGraph<V, E> extends Graph<V, E> {
         return edgeInfos;
     }
 
-    public Set<EdgeInfo<V, E>> kruskal() {
+    public Set<EdgeInfo<V, E>> kruskal() { // E * O(logE)
         int edgeSize = vertices.size() - 1;
         if (edgeSize <= 1) return null;
 
         Set<EdgeInfo<V, E>> edgeInfos = new HashSet<>();
+        // O(E)
         MinHeap<Edge<V, E>> heap = new MinHeap<>(edges, edgeComparator);
         UnionFind<Vertex<V, E>> uf = new UnionFind<>();
+        // O(V)
         vertices.forEach((V v, Vertex<V, E> vertex) -> {
             uf.makeSet(vertex);
         });
 
-        while (!heap.isEmpty() && edgeInfos.size() < edgeSize)  {
-            Edge<V, E> edge = heap.remove();
-            if(uf.isSame(edge.from, edge.to)) continue;
-            edgeInfos.add(edge.info());
-            uf.union(edge.from, edge.to);
+        // E * O(logE)
+        while (!heap.isEmpty() && edgeInfos.size() < edgeSize)  { // O(E)
+            Edge<V, E> edge = heap.remove();// O(logE)
+            if(uf.isSame(edge.from, edge.to)) continue;// // O(1)
+            edgeInfos.add(edge.info()); // O(1)
+            uf.union(edge.from, edge.to);// // O(1)
         }
         return edgeInfos;
     }
