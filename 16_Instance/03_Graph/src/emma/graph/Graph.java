@@ -3,37 +3,90 @@ package emma.graph;
 import java.util.List;
 import java.util.Set;
 
-public interface Graph<V, E>{
-    int verticesSize();
-    int edgesSize();
+public abstract class Graph<V, E> {
 
-    void addVertex(V v);
-    void addEdge(V from, V to);
-    void addEdge(V from, V to, E weight);
+    protected WeightManager<E> weightManager;
 
-    void removeVertex(V v);
-    void removeEdge(V from, V to);
+    public abstract int verticesSize();
 
-    void bfs(V begin, VertexVisitor<V> visitor);
-    void dfs(V begin, VertexVisitor<V> visitor);
+    public abstract int edgesSize();
 
-    Set<EdgeInfo<V, E>> mst();
+    public abstract void addVertex(V v);
 
-    List<V> topologicalSort();
+    public abstract void addEdge(V from, V to);
 
-    interface VertexVisitor<V> {
+    public abstract void addEdge(V from, V to, E weight);
+
+    public abstract void removeVertex(V v);
+
+    public abstract void removeEdge(V from, V to);
+
+    public abstract void bfs(V begin, VertexVisitor<V> visitor);
+
+    public abstract void dfs(V begin, VertexVisitor<V> visitor);
+
+    public abstract Set<EdgeInfo<V, E>> mst();
+
+    public abstract List<V> topologicalSort();
+
+    public interface VertexVisitor<V> {
         boolean visit(V v);
     }
 
-    class EdgeInfo<V, E> {
-        V from;
-        V to;
-        E weight;
+    public interface WeightManager<E> {
+        int compare(E w1, E w2);
+
+        E add(E w1, E w2);
+    }
+
+    public Graph() { }
+
+    public Graph(WeightManager<E> weightManager) {
+        this.weightManager = weightManager;
+    }
+
+    public static class EdgeInfo<V, E> {
+        private V from;
+        private V to;
+        private E weight;
 
         public EdgeInfo(V from, V to, E weight) {
             this.from = from;
             this.to = to;
             this.weight = weight;
+        }
+
+        public V getFrom() {
+            return from;
+        }
+
+        public void setFrom(V from) {
+            this.from = from;
+        }
+
+        public V getTo() {
+            return to;
+        }
+
+        public void setTo(V to) {
+            this.to = to;
+        }
+
+        public E getWeight() {
+            return weight;
+        }
+
+        public void setWeight(E weight) {
+            this.weight = weight;
+        }
+
+        @Override
+        public String toString() {
+            return "EdgeInfo{" +
+                    "from=" + from +
+                    ", to=" + to +
+                    ", weight=" + weight +
+                    '}';
         }
     }
 }

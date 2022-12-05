@@ -1,10 +1,23 @@
 package emma.graph;
 
+import emma.heap.MinHeap;
+
 import java.util.*;
 
-public class ListGraph<V, E> implements Graph<V, E> {
+public class ListGraph<V, E> extends Graph<V, E> {
     private Map<V, Vertex<V, E>> vertices = new HashMap<>();
     private Set<Edge<V, E>> edges = new HashSet<>();
+    private Comparator<Edge<V, E>> edgeComparator = (Edge<V, E> e1, Edge<V, E> e2) -> {
+        return weightManager.compare(e1.weight, e2.weight);
+    };
+
+    public ListGraph() {
+        super();
+    }
+
+    public ListGraph(WeightManager<E> weightManager) {
+        super(weightManager);
+    }
 
     public void print() {
         vertices.forEach((V key, Vertex<V, E> vertex) -> {
@@ -21,6 +34,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
             System.out.println(edge);
         });
     }
+
     @Override
     public int verticesSize() {
         return vertices.size();
@@ -75,14 +89,14 @@ public class ListGraph<V, E> implements Graph<V, E> {
         Vertex<V, E> vertex = vertices.remove(v); // Remove vertex and return removed value
         if (vertex == null) return;
 
-        for (Iterator<Edge<V, E>> iterator = vertex.outEdges.iterator(); iterator.hasNext();) {
+        for (Iterator<Edge<V, E>> iterator = vertex.outEdges.iterator(); iterator.hasNext(); ) {
             Edge<V, E> edge = iterator.next();
             edge.to.inEdges.remove(edge);
             iterator.remove();// remove current element from current collection loop
             edges.remove(edge);
         }
 
-        for (Iterator<Edge<V, E>> iterator = vertex.inEdges.iterator(); iterator.hasNext();) {
+        for (Iterator<Edge<V, E>> iterator = vertex.inEdges.iterator(); iterator.hasNext(); ) {
             Edge<V, E> edge = iterator.next();
             edge.from.outEdges.remove(edge);
             iterator.remove();// remove current element from current collection loop
@@ -142,7 +156,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
         while (!stack.isEmpty()) {
             Vertex<V, E> vertex = stack.pop();// From the tail
-            for (Edge<V, E> edge: vertex.outEdges) {
+            for (Edge<V, E> edge : vertex.outEdges) {
                 if (visitedVertices.contains(edge.to)) continue;
                 stack.push(edge.from);
                 stack.push(edge.to);
@@ -161,10 +175,23 @@ public class ListGraph<V, E> implements Graph<V, E> {
     public Set<EdgeInfo<V, E>> prim() {
         Iterator<Vertex<V, E>> iterator = vertices.values().iterator();
         if (!iterator.hasNext()) return null;
+
         Vertex<V, E> vertex = iterator.next();
+
         Set<EdgeInfo<V, E>> edgeInfos = new HashSet<>();
-        PriorityQueue<Edge<V, E>> heap = new PriorityQueue<>(vertex.outEdges);
-        return null;
+        Set<Vertex<V, E>> addedVertices = new HashSet<>();
+
+        addedVertices.add(vertex);
+        MinHeap<Edge<V, E>> heap = new MinHeap<>(vertex.outEdges, edgeComparator);
+        int edgeSize = vertices.size() - 1;
+        while (!heap.isEmpty() && edgeInfos.size() < edgeSize) {
+            Edge<V, E> edge = heap.remove();
+            if (addedVertices.contains(edge.to)) continue;
+            edgeInfos.add(edge.info());
+            addedVertices.add(edge.to);
+            heap.addAll(edge.to.outEdges);
+        }
+        return edgeInfos;
     }
 
     public Set<EdgeInfo<V, E>> kruskal() {
@@ -181,7 +208,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
     public void dfs2(Vertex<V, E> vertex, Set<Vertex<V, E>> visitedVertices) {
         visitedVertices.add(vertex);
         System.out.println(vertex.value);
-        for (Edge<V, E> edge: vertex.outEdges) {
+        for (Edge<V, E> edge : vertex.outEdges) {
             if (!visitedVertices.contains(edge.to))
                 dfs2(edge.to, visitedVertices);
         }
@@ -204,7 +231,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
         while (!queue.isEmpty()) {
             Vertex<V, E> vertex = queue.poll();
             list.add(vertex.value);
-            for (Edge<V, E> edge: vertex.outEdges) {
+            for (Edge<V, E> edge : vertex.outEdges) {
                 int inEdgesSize = ins.get(edge.to) - 1;
                 if (inEdgesSize == 0) {
                     queue.offer(edge.to);
@@ -221,7 +248,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
         Set<Edge<V, E>> inEdges = new HashSet<>();
         Set<Edge<V, E>> outEdges = new HashSet<>();
 
-        public Vertex(V value) {
+        Vertex(V value) {
             this.value = value;
         }
 
@@ -242,20 +269,24 @@ public class ListGraph<V, E> implements Graph<V, E> {
         }
     }
 
-    private static class Edge<V, E extends Comparable<E>> implements Comparable<Edge<V, E>> {
+    private static class Edge<V, E> {
         E weight;
         Vertex<V, E> from;
         Vertex<V, E> to;
 
-        public Edge(Vertex<V, E> from, Vertex<V, E> to) {
+        Edge(Vertex<V, E> from, Vertex<V, E> to) {
             this.from = from;
             this.to = to;
         }
 
-        public Edge(Vertex<V, E> from, Vertex<V, E> to, E weight) {
+        Edge(Vertex<V, E> from, Vertex<V, E> to, E weight) {
             this.from = from;
             this.to = to;
             this.weight = weight;
+        }
+
+        EdgeInfo<V, E> info() {
+            return new EdgeInfo<>(from.value, to.value, weight);
         }
 
         @Override
@@ -276,11 +307,6 @@ public class ListGraph<V, E> implements Graph<V, E> {
                     ", from=" + from +
                     ", to=" + to +
                     '}';
-        }
-
-        @Override
-        public int compareTo(Edge<V, E> o) {
-            return weight.compareTo(o.weight);
         }
     }
 }

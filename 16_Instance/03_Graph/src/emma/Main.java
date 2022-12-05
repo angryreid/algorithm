@@ -1,14 +1,30 @@
 package emma;
 
 import emma.graph.Graph;
+import emma.graph.Graph.EdgeInfo;
+import emma.graph.Graph.WeightManager;
+
 import emma.graph.Graph.VertexVisitor;
 import emma.graph.ListGraph;
 import emma.model.Data;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class Main {
+    static WeightManager<Double> wm = new WeightManager<Double>() {
+        @Override
+        public int compare(Double w1, Double w2) {
+            return w1.compareTo(w2);
+        }
+
+        @Override
+        public Double add(Double w1, Double w2) {
+            return w1 + w2;
+        }
+    };
+
     /**
      * directedGraph
      */
@@ -29,11 +45,12 @@ public class Main {
 
     /**
      * undirectedGraph
+     *
      * @param data
      * @return
      */
     private static Graph<Object, Double> undirectedGraph(Object[][] data) {
-        Graph<Object, Double> graph = new ListGraph<>();
+        Graph<Object, Double> graph = new ListGraph<>(wm);
         for (Object[] edge : data) {
             if (edge.length == 1) {
                 graph.addVertex(edge[0]);
@@ -126,7 +143,7 @@ public class Main {
     }
 
     public static void testDirectedDFS() {
-        ListGraph<Object, Double> graph = (ListGraph<Object, Double>)directedGraph(Data.DFS_02);
+        ListGraph<Object, Double> graph = (ListGraph<Object, Double>) directedGraph(Data.DFS_02);
         graph.dfs("a", (Object v) -> {
             System.out.println(v);
             return false;
@@ -149,8 +166,11 @@ public class Main {
     }
 
     public static void testMST() {
-        Graph<Object, Double> graph = new ListGraph<>();
-        graph.mst();
+        Graph<Object, Double> graph = undirectedGraph(Data.MST_02);
+        Set<EdgeInfo<Object, Double>> mst = graph.mst();
+        for (EdgeInfo<Object, Double> info : mst) {
+            System.out.println(info);
+        }
     }
 
     public static void main(String[] args) {
