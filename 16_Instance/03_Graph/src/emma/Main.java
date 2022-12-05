@@ -148,12 +148,18 @@ public class Main {
         System.out.println(list);
     }
 
+    public static void testMST() {
+        Graph<Object, Double> graph = new ListGraph<>();
+        graph.mst();
+    }
+
     public static void main(String[] args) {
 //        test();
 //        testUndirectedBFS();
 //        testDirectedBFS();
 //        testUndirectedDFS();
 //        testDirectedDFS();
-        testTopologicalSort();
+//        testTopologicalSort();
+        testMST();
     }
 }

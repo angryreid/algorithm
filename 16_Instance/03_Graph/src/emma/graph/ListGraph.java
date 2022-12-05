@@ -155,6 +155,19 @@ public class ListGraph<V, E> implements Graph<V, E> {
 
     @Override
     public Set<EdgeInfo<V, E>> mst() {
+        return prim();
+    }
+
+    public Set<EdgeInfo<V, E>> prim() {
+        Iterator<Vertex<V, E>> iterator = vertices.values().iterator();
+        if (!iterator.hasNext()) return null;
+        Vertex<V, E> vertex = iterator.next();
+        Set<EdgeInfo<V, E>> edgeInfos = new HashSet<>();
+        PriorityQueue<Edge<V, E>> heap = new PriorityQueue<>(vertex.outEdges);
+        return null;
+    }
+
+    public Set<EdgeInfo<V, E>> kruskal() {
         return null;
     }
 
@@ -229,7 +242,7 @@ public class ListGraph<V, E> implements Graph<V, E> {
         }
     }
 
-    private static class Edge<V, E> {
+    private static class Edge<V, E extends Comparable<E>> implements Comparable<Edge<V, E>> {
         E weight;
         Vertex<V, E> from;
         Vertex<V, E> to;
@@ -263,6 +276,11 @@ public class ListGraph<V, E> implements Graph<V, E> {
                     ", from=" + from +
                     ", to=" + to +
                     '}';
+        }
+
+        @Override
+        public int compareTo(Edge<V, E> o) {
+            return weight.compareTo(o.weight);
         }
     }
 }
