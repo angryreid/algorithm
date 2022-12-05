@@ -74,6 +74,8 @@ Topo Sort
 
 ## Spanning Tree
 
+Aims to undirected Graph
+
 ### Minimum Spanning Tree
 
 #### Cut Theory
@@ -85,3 +87,7 @@ Cut Theory: The minimum weight edge in any Cut area must be the part of MST
 #### Prim Algorithm
 
 #### Kruskal Algorithm
+
+## Shortest Path
+
+Aims to directed, undirected Graph & no weight Graph
