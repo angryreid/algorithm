@@ -203,7 +203,7 @@ public class ListGraph<V, E> extends Graph<V, E> {
         Set<EdgeInfo<V, E>> edgeInfos = new HashSet<>();
         // O(E)
         MinHeap<Edge<V, E>> heap = new MinHeap<>(edges, edgeComparator);
-        UnionFind<Vertex<V, E>> uf = new UnionFind<>();
+        UnionFind<Vertex<V, E>> uf = new UnionFind<>(); // Can not to use addedVertices Set to store due to multiple Set existing possible
         // O(V)
         vertices.forEach((V v, Vertex<V, E> vertex) -> {
             uf.makeSet(vertex);
