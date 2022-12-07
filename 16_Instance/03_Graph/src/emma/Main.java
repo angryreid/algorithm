@@ -8,7 +8,9 @@ import emma.graph.Graph.VertexVisitor;
 import emma.graph.ListGraph;
 import emma.model.Data;
 
+import javax.swing.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +31,7 @@ public class Main {
      * directedGraph
      */
     private static Graph<Object, Double> directedGraph(Object[][] data) {
-        Graph<Object, Double> graph = new ListGraph<>();
+        Graph<Object, Double> graph = new ListGraph<>(wm);
         for (Object[] edge : data) {
             if (edge.length == 1) {
                 graph.addVertex(edge[0]);
@@ -173,6 +175,12 @@ public class Main {
         }
     }
 
+    public static void testSP() {
+        Graph<Object, Double> graph = directedGraph(Data.SP);
+        Map<Object, Double> sp = graph.shortestPath("A");
+        System.out.println(sp);
+    }
+
     public static void main(String[] args) {
 //        test();
 //        testUndirectedBFS();
@@ -180,6 +188,7 @@ public class Main {
 //        testUndirectedDFS();
 //        testDirectedDFS();
 //        testTopologicalSort();
-        testMST();
+//        testMST();
+        testSP();
     }
 }

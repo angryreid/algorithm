@@ -3,6 +3,7 @@ package emma.graph;
 import emma.heap.MinHeap;
 import emma.union.UnionFind;
 
+
 import java.util.*;
 
 public class ListGraph<V, E> extends Graph<V, E> {
@@ -272,20 +273,50 @@ public class ListGraph<V, E> extends Graph<V, E> {
 
         Map<V, E> selectedPaths = new HashMap<>();
         Map<Vertex<V, E>, E> paths = new HashMap<>();
+        for (Edge<V, E> edge: beginVertex.outEdges) {
+            paths.put(edge.to, edge.weight);
+        }
+
+        while (!paths.isEmpty()) {
+            Map.Entry<Vertex<V, E>, E> minEntry = getMinPath(paths);
+            Vertex<V, E> minVertex = minEntry.getKey();
+            E minWeight = minEntry.getValue();
+
+            selectedPaths.put(minVertex.value, minWeight);
+            paths.remove(minVertex);
+            for (Edge<V, E> edge: minVertex.outEdges) {
+                // filter undirected edge.to
+                if (selectedPaths.containsKey(edge.to.value)) continue;
+                // beginVertex -> edge.to
+                E newWeight = weightManager.add(minEntry.getValue(), edge.weight);
+                // beginVertex -> edge.from + edge.weight
+                E oldWeight = paths.get(edge.to);
+
+                if (oldWeight == null || weightManager.compare(newWeight, oldWeight) < 0) {
+                    paths.put(edge.to, newWeight);
+                }
+
+            }
+        }
+
 
         return selectedPaths;
     }
 
-    private Vertex<V, E> getMinPath(Map<Vertex<V, E>, E> paths) {
+//    private relax() {
+//
+//    }
+
+    private Map.Entry<Vertex<V, E>, E> getMinPath(Map<Vertex<V, E>, E> paths) {
         Iterator<Map.Entry<Vertex<V, E>, E>> it = paths.entrySet().iterator();
         Map.Entry<Vertex<V, E>, E> minEntry = it.next();
         while(it.hasNext()) {
             Map.Entry<Vertex<V, E>, E> entry = it.next();
-            if (weightManager.compare(minEntry.getValue(), entry.getValue()) < 0) {
+            if (weightManager.compare(entry.getValue(), minEntry.getValue()) < 0) { // entry < minEntry
                 minEntry = entry;
             }
         }
-        return minEntry.getKey();
+        return minEntry;
 
 //        Vertex<V, E> minVertex = null;
 //        E minWeight = null;
