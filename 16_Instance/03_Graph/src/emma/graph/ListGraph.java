@@ -265,6 +265,41 @@ public class ListGraph<V, E> extends Graph<V, E> {
         return list;
     }
 
+    @Override
+    public Map<V, E> shortestPath(V begin) {
+        Vertex<V, E> beginVertex = vertices.get(begin);
+        if (beginVertex == null) return null;
+
+        Map<V, E> selectedPaths = new HashMap<>();
+        Map<Vertex<V, E>, E> paths = new HashMap<>();
+
+        return selectedPaths;
+    }
+
+    private Vertex<V, E> getMinPath(Map<Vertex<V, E>, E> paths) {
+        Iterator<Map.Entry<Vertex<V, E>, E>> it = paths.entrySet().iterator();
+        Map.Entry<Vertex<V, E>, E> minEntry = it.next();
+        while(it.hasNext()) {
+            Map.Entry<Vertex<V, E>, E> entry = it.next();
+            if (weightManager.compare(minEntry.getValue(), entry.getValue()) < 0) {
+                minEntry = entry;
+            }
+        }
+        return minEntry.getKey();
+
+//        Vertex<V, E> minVertex = null;
+//        E minWeight = null;
+//        for (Map.Entry<Vertex<V, E>, E> entry : paths.entrySet()) {
+//            Vertex<V, E> vertex = entry.getKey();
+//            E weight = entry.getValue();
+//            if (minWeight == null || weightManager.compare(minWeight, weight) < 0) {
+//                minVertex = vertex;
+//                minWeight = weight;
+//            }
+//        }
+//        return minVertex;
+    }
+
     private static class Vertex<V, E> {
         V value;
         Set<Edge<V, E>> inEdges = new HashSet<>();

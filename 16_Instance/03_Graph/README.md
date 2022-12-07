@@ -96,6 +96,8 @@ Aims to directed, undirected Graph & no weight Graph
 
 #### Dijkstra Algorithm
 
+Time Complexity: O(ElogV) E -> Edges size, V -> Vertices size
+
 #### Bellman-Fold Algorithm
 
 ### Multiple source shortest path
