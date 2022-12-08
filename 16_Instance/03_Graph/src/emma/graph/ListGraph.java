@@ -289,18 +289,27 @@ public class ListGraph<V, E> extends Graph<V, E> {
                 relaxBellmanFord(edge, fromPath, selectedPaths);
             }
         }
+
+        for (Edge<V, E> edge: edges) {
+            PathInfo<V, E> fromPath = selectedPaths.get(edge.from.value);
+            if (fromPath == null) continue;
+            if (relaxBellmanFord(edge, fromPath, selectedPaths)) {
+                System.out.println("Negative Cycle detected.");
+                return null;
+            };
+        }
         selectedPaths.remove(begin);
         return selectedPaths;
     }
 
-    private void relaxBellmanFord(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<V, PathInfo<V, E>> paths) {
+    private boolean relaxBellmanFord(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<V, PathInfo<V, E>> paths) {
         // beginVertex -> edge.to
         E newWeight = weightManager.add(fromPath.weight, edge.weight);
         // beginVertex -> edge.from + edge.weight
 //         E oldWeight = paths.get(edge.to).weight;
 
         PathInfo<V, E> oldPath = paths.get(edge.to.value);
-        if (oldPath != null && weightManager.compare(newWeight, oldPath.weight) >= 0) return;
+        if (oldPath != null && weightManager.compare(newWeight, oldPath.weight) >= 0) return false;
         if (oldPath == null) {
             oldPath = new PathInfo<>();
             paths.put(edge.to.value, oldPath);
@@ -311,6 +320,7 @@ public class ListGraph<V, E> extends Graph<V, E> {
         oldPath.weight = newWeight;
         oldPath.edgeInfos.addAll(fromPath.edgeInfos);
         oldPath.edgeInfos.add(edge.info());
+        return true;
     }
 
     private Map<V, PathInfo<V, E>> dijkstra(V begin) {

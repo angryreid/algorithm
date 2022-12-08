@@ -181,8 +181,13 @@ public class Main {
     }
 
     public static void testSP() {
-        Graph<Object, Double> graph = directedGraph(Data.SP);
-        Map<Object, Graph.PathInfo<Object, Double>> sp = graph.shortestPath("A");
+//        Graph<Object, Double> graph = directedGraph(Data.SP);
+//        Graph<Object, Double> graph = directedGraph(Data.NEGATIVE_WEIGHT1);
+//        Map<Object, Graph.PathInfo<Object, Double>> sp = graph.shortestPath("A");
+        Graph<Object, Double> graph = directedGraph(Data.NEGATIVE_WEIGHT2);
+        Map<Object, Graph.PathInfo<Object, Double>> sp = graph.shortestPath(0);
+        if (sp == null) return;
+        sp = graph.shortestPath("A");
 //        System.out.println(sp);
         sp.forEach((Object v, Graph.PathInfo<Object, Double> pathInfo) -> {
             System.out.println(v + " - " + pathInfo);
