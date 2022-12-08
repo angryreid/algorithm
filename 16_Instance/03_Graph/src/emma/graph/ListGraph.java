@@ -4,6 +4,7 @@ import emma.heap.MinHeap;
 import emma.union.UnionFind;
 
 
+import java.nio.file.Path;
 import java.util.*;
 
 public class ListGraph<V, E> extends Graph<V, E> {
@@ -211,9 +212,9 @@ public class ListGraph<V, E> extends Graph<V, E> {
         });
 
         // E * O(logE)
-        while (!heap.isEmpty() && edgeInfos.size() < edgeSize)  { // O(E)
+        while (!heap.isEmpty() && edgeInfos.size() < edgeSize) { // O(E)
             Edge<V, E> edge = heap.remove();// O(logE)
-            if(uf.isSame(edge.from, edge.to)) continue;// // O(1)
+            if (uf.isSame(edge.from, edge.to)) continue;// // O(1)
             edgeInfos.add(edge.info()); // O(1)
             uf.union(edge.from, edge.to);// // O(1)
         }
@@ -267,33 +268,39 @@ public class ListGraph<V, E> extends Graph<V, E> {
     }
 
     @Override
-    public Map<V, E> shortestPath(V begin) {
+    public Map<V, PathInfo<V, E>> shortestPath(V begin) {
         Vertex<V, E> beginVertex = vertices.get(begin);
         if (beginVertex == null) return null;
 
-        Map<V, E> selectedPaths = new HashMap<>();
-        Map<Vertex<V, E>, E> paths = new HashMap<>();
-        for (Edge<V, E> edge: beginVertex.outEdges) {
-            paths.put(edge.to, edge.weight);
+        Map<V, PathInfo<V, E>> selectedPaths = new HashMap<>();
+        Map<Vertex<V, E>, PathInfo<V, E>> paths = new HashMap<>();
+        for (Edge<V, E> edge : beginVertex.outEdges) {
+            PathInfo<V, E> path = new PathInfo<>();
+            path.weight = edge.weight;
+            path.edgeInfos.add(edge.info());
+            paths.put(edge.to, path);
         }
 
         while (!paths.isEmpty()) {
-            Map.Entry<Vertex<V, E>, E> minEntry = getMinPath(paths);
+            Map.Entry<Vertex<V, E>, PathInfo<V, E>> minEntry = getMinPath(paths);
             Vertex<V, E> minVertex = minEntry.getKey();
-            E minWeight = minEntry.getValue();
-
-            selectedPaths.put(minVertex.value, minWeight);
+            selectedPaths.put(minVertex.value, minEntry.getValue());
             paths.remove(minVertex);
-            for (Edge<V, E> edge: minVertex.outEdges) {
+            for (Edge<V, E> edge : minVertex.outEdges) {
                 // filter undirected edge.to
                 if (selectedPaths.containsKey(edge.to.value)) continue;
                 // beginVertex -> edge.to
-                E newWeight = weightManager.add(minEntry.getValue(), edge.weight);
+                E newWeight = weightManager.add(minEntry.getValue().weight, edge.weight);
                 // beginVertex -> edge.from + edge.weight
-                E oldWeight = paths.get(edge.to);
+//                E oldWeight = paths.get(edge.to).weight;
 
-                if (oldWeight == null || weightManager.compare(newWeight, oldWeight) < 0) {
-                    paths.put(edge.to, newWeight);
+                PathInfo<V, E> oldPath = paths.get(edge.to);
+                if (oldPath == null || weightManager.compare(newWeight, oldPath.weight) < 0) {
+                    PathInfo<V, E> path = new PathInfo<>();
+                    path.weight = newWeight;
+                    path.edgeInfos.addAll(minEntry.getValue().edgeInfos);
+                    path.edgeInfos.add(edge.info());
+                    paths.put(edge.to, path);
                 }
 
             }
@@ -307,28 +314,16 @@ public class ListGraph<V, E> extends Graph<V, E> {
 //
 //    }
 
-    private Map.Entry<Vertex<V, E>, E> getMinPath(Map<Vertex<V, E>, E> paths) {
-        Iterator<Map.Entry<Vertex<V, E>, E>> it = paths.entrySet().iterator();
-        Map.Entry<Vertex<V, E>, E> minEntry = it.next();
-        while(it.hasNext()) {
-            Map.Entry<Vertex<V, E>, E> entry = it.next();
-            if (weightManager.compare(entry.getValue(), minEntry.getValue()) < 0) { // entry < minEntry
+    private Map.Entry<Vertex<V, E>, PathInfo<V, E>> getMinPath(Map<Vertex<V, E>, PathInfo<V, E>> paths) {
+        Iterator<Map.Entry<Vertex<V, E>, PathInfo<V, E>>> it = paths.entrySet().iterator();
+        Map.Entry<Vertex<V, E>, PathInfo<V, E>> minEntry = it.next();
+        while (it.hasNext()) {
+            Map.Entry<Vertex<V, E>, PathInfo<V, E>> entry = it.next();
+            if (weightManager.compare(entry.getValue().weight, minEntry.getValue().weight) < 0) { // entry < minEntry
                 minEntry = entry;
             }
         }
         return minEntry;
-
-//        Vertex<V, E> minVertex = null;
-//        E minWeight = null;
-//        for (Map.Entry<Vertex<V, E>, E> entry : paths.entrySet()) {
-//            Vertex<V, E> vertex = entry.getKey();
-//            E weight = entry.getValue();
-//            if (minWeight == null || weightManager.compare(minWeight, weight) < 0) {
-//                minVertex = vertex;
-//                minWeight = weight;
-//            }
-//        }
-//        return minVertex;
     }
 
     private static class Vertex<V, E> {

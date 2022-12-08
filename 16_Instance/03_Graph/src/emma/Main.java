@@ -177,8 +177,11 @@ public class Main {
 
     public static void testSP() {
         Graph<Object, Double> graph = directedGraph(Data.SP);
-        Map<Object, Double> sp = graph.shortestPath("A");
-        System.out.println(sp);
+        Map<Object, Graph.PathInfo<Object, Double>> sp = graph.shortestPath("A");
+//        System.out.println(sp);
+        sp.forEach((Object v, Graph.PathInfo<Object, Double> pathInfo) -> {
+            System.out.println(v + " - " + pathInfo);
+        });
     }
 
     public static void main(String[] args) {

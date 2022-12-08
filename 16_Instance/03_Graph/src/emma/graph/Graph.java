@@ -1,5 +1,6 @@
 package emma.graph;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -7,6 +8,12 @@ import java.util.Set;
 public abstract class Graph<V, E> {
 
     protected WeightManager<E> weightManager;
+
+    public Graph() { }
+
+    public Graph(WeightManager<E> weightManager) {
+        this.weightManager = weightManager;
+    }
 
     public abstract int verticesSize();
 
@@ -30,7 +37,8 @@ public abstract class Graph<V, E> {
 
     public abstract List<V> topologicalSort();
 
-    public abstract Map<V, E> shortestPath(V begin);
+//    public abstract Map<V, E> shortestPath(V begin);
+    public abstract Map<V, PathInfo<V, E>> shortestPath(V begin);
 
     public interface VertexVisitor<V> {
         boolean visit(V v);
@@ -42,11 +50,35 @@ public abstract class Graph<V, E> {
         E add(E w1, E w2);
     }
 
-    public Graph() { }
+    public static class PathInfo<V, E> {
+        protected E weight;
+        protected LinkedList<EdgeInfo<V, E>> edgeInfos = new LinkedList<>();
 
-    public Graph(WeightManager<E> weightManager) {
-        this.weightManager = weightManager;
+        public E getWeight() {
+            return weight;
+        }
+
+        public void setWeight(E weight) {
+            this.weight = weight;
+        }
+
+        public LinkedList<EdgeInfo<V, E>> getEdgeInfos() {
+            return edgeInfos;
+        }
+
+        public void setEdgeInfos(LinkedList<EdgeInfo<V, E>> edgeInfos) {
+            this.edgeInfos = edgeInfos;
+        }
+
+        @Override
+        public String toString() {
+            return "PathInfo{" +
+                    "weight=" + weight +
+                    ", edgeInfos=" + edgeInfos +
+                    '}';
+        }
     }
+
 
     public static class EdgeInfo<V, E> {
         private V from;
