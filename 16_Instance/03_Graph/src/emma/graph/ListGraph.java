@@ -286,7 +286,7 @@ public class ListGraph<V, E> extends Graph<V, E> {
             paths.remove(minVertex);
             for (Edge<V, E> edge: minVertex.outEdges) {
                 // filter undirected edge.to
-                if (selectedPaths.containsKey(edge.to.value) || edge.to.equals(beginVertex)) continue;
+                if (selectedPaths.containsKey(edge.to.value)) continue;
                 // beginVertex -> edge.to
                 E newWeight = weightManager.add(minEntry.getValue(), edge.weight);
                 // beginVertex -> edge.from + edge.weight
@@ -299,7 +299,7 @@ public class ListGraph<V, E> extends Graph<V, E> {
             }
         }
 
-//        selectedPaths.remove(beginVertex.value);
+        selectedPaths.remove(begin);
         return selectedPaths;
     }
 
