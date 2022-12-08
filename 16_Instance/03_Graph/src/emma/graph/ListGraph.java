@@ -295,14 +295,17 @@ public class ListGraph<V, E> extends Graph<V, E> {
 //                E oldWeight = paths.get(edge.to).weight;
 
                 PathInfo<V, E> oldPath = paths.get(edge.to);
-                if (oldPath == null || weightManager.compare(newWeight, oldPath.weight) < 0) {
-                    PathInfo<V, E> path = new PathInfo<>();
-                    path.weight = newWeight;
-                    path.edgeInfos.addAll(minEntry.getValue().edgeInfos);
-                    path.edgeInfos.add(edge.info());
-                    paths.put(edge.to, path);
+                if (oldPath != null && weightManager.compare(newWeight, oldPath.weight) >= 0) continue;
+                if (oldPath == null) {
+                    oldPath = new PathInfo<>();
+                    paths.put(edge.to, oldPath);
+                } else {
+                    oldPath.edgeInfos.clear();
                 }
 
+                oldPath.weight = newWeight;
+                oldPath.edgeInfos.addAll(minEntry.getValue().edgeInfos);
+                oldPath.edgeInfos.add(edge.info());
             }
         }
 
