@@ -284,28 +284,13 @@ public class ListGraph<V, E> extends Graph<V, E> {
         while (!paths.isEmpty()) {
             Map.Entry<Vertex<V, E>, PathInfo<V, E>> minEntry = getMinPath(paths);
             Vertex<V, E> minVertex = minEntry.getKey();
-            selectedPaths.put(minVertex.value, minEntry.getValue());
+            PathInfo<V, E> minPath = minEntry.getValue();
+            selectedPaths.put(minVertex.value, minPath);
             paths.remove(minVertex);
             for (Edge<V, E> edge : minVertex.outEdges) {
                 // filter undirected edge.to
                 if (selectedPaths.containsKey(edge.to.value)) continue;
-                // beginVertex -> edge.to
-                E newWeight = weightManager.add(minEntry.getValue().weight, edge.weight);
-                // beginVertex -> edge.from + edge.weight
-//                E oldWeight = paths.get(edge.to).weight;
-
-                PathInfo<V, E> oldPath = paths.get(edge.to);
-                if (oldPath != null && weightManager.compare(newWeight, oldPath.weight) >= 0) continue;
-                if (oldPath == null) {
-                    oldPath = new PathInfo<>();
-                    paths.put(edge.to, oldPath);
-                } else {
-                    oldPath.edgeInfos.clear();
-                }
-
-                oldPath.weight = newWeight;
-                oldPath.edgeInfos.addAll(minEntry.getValue().edgeInfos);
-                oldPath.edgeInfos.add(edge.info());
+                relax(edge, minPath, paths);
             }
         }
 
@@ -313,9 +298,25 @@ public class ListGraph<V, E> extends Graph<V, E> {
         return selectedPaths;
     }
 
-//    private relax() {
-//
-//    }
+    private void relax(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<Vertex<V, E>, PathInfo<V, E>> paths) {
+        // beginVertex -> edge.to
+        E newWeight = weightManager.add(fromPath.weight, edge.weight);
+        // beginVertex -> edge.from + edge.weight
+//         E oldWeight = paths.get(edge.to).weight;
+
+        PathInfo<V, E> oldPath = paths.get(edge.to);
+        if (oldPath != null && weightManager.compare(newWeight, oldPath.weight) >= 0) return;
+        if (oldPath == null) {
+            oldPath = new PathInfo<>();
+            paths.put(edge.to, oldPath);
+        } else {
+            oldPath.edgeInfos.clear();
+        }
+
+        oldPath.weight = newWeight;
+        oldPath.edgeInfos.addAll(fromPath.edgeInfos);
+        oldPath.edgeInfos.add(edge.info());
+    }
 
     private Map.Entry<Vertex<V, E>, PathInfo<V, E>> getMinPath(Map<Vertex<V, E>, PathInfo<V, E>> paths) {
         Iterator<Map.Entry<Vertex<V, E>, PathInfo<V, E>>> it = paths.entrySet().iterator();
