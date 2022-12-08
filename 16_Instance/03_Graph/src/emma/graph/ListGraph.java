@@ -269,6 +269,51 @@ public class ListGraph<V, E> extends Graph<V, E> {
 
     @Override
     public Map<V, PathInfo<V, E>> shortestPath(V begin) {
+//        return dijkstra(begin);
+        return bellmanFord(begin);
+    }
+
+    private Map<V, PathInfo<V, E>> bellmanFord(V begin) {
+        Vertex<V, E> beginVertex = vertices.get(begin);
+        if (beginVertex == null) return null;
+
+        Map<V, PathInfo<V, E>> selectedPaths = new HashMap<>();
+        PathInfo<V, E> beginPath = new PathInfo<>();
+        beginPath.weight = weightManager.zero();
+        selectedPaths.put(begin, beginPath);
+        int count = vertices.size() - 1;
+        for (int i = 0; i < count; i++) {
+            for (Edge<V, E> edge: edges) {
+                PathInfo<V, E> fromPath = selectedPaths.get(edge.from.value);
+                if (fromPath == null) continue;
+                relaxBellmanFord(edge, fromPath, selectedPaths);
+            }
+        }
+        selectedPaths.remove(begin);
+        return selectedPaths;
+    }
+
+    private void relaxBellmanFord(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<V, PathInfo<V, E>> paths) {
+        // beginVertex -> edge.to
+        E newWeight = weightManager.add(fromPath.weight, edge.weight);
+        // beginVertex -> edge.from + edge.weight
+//         E oldWeight = paths.get(edge.to).weight;
+
+        PathInfo<V, E> oldPath = paths.get(edge.to.value);
+        if (oldPath != null && weightManager.compare(newWeight, oldPath.weight) >= 0) return;
+        if (oldPath == null) {
+            oldPath = new PathInfo<>();
+            paths.put(edge.to.value, oldPath);
+        } else {
+            oldPath.edgeInfos.clear();
+        }
+
+        oldPath.weight = newWeight;
+        oldPath.edgeInfos.addAll(fromPath.edgeInfos);
+        oldPath.edgeInfos.add(edge.info());
+    }
+
+    private Map<V, PathInfo<V, E>> dijkstra(V begin) {
         Vertex<V, E> beginVertex = vertices.get(begin);
         if (beginVertex == null) return null;
 
@@ -290,7 +335,7 @@ public class ListGraph<V, E> extends Graph<V, E> {
             for (Edge<V, E> edge : minVertex.outEdges) {
                 // filter undirected edge.to
                 if (selectedPaths.containsKey(edge.to.value)) continue;
-                relax(edge, minPath, paths);
+                relaxDijkstra(edge, minPath, paths);
             }
         }
 
@@ -298,7 +343,7 @@ public class ListGraph<V, E> extends Graph<V, E> {
         return selectedPaths;
     }
 
-    private void relax(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<Vertex<V, E>, PathInfo<V, E>> paths) {
+    private void relaxDijkstra(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<Vertex<V, E>, PathInfo<V, E>> paths) {
         // beginVertex -> edge.to
         E newWeight = weightManager.add(fromPath.weight, edge.weight);
         // beginVertex -> edge.from + edge.weight
