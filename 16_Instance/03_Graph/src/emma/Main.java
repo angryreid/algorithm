@@ -187,10 +187,21 @@ public class Main {
 //        Graph<Object, Double> graph = directedGraph(Data.NEGATIVE_WEIGHT2);
 //        Map<Object, Graph.PathInfo<Object, Double>> sp = graph.shortestPath(0);
         if (sp == null) return;
-        sp = graph.shortestPath("A");
 //        System.out.println(sp);
         sp.forEach((Object v, Graph.PathInfo<Object, Double> pathInfo) -> {
             System.out.println(v + " - " + pathInfo);
+        });
+    }
+
+    public static void testMulSp() {
+        Graph<Object, Double> graph = directedGraph(Data.SP);
+        Map<Object, Map<Object, Graph.PathInfo<Object, Double>>> sp = graph.allShortestPath();
+        if (sp == null) return;
+        sp.forEach((Object from, Map<Object, Graph.PathInfo<Object, Double>> paths) -> {
+            System.out.println(from + "-------------------------");
+            paths.forEach((Object end, Graph.PathInfo<Object, Double> path) -> {
+                System.out.println(end + " - " + path);
+            });
         });
     }
 
@@ -202,6 +213,7 @@ public class Main {
 //        testDirectedDFS();
 //        testTopologicalSort();
 //        testMST();
-        testSP();
+//        testSP();
+        testMulSp();
     }
 }

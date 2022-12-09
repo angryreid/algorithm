@@ -273,6 +273,64 @@ public class ListGraph<V, E> extends Graph<V, E> {
 //        return bellmanFord(begin);
     }
 
+    @Override
+    public Map<V, Map<V, PathInfo<V, E>>> allShortestPath() {
+        return floyd();
+    }
+
+    private Map<V, Map<V, PathInfo<V, E>>> floyd() {
+        Map<V, Map<V, PathInfo<V, E>>> paths = new HashMap<>();
+
+        // Initial value
+        for (Edge<V, E> edge : edges) {
+            Map<V, PathInfo<V, E>> map = paths.get(edge.from.value);
+            if (map == null) {
+                map = new HashMap<>();
+                paths.put(edge.from.value, map);
+            }
+
+            PathInfo<V, E> pathInfo = new PathInfo<>(edge.weight);
+            pathInfo.edgeInfos.add(edge.info());
+            map.put(edge.to.value, pathInfo);
+        }
+
+        // (from -> mid) + D(mid -> end) < D(from -> end)
+        vertices.forEach((V mid, Vertex<V, E> midVertex) -> {
+            vertices.forEach((V from, Vertex<V, E> fromVertex) -> {
+                vertices.forEach((V end, Vertex<V, E> endVertex) -> {
+                    if (from.equals(mid) || mid.equals(end) || from.equals(end)) return;
+                    // from -> mid
+                    PathInfo<V, E> fromToMid = getPathInfo(from, mid, paths);
+                    if (fromToMid == null) return;
+                    // mid -> end
+                    PathInfo<V, E> midToEnd = getPathInfo(mid, end, paths);
+                    if (midToEnd == null) return;
+                    // from -> end
+                    PathInfo<V, E> fromToEnd = getPathInfo(from, end, paths);
+                    E newWeight = weightManager.add(fromToMid.weight, midToEnd.weight);
+                    if (fromToEnd != null && weightManager.compare(newWeight, fromToEnd.weight) >= 0) return;
+                    if (fromToEnd == null) {
+                        fromToEnd = new PathInfo<>();
+                        paths.get(from).put(end, fromToEnd); // Put & Update
+                    } else {
+                        fromToEnd.edgeInfos.clear();
+                    }
+
+                    fromToEnd.weight = newWeight;
+                    fromToEnd.edgeInfos.addAll(fromToMid.edgeInfos);
+                    fromToEnd.edgeInfos.addAll(midToEnd.edgeInfos);
+
+                });
+            });
+        });
+        return paths;
+    }
+
+    private PathInfo<V, E> getPathInfo(V from, V end, Map<V, Map<V, PathInfo<V, E>>> paths) {
+        Map<V, PathInfo<V, E>> map = paths.get(from);
+        return map == null ? null : map.get(end);
+    }
+
     private Map<V, PathInfo<V, E>> bellmanFord(V begin) {
         Vertex<V, E> beginVertex = vertices.get(begin);
         if (beginVertex == null) return null;
@@ -282,20 +340,21 @@ public class ListGraph<V, E> extends Graph<V, E> {
 
         int count = vertices.size() - 1;
         for (int i = 0; i < count; i++) {
-            for (Edge<V, E> edge: edges) {
+            for (Edge<V, E> edge : edges) {
                 PathInfo<V, E> fromPath = selectedPaths.get(edge.from.value);
                 if (fromPath == null) continue;
                 relaxBellmanFord(edge, fromPath, selectedPaths);
             }
         }
 
-        for (Edge<V, E> edge: edges) {
+        for (Edge<V, E> edge : edges) {
             PathInfo<V, E> fromPath = selectedPaths.get(edge.from.value);
             if (fromPath == null) continue;
             if (relaxBellmanFord(edge, fromPath, selectedPaths)) {
                 System.out.println("Negative Cycle detected.");
                 return null;
-            };
+            }
+            ;
         }
         selectedPaths.remove(begin);
         return selectedPaths;
