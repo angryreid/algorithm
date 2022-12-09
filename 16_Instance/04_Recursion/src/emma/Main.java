@@ -13,7 +13,15 @@ public class Main {
         Times.test("fib1", () -> {
             System.out.println(fib.fib1(n));
         });
-
+        Times.test("fib2", () -> {
+            System.out.println(fib.fib2(n));
+        });
+        Times.test("fib3", () -> {
+            System.out.println(fib.fib3(n));
+        });
+        Times.test("fib4", () -> {
+            System.out.println(fib.fib4(n));
+        });
     }
     public static void main(String args[]) {
         System.out.println("Recursion");
