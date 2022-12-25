@@ -10,11 +10,15 @@ public class Hanoi {
      */
     public void hanoi(int n, String start, String mid, String end) {
         if (n == 1) {
-            System.out.println(start + " -> " + end);
+            move(n, start, end);
             return;
         }
         hanoi(n - 1, start, end, mid);
-        System.out.println(start + " -> " + end);
+        move(n, start, end);
         hanoi(n - 1, mid, start, end);
+    }
+
+    public void move(int no, String from, String to) {
+        System.out.println("Moved number# " + no + " " + from + " -> " + to);
     }
 }
