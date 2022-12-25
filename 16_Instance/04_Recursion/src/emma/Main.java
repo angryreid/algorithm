@@ -1,6 +1,7 @@
 package emma;
 
 import emma.fib.Fib;
+import emma.hanoi.Hanoi;
 import emma.time.Times;
 
 public class Main {
@@ -32,10 +33,18 @@ public class Main {
         });
     }
 
+    public static void testHanoi() {
+        Hanoi hanoi = new Hanoi();
+        Times.test("testHanoi", () -> {
+           hanoi.hanoi(3, "A", "B", "C");
+        });
+    }
+
     public static void main(String args[]) {
         System.out.println("Recursion");
 
 //        testFib();
-        testClimbStairs();
+//        testClimbStairs();
+        testHanoi();
     }
 }
