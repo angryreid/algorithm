@@ -23,9 +23,19 @@ public class Main {
             System.out.println(fib.fib4(n));
         });
     }
+
+    public static void testClimbStairs() {
+        Fib fib = new Fib();
+
+        Times.test("testClimbStairs", () -> {
+            System.out.println(fib.climbStairs2(3));
+        });
+    }
+
     public static void main(String args[]) {
         System.out.println("Recursion");
 
-        testFib();
+//        testFib();
+        testClimbStairs();
     }
 }

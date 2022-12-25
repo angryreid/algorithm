@@ -52,4 +52,19 @@ public class Fib {
         }
         return next;
     }
+
+    public int climbStairs(int n) {
+        if (n <= 2) return n;
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
+    public int climbStairs2(int n) {
+        if (n <= 2) return n;
+        int pre = 1, next = 2;
+        for (int i = 3; i <= n; i++) {
+            next = next + pre;
+            pre = next - pre;
+        }
+        return next;
+    }
 }
