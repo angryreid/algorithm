@@ -7,6 +7,7 @@ public class Hanoi {
      * @param start
      * @param mid
      * @param end
+     * O(n) = O(2^n)
      */
     public void hanoi(int n, String start, String mid, String end) {
         if (n == 1) {
