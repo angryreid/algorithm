@@ -26,6 +26,7 @@ public class Main {
     public void place(int row) {
         if (row == cols.length) {
             ways++;
+            show();
             return;
         }
         for (int col = 0; col < cols.length; col++) {
@@ -53,5 +54,19 @@ public class Main {
             }
         }
         return true;
+    }
+
+    public void show() {
+        for (int row = 0; row < cols.length; row++) {
+            for (int col = 0; col < cols.length; col++) {
+                if(cols[row] == col) {
+                    System.out.print("1 ");
+                } else {
+                    System.out.print("0 ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("====================");
     }
 }
