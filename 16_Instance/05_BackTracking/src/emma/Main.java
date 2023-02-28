@@ -3,7 +3,8 @@ package emma;
 public class Main {
     public static void main(String[] args) {
         // write your code here
-        new Main().placeQueue(8); // 92
+//        new Main().placeQueue(8); // 92
+        new Main().placeQueue(4); // 2
     }
 
     /**
@@ -52,7 +53,9 @@ public class Main {
             if (row - r == Math.abs(col - cols[r])) { // y2 - y1 / x2 - x1 = -1 / 1
                 return false;
             }
+            System.out.println("["+row+"]" + "["+col+"]" + "=false");
         }
+        System.out.println("["+row+"]" + "["+col+"]" + "=true");
         return true;
     }
 
