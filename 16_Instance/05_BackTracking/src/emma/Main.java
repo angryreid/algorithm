@@ -10,6 +10,6 @@ public class Main {
 //        new Main().placeQueue(8); // 92
 //        new Queue().placeQueue(4); // 2
 //        new Queue2().placeQueue(8); // 92
-        new QueueByte().placeQueue(8);
+        new QueueByte().placeQueue(8); // 92 Only apply to less then 8 queues
     }
 }
