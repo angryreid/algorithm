@@ -36,6 +36,15 @@ At this condition, only parent node need to balance.
 - Removing a node may enable parent or ancestors node losing balance.
 - The worst case is all parent node need to balance until the root.
 
+## Sample
+
+[94, 15, 1, 19, 90, 86, 60, 24, 48, 21, 96, 74, 34, 57, 81, 13, 85, 88, 67, 45]
+
+![Smaple](./assets/bst-avl.png)
+
+Inorder
+[1, 13, 15, 19, 21, 24, 34, 45, 48, 57, 60, 67, 74, 81, 85, 86, 88, 90, 94, 96]
+
 ## Summary
 
 The average time complexity 
