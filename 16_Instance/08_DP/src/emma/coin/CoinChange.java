@@ -44,8 +44,7 @@ package emma.coin;
          int[] dp = new int[n + 1];
          for (int i = 1; i <= n; i++) {
 //             dp[i] = min (dp[i - 25], dp[i - 20, dp[i - 5], dp[i - 1]]) + 1;
-             int min = Integer.MAX_VALUE;
-             if (i >= 1) min = Math.min(min, dp[i - 1]);
+             int min = dp[i - 1];
              if (i >= 5) min = Math.min(min, dp[i - 5]);
              if (i >= 20) min = Math.min(min, dp[i - 20]);
              if (i >= 25) min = Math.min(min, dp[i - 25]);
