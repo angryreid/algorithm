@@ -3,8 +3,9 @@ package emma.coin;
  public class CoinChange {
     public static void main(String[] args) {
         int money = 41;
+//        int money = 19;
         System.out.println(coins(money));
-        System.out.println(coins2(money));
+//        System.out.println(coins2(money));
         System.out.println(coins3(money));
 
     }
@@ -64,15 +65,18 @@ package emma.coin;
              }
 
              dp[i] = min + 1;
+             print(faces, i);
          }
-         print(faces, n);
+//         print(faces, n);
          return dp[n];
      }
 
      static void print(int[] faces, int n) {
+        System.out.print("[" + n + "] = ");
         while (n > 0) {
-            System.out.println(faces[n]);
+            System.out.print(faces[n] + " ");
             n -= faces[n];
         }
+         System.out.println();
      }
 }
