@@ -3,10 +3,12 @@ package emma.coin;
  public class CoinChange {
     public static void main(String[] args) {
         int money = 41;
+        int[] faces = {1, 5, 20, 25};
 //        int money = 19;
         System.out.println(coins(money));
 //        System.out.println(coins2(money));
         System.out.println(coins3(money));
+        System.out.println(coins4(money, faces));
 
     }
 
@@ -68,6 +70,21 @@ package emma.coin;
              print(faces, i);
          }
 //         print(faces, n);
+         return dp[n];
+     }
+
+     static int coins4(int n, int[] faces) {
+         if (n < 1) return -1;
+         int[] dp = new int[n + 1];
+         for (int i = 1; i <= n; i++) {
+             int min = Integer.MAX_VALUE;
+             for (int face :
+                     faces) {
+                 if (i < face) continue;
+                 min = Math.min(dp[i - face], min);
+             }
+             dp[i] = min + 1;
+         }
          return dp[n];
      }
 
