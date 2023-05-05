@@ -4,11 +4,13 @@ package emma.coin;
     public static void main(String[] args) {
         int money = 41;
         int[] faces = {1, 5, 20, 25};
+        int[] faces2 = {5, 20, 25};
 //        int money = 19;
         System.out.println(coins(money));
 //        System.out.println(coins2(money));
         System.out.println(coins3(money));
         System.out.println(coins4(money, faces));
+        System.out.println(coins5(money, faces2));
 
     }
 
@@ -84,6 +86,25 @@ package emma.coin;
                  min = Math.min(dp[i - face], min);
              }
              dp[i] = min + 1;
+         }
+         return dp[n];
+     }
+
+     static int coins5(int n, int[] faces) {
+         if (n < 1) return -1;
+         int[] dp = new int[n + 1];
+         for (int i = 1; i <= n; i++) {
+             int min = Integer.MAX_VALUE;
+             for (int face :
+                     faces) {
+                 if (i < face) continue;
+                 int pre = dp[i - face];
+                 if (pre < 0 || pre >= min) continue;
+//                 min = Math.min(dp[i - face], min);
+                 min = pre;
+             }
+             if (min == Integer.MAX_VALUE) dp[i] = -1;
+             else dp[i] = min + 1;
          }
          return dp[n];
      }
