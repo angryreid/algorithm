@@ -88,6 +88,32 @@ public class _1143_LCS {
         return dp[colNums.length];
     }
 
+    public int longestCommonSubsequence(String text1, String text2) {
+        if(text1 == null || text2 == null) return 0;
+        char[] char1 = text1.toCharArray(), char2 = text2.toCharArray();
+        if(char1.length == 0 || char2.length == 0) return 0;
+
+        char[] rowChars = char1, colChars = char2;
+        if (char1.length < char2.length) {
+            rowChars = char2;
+            colChars = char1;
+        }
+        int[] dp = new int[colChars.length + 1];
+        for (int i = 1; i <= rowChars.length; i++) {
+            int cur = 0;
+            for (int j = 1; j <= colChars.length; j++) {
+                int leftTop = cur;
+                cur = dp[j];
+                if(rowChars[i - 1] == colChars[j - 1]) {
+                    dp[j] = leftTop + 1;
+                } else {
+                    dp[j] = Math.max(dp[j - 1], dp[j]);
+                }
+            }
+        }
+        return dp[colChars.length];
+    }
+
     public static void main(String[] args) {
         System.out.println(lcs(new int[]{1,3,5,9,10}, new int[]{1,4,9,10}));
         System.out.println(lcs2(new int[]{1,4,5,9,10}, new int[]{1,4,9,10}));
