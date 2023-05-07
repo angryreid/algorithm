@@ -65,10 +65,34 @@ public class _1143_LCS {
         return dp[nums2.length];
     }
 
+    public static int lcs5(int[] nums1, int[] nums2) {
+        if(nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) return 0;
+        int[] rowNums = nums1, colNums = nums2;
+        if (nums1.length < nums2.length) {
+            rowNums = nums2;
+            colNums = nums1;
+        }
+        int[] dp = new int[colNums.length + 1];
+        for (int i = 1; i <= rowNums.length; i++) {
+            int cur = 0;
+            for (int j = 1; j <= colNums.length; j++) {
+                int leftTop = cur;
+                cur = dp[j];
+                if(rowNums[i - 1] == colNums[j - 1]) {
+                    dp[j] = leftTop + 1;
+                } else {
+                    dp[j] = Math.max(dp[j - 1], dp[j]);
+                }
+            }
+        }
+        return dp[colNums.length];
+    }
+
     public static void main(String[] args) {
         System.out.println(lcs(new int[]{1,3,5,9,10}, new int[]{1,4,9,10}));
         System.out.println(lcs2(new int[]{1,4,5,9,10}, new int[]{1,4,9,10}));
         System.out.println(lcs3(new int[]{1,2,4,5,9,10}, new int[]{1,4,9,10}));
         System.out.println(lcs4(new int[]{1,2,4,5,9,10}, new int[]{1,4,9,10}));
+        System.out.println(lcs5(new int[]{1,2,4,5,9,10}, new int[]{1,4,9,10}));
     }
 }
