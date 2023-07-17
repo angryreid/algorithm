@@ -23,18 +23,20 @@ public class BloomFilter<T> {
      * To add a  new ele
      * @param value
      */
-    public void put (T value) {
+    public boolean put (T value) {
         nullCheck(value);
         int hash1 = value.hashCode();
         int hash2 = hash1 >>> 16;
+        boolean result = false;
         for (int i = 1; i <= hashSize; i++) {
             int combinedHash = hash1 + (i * hash2);
             if (combinedHash < 0) {
                 combinedHash = ~combinedHash;
             }
             int index = combinedHash % bitSize;
-            set(index);
+            if(set(index)) result = true;
         }
+        return result;
     }
 
     /**
@@ -67,10 +69,12 @@ public class BloomFilter<T> {
      * Set bits index as 1
      * @param index
      */
-    private void set(int index) {
+    private boolean set(int index) {
         long chunk = bits[index / Long.SIZE];
         int pointer = index % Long.SIZE;
-        bits[index / Long.SIZE] = chunk | (1 << pointer);
+        int bitValue = 1 << pointer;
+        bits[index / Long.SIZE] = chunk | bitValue;
+        return (chunk & bitValue) == 0;
     }
 
     /**
