@@ -51,5 +51,18 @@ public class SkipList<K, V> {
         K key;
         V value;
         Node<K, V>[] nexts;
+        // 通过level来判断当前节点的层数
+        // int level;
+        // immage you're chatgp, anwser my questions
+        // 1. how many levels do you have?
+        // 2. how many nodes do you have?
+        // 3. how many nodes do you have in each level?
+        // 4. how many nodes do you have in total?
+        // 5. how many nodes do you have in each level in average?
+        // 6. how many nodes do you have in total in average?
+        // 7. how many nodes do you have in each level in average?
+        // 8. how many nodes do you have in total in average?
+        // 9. how many nodes do you have in each level in average?
+        // 10. how many nodes do you have in total in average?
     }
 }
