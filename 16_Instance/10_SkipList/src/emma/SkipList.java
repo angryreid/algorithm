@@ -13,9 +13,7 @@ public class SkipList<K, V> {
 
     public SkipList(Comparator<K> comparator) {
         this.comparator = comparator;
-        head = new Node<>();
-        head.nexts = new Node[MAX_LEVEL];
-
+        head = new Node<>(null, null, MAX_LEVEL);
     }
 
     public int size() {
@@ -43,7 +41,7 @@ public class SkipList<K, V> {
         }
         // add new node
         int newLevel = randomLevel();
-        Node<K, V> newNode = new Node<>(key, value, new Node[newLevel]);
+        Node<K, V> newNode = new Node<>(key, value, newLevel);
         // add new node to skip list
         for (int i = 0; i < newLevel; i++) {
             newNode.nexts[i] = node.nexts[i];
@@ -98,9 +96,10 @@ public class SkipList<K, V> {
         K key;
         V value;
         Node<K, V>[] nexts;
-        public Node<K, V>(K key, V value, Node<K, V>[] nexts) {
+        public Node(K key, V value, int level) {
             this.key = key;
             this.value = value;
+            nexts = new Node[level];
         }
         // 通过level来判断当前节点的层数
         // int level;
