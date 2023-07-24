@@ -3,7 +3,8 @@ package emma;
 import java.util.Comparator;
 
 public class SkipList<K, V> {
-    private static final int MAX_LEVEL= 32;
+    private static final int MAX_LEVEL= 32; // from redis
+    private static final double P = 0.25;
     private int size;
     private Comparator<K> comparator;
     private Node<K, V> head; // null head
@@ -27,6 +28,30 @@ public class SkipList<K, V> {
 
     public V put(K key, V value) {
         keyCheck(key);
+        // put key in skip list (completed by copilot)
+        Node<K, V> node = head;
+        for (int i = level - 1; i >= 0; i--) {
+            int cmp = -1;
+            while (node.nexts[i] != null && (cmp = compare(key, node.nexts[i].key)) > 0) {
+                node = node.nexts[i];
+            }
+            if (cmp == 0) {
+                V oldValue = node.nexts[i].value;
+                node.nexts[i].value = value;
+                return oldValue;
+            }
+        }
+        // add new node
+        int newLevel = randomLevel();
+        Node<K, V> newNode = new Node<>(key, value, new Node[newLevel]);
+        // add new node to skip list
+        for (int i = 0; i < newLevel; i++) {
+            newNode.nexts[i] = node.nexts[i];
+            node.nexts[i] = newNode;
+        }
+        // update level
+        level = Math.max(level, newLevel);
+        size++;
         return null;
     }
 
@@ -59,10 +84,24 @@ public class SkipList<K, V> {
         return comparator != null ? comparator.compare(k1, k2) : ((Comparable<K>)k1).compareTo(k2);
     }
 
+    // creat random level
+    private int randomLevel() {
+        int level = 1;
+        // Math.random() -> [0, 1) (this is from Copilot too)
+        while (Math.random() < P && level < MAX_LEVEL) {
+            level++;
+        }
+        return level;
+    }
+
     private static class Node<K, V> {
         K key;
         V value;
         Node<K, V>[] nexts;
+        public Node<K, V>(K key, V value, Node<K, V>[] nexts) {
+            this.key = key;
+            this.value = value;
+        }
         // 通过level来判断当前节点的层数
         // int level;
         // imagine you're chat-gpt, answer my questions
