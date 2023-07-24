@@ -28,6 +28,7 @@ public class SkipList<K, V> {
         keyCheck(key);
         // put key in skip list (completed by copilot)
         Node<K, V> node = head;
+        Node<K, V>[] prevs = new Node[level]; // store previous node
         for (int i = level - 1; i >= 0; i--) {
             int cmp = -1;
             while (node.nexts[i] != null && (cmp = compare(key, node.nexts[i].key)) > 0) {
@@ -38,14 +39,33 @@ public class SkipList<K, V> {
                 node.nexts[i].value = value;
                 return oldValue;
             }
+            prevs[i] = node; // store previous node
         }
         // add new node
         int newLevel = randomLevel();
         Node<K, V> newNode = new Node<>(key, value, newLevel);
         // add new node to skip list
+        /**
+         * explain below code
+         * 1. i < newLevel: add new node to each level
+         * 2. i < level: add new node to each level which is less than current level
+         * 3. i >= level: add new node to each level which is greater than current level
+         * 4. i >= newLevel: add new node to each level which is greater than new level
+         * 5. i >= newLevel && i < level: add new node to each level which is greater than new level and less than current level
+         * 6. i < newLevel && i < level: add new node to each level which is less than new level and less than current level
+         * 7. i < newLevel && i >= level: add new node to each level which is less than new level and greater than current level
+         * 8. i >= newLevel && i >= level: add new node to each level which is greater than new level and greater than current level
+         * 9. i < newLevel || i < level: add new node to each level which is less than new level or less than current level
+         * 10. i < newLevel || i >= level: add new node to each level which is less than new level or greater than current level
+         * 
+         */
         for (int i = 0; i < newLevel; i++) {
-            newNode.nexts[i] = node.nexts[i];
-            node.nexts[i] = newNode;
+            if (i >= level) {
+                head.nexts[i] = newNode;
+            } else {
+                newNode.nexts[i] = prevs[i].nexts[i];
+                prevs[i].nexts[i] = newNode;
+            }
         }
         // update level
         level = Math.max(level, newLevel);
