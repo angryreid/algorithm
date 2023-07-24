@@ -7,11 +7,14 @@ public class SkipList<K, V> {
     private int size;
     private Comparator<K> comparator;
     private Node<K, V> head; // null head
+    // real level  
+    private int level;
 
     public SkipList(Comparator<K> comparator) {
         this.comparator = comparator;
         head = new Node<>();
         head.nexts = new Node[MAX_LEVEL];
+
     }
 
     public int size() {
@@ -29,6 +32,15 @@ public class SkipList<K, V> {
 
     public V get(K key) {
         keyCheck(key);
+        // search key in skip list (completed by copilot)
+        Node<K, V> node = head;
+        for (int i = level - 1; i >= 0; i--) {
+            int cmp = -1;
+            while (node.nexts[i] != null && (cmp = compare(key, node.nexts[i].key)) > 0) {
+                node = node.nexts[i];
+            }
+            if (cmp == 0) return node.nexts[i].value;
+        }
         return null;
     }
 
@@ -53,7 +65,7 @@ public class SkipList<K, V> {
         Node<K, V>[] nexts;
         // 通过level来判断当前节点的层数
         // int level;
-        // immage you're chatgp, anwser my questions
+        // imagine you're chat-gpt, answer my questions
         // 1. how many levels do you have?
         // 2. how many nodes do you have?
         // 3. how many nodes do you have in each level?
