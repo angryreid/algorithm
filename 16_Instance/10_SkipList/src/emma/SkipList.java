@@ -89,7 +89,32 @@ public class SkipList<K, V> {
 
     public V remove(K key) {
         keyCheck(key);
-        return null;
+        Node<K, V> node = head;
+        Node<K, V>[] prevs = new Node[level]; // store previous node
+        boolean exist = false; // if key exists
+        for (int i = level - 1; i >= 0; i--) {
+            int cmp = -1;
+            while (node.nexts[i] != null && (cmp = compare(key, node.nexts[i].key)) > 0) {
+                node = node.nexts[i];
+            }
+            prevs[i] = node; // store previous node
+            if (cmp == 0) exist = true; //  if key exists
+        }
+        if (!exist) return null;
+        // remove node
+        Node<K, V> removedNode = node.nexts[0];
+        for (int i = 0; i < removedNode.nexts.length; i++) {
+            prevs[i].nexts[i] = removedNode.nexts[i];
+        }
+        // update level
+        int newLevel = level;
+        // if removed node is the highest node, update level
+        while (--newLevel >= 0 && head.nexts[newLevel] == null) { // head.nexts[newLevel] == null means there is no node in this level
+            level = newLevel; // update level
+        }
+        size--; // update size
+        return removedNode.value;
+
     }
 
     private void keyCheck(K key) {
