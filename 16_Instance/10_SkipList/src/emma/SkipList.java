@@ -16,6 +16,10 @@ public class SkipList<K, V> {
         head = new Node<>(null, null, MAX_LEVEL);
     }
 
+    public SkipList() {
+        this(null);
+    }
+
     public int size() {
         return size;
     }
@@ -137,7 +141,24 @@ public class SkipList<K, V> {
         return level;
     }
 
-    private static class Node<K, V> {
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SkipList{size=").append(size).append(", level=").append(level).append("\n");
+        for (int i = level - 1; i >= 0; i--) {
+            sb.append("level ").append(i).append(": ");
+            Node<K, V> node = head.nexts[i];
+            while (node != null) {
+                sb.append(node).append("->");
+                node = node.nexts[i];
+            }
+            sb.append("\n");
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
+    private static class Node<K, V> { 
         K key;
         V value;
         Node<K, V>[] nexts;
@@ -145,6 +166,13 @@ public class SkipList<K, V> {
             this.key = key;
             this.value = value;
             nexts = new Node[level];
+        }
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("{").append(key).append(":").append(value).append("}");
+            sb.append("[").append(nexts.length).append("]");
+            return sb.toString();
         }
         // 通过level来判断当前节点的层数
         // int level;
