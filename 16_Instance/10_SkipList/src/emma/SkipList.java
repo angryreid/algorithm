@@ -135,7 +135,7 @@ public class SkipList<K, V> {
     private int randomLevel() {
         int level = 1;
         // Math.random() -> [0, 1) (this is from Copilot too)
-        while (Math.random() < P && level < MAX_LEVEL) {
+        while (Math.random() < P && level < MAX_LEVEL) { // P = 0.25,   MAX_LEVEL = 32
             level++;
         }
         return level;
