@@ -2,6 +2,7 @@ package emma;
 
 public class BruteForce02 {
     // return first index of pattern in text, otherwise -1
+    // time complexity: O(n * m)
     public static int indexOf(String text, String pattern) {
         if (text == null || pattern == null) return -1;
         char[] textChars = text.toCharArray();
