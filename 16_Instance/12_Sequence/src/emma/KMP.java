@@ -31,7 +31,7 @@ public class KMP {
  * @param pattern 模式串
  * @return
  */
-    private static int[] next(String pattern) {
+    private static int[] next2(String pattern) {
         char[] chars = pattern.toCharArray();
         int[] next = new int[chars.length];
         next[0] = -1;
@@ -39,6 +39,27 @@ public class KMP {
         while (i < chars.length - 1) {
             if (j == -1 || chars[i] == chars[j]) {
                 next[++i] = ++j;
+            } else {
+                j = next[j];
+            }
+        }
+        return next;
+    }
+
+    private static int[] next(String pattern) {
+        char[] chars = pattern.toCharArray();
+        int[] next = new int[chars.length];
+        next[0] = -1;
+        int i = 0, j = -1;
+        while (i < chars.length - 1) {
+            if (j == -1 || chars[i] == chars[j]) {
+                i++;
+                j++;
+                if (chars[i] != chars[j]) {
+                    next[i] = j;
+                } else {
+                    next[i] = next[j];
+                }
             } else {
                 j = next[j];
             }
