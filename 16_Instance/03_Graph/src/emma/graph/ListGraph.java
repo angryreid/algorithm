@@ -381,9 +381,12 @@ public class ListGraph<V, E> extends Graph<V, E> {
         return true;
     }
 
-    private Map<V, PathInfo<V, E>> dijkstra(V begin) {
-        Vertex<V, E> beginVertex = vertices.get(begin);
-        if (beginVertex == null) return null;
+    /**
+     *
+     */
+    private Map<V, PathInfo<V, E>> dijkstra(V begin) { // O(V^2 + E)
+        Vertex<V, E> beginVertex = vertices.get(begin); // 
+        if (beginVertex == null) return null;// 
 
         Map<V, PathInfo<V, E>> selectedPaths = new HashMap<>();
         Map<Vertex<V, E>, PathInfo<V, E>> paths = new HashMap<>();
@@ -415,6 +418,9 @@ public class ListGraph<V, E> extends Graph<V, E> {
         return selectedPaths;
     }
 
+/**
+ * 
+ */
     private void relaxDijkstra(Edge<V, E> edge, PathInfo<V, E> fromPath, Map<Vertex<V, E>, PathInfo<V, E>> paths) {
         // beginVertex -> edge.to
         E newWeight = weightManager.add(fromPath.weight, edge.weight);

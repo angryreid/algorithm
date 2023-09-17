@@ -14,3 +14,7 @@ function convert(s, numRows) {
 };
 
 console.log(convert("AB", 1)) // AB
+
+console.log(convert("LEETCODEISHIRING", 3)) // LCIRETOESIIGEDHN
+
+console.log(convert("LEETCODEISHIRING", 4)) // LDREOEIIECIHNTSG

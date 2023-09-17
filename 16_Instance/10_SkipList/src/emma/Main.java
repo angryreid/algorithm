@@ -55,8 +55,21 @@ public class Main {
     list.put(4, 66);
     System.out.println(list);
     System.out.println(list.get(4));
-    System.out.println(list.remove(4));
+    System.out.println(list.remove(4)); 
     System.out.println(list);
+
+    // test skip list function
+    SkipList<String, String> list2 = new SkipList<>();
+    list2.put("jack", "jack");
+    list2.put("rose", "rose");
+    list2.put("jim", "jim");
+    list2.put("jake", "jake");
+    list2.put("jake", "jake2");
+    System.out.println(list2);
+    System.out.println(list2.get("jake"));
+    System.out.println(list2.remove("jake"));
+    System.out.println(list2);
+    
   }
 
 }
