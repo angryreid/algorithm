@@ -17,7 +17,6 @@ public class BruteForce01 {
                 ti++;
                 pi++;
             } else {
-                ti = ti - pi + 1;
                 pi = 0;
             }
         }
