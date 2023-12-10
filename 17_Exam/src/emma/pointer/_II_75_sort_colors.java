@@ -6,20 +6,22 @@ public class _II_75_sort_colors {
     // scanning idx -> 1: skip
     // scanning idx -> 0: shift with left
     // scanning idx -> 2: shift with right -> check scanning idx value again.
-    public void sortColors(int[] nums) {
-        int i = 0;
-        int l = 0;
-        int r = nums.length - 1;
-        while (i <= r) {
-            int v = nums[i];
-            if (v == 0) {
-                swap(nums, i++, l++);
-            } else if (v == 1) {
-                i++;
-            } else {
-                swap(nums, i, r--);
-            }
+    public void sortColors(int[] nums) { // Define the method that takes an array of integers as input
+      int i = 0; // Initialize a pointer for the current element
+      int l = 0; // Initialize a pointer for the next position of 0
+      int r = nums.length - 1; // Initialize a pointer for the next position of 2
+
+      while (i <= r) { // While there are unprocessed elements
+        int v = nums[i]; // Get the value of the current element
+
+        if (v == 0) { // If the value is 0
+          swap(nums, i++, l++); // Swap the current element with the next position of 0, and move both pointers
+        } else if (v == 1) { // If the value is 1
+          i++; // Move the pointer of the current element
+        } else { // If the value is 2
+          swap(nums, i, r--); // Swap the current element with the next position of 2, and move the pointer of the next position of 2
         }
+      }
     }
 
     private void swap(int[] nums, int i, int j) {
