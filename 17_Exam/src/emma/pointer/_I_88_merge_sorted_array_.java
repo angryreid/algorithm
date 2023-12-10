@@ -1,13 +1,13 @@
 package emma.pointer;
 
 public class _I_88_merge_sorted_array_ { // level 1
-    public void merge (int[] nums1, int m, int[] nums2, int n) {
-        int i = m-1, j = n-1, k = m+n-1;
-        while (i>=0 && j>=0) {
-            nums1[k--] = nums1[i]>nums2[j]?nums1[i--]:nums2[j--];
+    public void merge (int[] nums1, int m, int[] nums2, int n) { // Define the method that takes two sorted arrays (nums1 and nums2) and their lengths (m and n) as input
+        int i = m-1, j = n-1, k = m+n-1; // Initialize pointers for the ends of nums1, nums2, and the merged array
+        while (i>=0 && j>=0) { // While there are elements left in both arrays
+            nums1[k--] = nums1[i]>nums2[j]?nums1[i--]:nums2[j--]; // Compare the last elements of nums1 and nums2, put the larger one at the end of the merged array, and move the corresponding pointer
         }
-        while (j>=0) {
-            nums1[k--] = nums2[j--];
+        while (j>=0) { // While there are elements left in nums2
+            nums1[k--] = nums2[j--]; // Put the last element of nums2 at the end of the merged array and move the pointer
         }
     }
 
