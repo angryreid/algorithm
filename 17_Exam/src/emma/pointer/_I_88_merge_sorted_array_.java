@@ -1,6 +1,7 @@
 package emma.pointer;
 
 public class _I_88_merge_sorted_array_ { // level 1
+    // leetcode 88 link: https://leetcode.com/problems/merge-sorted-array/
     public void merge (int[] nums1, int m, int[] nums2, int n) { // Define the method that takes two sorted arrays (nums1 and nums2) and their lengths (m and n) as input
         int i = m-1, j = n-1, k = m+n-1; // Initialize pointers for the ends of nums1, nums2, and the merged array
         while (i>=0 && j>=0) { // While there are elements left in both arrays
