@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "gp": "git add -A && git commit -m 'KMP' && git pull && git push",
+    "gpa": "git add -A && git commit -m 'LeetCode' && git pull && git push",
     "gp_add_test": "git add -A && git commit -m 'Add Test' && git pull && git push"
   },
   "repository": {
