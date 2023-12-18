@@ -24,5 +24,6 @@
 
 | Exam Solution Class| Exam Name | Exam Link | Exam Difficulty |
 | --- | --- | --- | --- |
-| `_I_203_Remove_Linked_List_Elements` | Reverse a linked list | https://leetcode.com/problems/reverse-linked-list/ | Easy |
+| `_I_203_Remove_Linked_List_Elements` | Remove Linked List Elements
+ | https://leetcode.com/problems/reverse-linked-list/ | Easy |
 | `_I_206_Reverse_Linked_List` | Reverse a linked list | https://leetcode.com/problems/reverse-linked-list/ | Easy |
