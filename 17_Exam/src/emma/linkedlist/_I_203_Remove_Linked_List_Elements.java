@@ -54,6 +54,25 @@ public class _I_203_Remove_Linked_List_Elements {
     return newHead;
   }
 
+/**
+ * Enhanced version
+ */
+  public ListNode removeElements3(ListNode head, int val) {
+        ListNode newHead = new ListNode(0);
+        ListNode pre = newHead;
+        while(head != null) {
+            if (head.val != val) {
+                pre = pre.next = head;
+            }
+            head = head.next;
+        }
+
+        if (pre != null)
+            pre.next = null;
+
+        return newHead.next;
+    }
+
   /**
    * Definition for singly-linked list.
    *
