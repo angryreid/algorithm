@@ -32,3 +32,5 @@
 | `_I_206_Reverse_Linked_List` | Reverse a linked list | https://leetcode.com/problems/reverse-linked-list/ | Easy |
 <!-- 2 add two numbers-->
 | `_II_2_Add_Two_Numbers` | Add Two Numbers | https://leetcode.com/problems/add-two-numbers/ | Medium |
+<!-- 160 -->
+| `_II_160_Intersection_of_Two_Linked_Lists` | Intersection of Two Linked Lists | https://leetcode.com/problems/intersection-of-two-linked-lists/ | Medium |
