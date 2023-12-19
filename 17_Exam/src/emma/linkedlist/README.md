@@ -3,15 +3,16 @@
 ## Pre-requisites
 
 1. Basic operation of LinkedList
-2. How to insert, delete Node
-3. How to reverse LinkedList
-4. How to find middle Node
-5. How to find Nth Node from end
-6. How to find loop in LinkedList
-7. How to find length of loop in LinkedList
-8. How to remove loop in LinkedList
-9. How to merge two LinkedList
-10. How to find intersection point of two LinkedList
+2. How to set dummy Head
+3. How to insert, delete Node
+4. How to reverse LinkedList
+5. How to find middle Node
+6. How to find Nth Node from end
+7. How to find loop in LinkedList
+8. How to find length of loop in LinkedList
+9. How to remove loop in LinkedList
+10. How to merge two LinkedList
+11. How to find intersection point of two LinkedList
 
 ## Exams
 
@@ -22,8 +23,12 @@
 2. Exam Link
 3. Exam Difficulty -->
 
+<!-- Note to add prefix _I_ or _II_ or _III_ for exam solution class name III means hard, II means medium, I means easy-->
+
 | Exam Solution Class| Exam Name | Exam Link | Exam Difficulty |
 | --- | --- | --- | --- |
 | `_I_203_Remove_Linked_List_Elements` | Remove Linked List Elements
  | https://leetcode.com/problems/reverse-linked-list/ | Easy |
 | `_I_206_Reverse_Linked_List` | Reverse a linked list | https://leetcode.com/problems/reverse-linked-list/ | Easy |
+<!-- 2 add two numbers-->
+| `_II_2_Add_Two_Numbers` | Add Two Numbers | https://leetcode.com/problems/add-two-numbers/ | Medium |
