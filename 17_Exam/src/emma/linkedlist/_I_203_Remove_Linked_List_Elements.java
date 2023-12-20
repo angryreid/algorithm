@@ -73,19 +73,6 @@ public class _I_203_Remove_Linked_List_Elements {
         return newHead.next;
     }
 
-  /**
-   * Definition for singly-linked list.
-   *
-   *
-   */
-  static class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-  }
-
   // main function for local test
   public static void main(String[] args) {
     // write test code here and use assert to do self-check

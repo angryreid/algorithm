@@ -34,3 +34,6 @@
 | `_II_2_Add_Two_Numbers` | Add Two Numbers | https://leetcode.com/problems/add-two-numbers/ | Medium |
 <!-- 160 -->
 | `_II_160_Intersection_of_Two_Linked_Lists` | Intersection of Two Linked Lists | https://leetcode.com/problems/intersection-of-two-linked-lists/ | Medium |
+<!-- 86 -->
+| `_II_86_Partition_List` | Partition List | https://leetcode.com/problems/partition-list/ | Medium |
+
