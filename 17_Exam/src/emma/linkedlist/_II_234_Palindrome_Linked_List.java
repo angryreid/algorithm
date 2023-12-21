@@ -8,12 +8,14 @@ public class _II_234_Palindrome_Linked_List {
         System.out.println(mid.val);
         ListNode rHead = reverseList(mid);
         ListNode lHead = head;
+        ListNode rOldHead = rHead;
         while (rHead != null) {
             System.out.println(rHead.val);
             if (lHead.val != rHead.val) return false;
             lHead = lHead.next;
             rHead = rHead.next;
         }
+        reverseList(rOldHead);
         return true;
     }
 
@@ -53,6 +55,8 @@ public class _II_234_Palindrome_Linked_List {
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
+        System.out.println(head.toString());
         System.out.println(solution.isPalindrome(head));
+        System.out.println(head.toString());
     }
 }
