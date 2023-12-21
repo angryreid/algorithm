@@ -9,4 +9,15 @@ public class _I_206_Reverse_Linked_List {
     head.next = null;
     return newHead;
   }
+
+  public ListNode reverseList2(ListNode head) {
+    ListNode newHead = null;
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = newHead;
+      newHead = head;
+      head = next;
+    }
+    return newHead;
+  }
 }
