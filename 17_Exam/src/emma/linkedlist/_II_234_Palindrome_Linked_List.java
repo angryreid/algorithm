@@ -5,18 +5,20 @@ public class _II_234_Palindrome_Linked_List {
         if (head == null || head.next == null) return true;
         if (head.next.next == null) return head.val == head.next.val;
         ListNode mid = findMidNode(head);
-        System.out.println(mid.val);
         ListNode rHead = reverseList(mid);
         ListNode lHead = head;
         ListNode rOldHead = rHead;
+        boolean isPalindrome = true;
         while (rHead != null) {
-            System.out.println(rHead.val);
-            if (lHead.val != rHead.val) return false;
+            if (lHead.val != rHead.val) {
+                isPalindrome = false;
+                break;
+            }
             lHead = lHead.next;
             rHead = rHead.next;
         }
         reverseList(rOldHead);
-        return true;
+        return isPalindrome;
     }
 
     private ListNode reverseList(ListNode head) {
