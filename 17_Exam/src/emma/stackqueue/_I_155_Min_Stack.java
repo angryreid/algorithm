@@ -9,7 +9,7 @@ public class _I_155_Min_Stack { // Define the class
   public _I_155_Min_Stack() { // Define the constructor
     stack = new Stack<>();
     minStack = new Stack<>();
-    minStack.push(Integer.MAX_VALUE);
+    minStack.push(Integer.MAX_VALUE); // Push the maximum value onto the minStack
   }
 
   public void push(int val) { // Define a method to push a value onto the stack
