@@ -26,6 +26,31 @@ public class _III_239_Sliding_Window_Maximum { // Define the class
         }
         return maxes; // Return the array of maximum values
     }
+
+    public int[] maxSlidingWindow2(int[] nums, int k) {
+        if (k == 1) return nums;
+        int len = nums.length;
+        int[] maxes = new int[len - k + 1];
+        int maxIdx = 0;
+        for (int i = 1; i < k; i++) {
+            if (nums[i] > nums[maxIdx]) maxIdx = i;
+        }
+
+        maxes[0] = nums[maxIdx];
+        for (int li = 1; li < maxes.length; li++) {
+            int ri = li + k - 1;
+            if (maxIdx < li) {
+                maxIdx = li;
+                for (int i = li + 1; i <= ri; i++) {
+                    if (nums[i] > nums[maxIdx]) maxIdx = i;
+                }
+            } else if (nums[ri] >= nums[maxIdx]) {
+                maxIdx = ri;
+            }
+            maxes[li] = nums[maxIdx];
+        }
+        return maxes;
+    }
 }
 
 
