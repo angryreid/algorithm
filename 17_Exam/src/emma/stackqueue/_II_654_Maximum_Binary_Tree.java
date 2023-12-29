@@ -41,8 +41,7 @@ public class _II_654_Maximum_Binary_Tree {
         for (int i = 0; i < len; i++) {
             ris[i] = -1;
             lis[i] = -1;
-            int v = nums[i];
-            while (!stack.isEmpty() && v >= nums[stack.peek()]) {
+            while (!stack.isEmpty() && nums[i] >= nums[stack.peek()]) {
                 ris[stack.pop()] = i;
             }
             if (!stack.isEmpty()) {
