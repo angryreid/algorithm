@@ -1,9 +1,8 @@
 package emma.stackqueue;
 
+import java.util.Stack;
+
 public class _II_654_Maximum_Binary_Tree {
-
-
-
 
     public TreeNode constructMaximumBinaryTree(int[] nums) {
         return findRoot(nums, 0, nums.length);
@@ -61,10 +60,22 @@ public class _II_654_Maximum_Binary_Tree {
             } else if (ris[i] == -1) {
                 parents[i] = lis[i];
             } else {
-                parents[i] = nums[lis[i]] > nums[ris[i]] ? lis[i] : ris[i];
+                parents[i] = nums[lis[i]] > nums[ris[i]] ? ris[i] : lis[i];
             }
         }
         return parents;
+    }
+
+    public static void main(String[] args) {
+        // test case 1
+        int[] nums = {3, 2, 1, 6, 0, 5};
+        // test get parent indexes
+        _II_654_Maximum_Binary_Tree solution = new _II_654_Maximum_Binary_Tree();
+        int[] parents = solution.parentIndexes(nums);
+        for (int i = 0; i < parents.length; i++) {
+            System.out.println(parents[i]);
+        }
+        
     }
 
     /**
