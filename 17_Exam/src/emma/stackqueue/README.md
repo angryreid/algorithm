@@ -36,4 +36,3 @@
 | `_II_654_Maximum_Binary_Tree` | Maximum Binary Tree | https://leetcode.com/problems/maximum-binary-tree/ | Medium |
 <!-- 739 -->
 | `_II_739_Daily_Temperatures` | Daily Temperatures | https://leetcode.com/problems/daily-temperatures/ | Medium |
-
