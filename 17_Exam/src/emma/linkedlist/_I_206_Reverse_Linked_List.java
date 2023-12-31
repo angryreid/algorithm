@@ -1,5 +1,7 @@
 package emma.linkedlist;
 
+import emma.common.ListNode;
+
 public class _I_206_Reverse_Linked_List {
 
   public ListNode reverseList(ListNode head) {

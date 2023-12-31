@@ -1,5 +1,7 @@
 package emma.linkedlist;
 
+import emma.common.ListNode;
+
 public class _II_86_Partition_List {
     public ListNode partition(ListNode head, int x) {
         if (head == null || head.next == null) return head;

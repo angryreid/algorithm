@@ -1,5 +1,7 @@
 package emma.stackqueue;
 
+import emma.common.TreeNode;
+
 import java.util.Stack;
 
 public class _II_654_Maximum_Binary_Tree {
@@ -75,27 +77,5 @@ public class _II_654_Maximum_Binary_Tree {
             System.out.println(parents[i]);
         }
         
-    }
-
-    /**
-     * Definition for a binary tree node.
-     */
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
     }
 }

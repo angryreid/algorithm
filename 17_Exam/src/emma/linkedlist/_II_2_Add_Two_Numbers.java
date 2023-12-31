@@ -1,5 +1,7 @@
 package emma.linkedlist;
 
+import emma.common.ListNode;
+
 public class _II_2_Add_Two_Numbers {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

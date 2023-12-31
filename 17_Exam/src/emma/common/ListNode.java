@@ -1,4 +1,4 @@
-package emma.linkedlist;
+package emma.common;
 
 public class ListNode {
     public int val;

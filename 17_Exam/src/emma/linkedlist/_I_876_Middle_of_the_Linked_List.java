@@ -1,5 +1,7 @@
 package emma.linkedlist;
 
+import emma.common.ListNode;
+
 public class _I_876_Middle_of_the_Linked_List {
     private ListNode findMidNode(ListNode head) {
         if(head == null)

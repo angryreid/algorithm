@@ -1,5 +1,7 @@
 package emma.linkedlist;
 
+import emma.common.ListNode;
+
 public class _I_203_Remove_Linked_List_Elements {
 
   public ListNode removeElements(ListNode head, int val) {
