@@ -30,3 +30,5 @@ sample: 151 is medium, so the file name is _II_151_Reverse_Words_in_a_String.jav
 | `_I_572_Subtree_of_Another_Tree` | Subtree of Another Tree | https://leetcode.com/problems/subtree-of-another-tree/ | Easy |
 <!-- 151 -->
 | `_II_151_Reverse_Words_in_a_String` | Reverse Words in a String | https://leetcode.com/problems/reverse-words-in-a-string/ | Medium |
+<!-- 3 hard -->
+| `_III_3_Longest_Substring_Without_Repeating_Characters` | Longest Substring Without Repeating Characters | https://leetcode.com/problems/longest-substring-without-repeating-characters/ | Hard |
