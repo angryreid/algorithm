@@ -1,91 +1,93 @@
 package emma;
 
 public class BloomFilter<T> {
-    private int bitSize; // binary size
-    private int hashSize; // hash function size
+    private int bitSize; // 二进制大小
+    private int hashSize; // 哈希函数大小
     private long[] bits; // 8 * size
+
     /**
      *
-     * @param n data size
-     * @param p error rate (0 , 1)
+     * @param n 数据大小
+     * @param p 错误率 (0 , 1)
      */
     public BloomFilter(int n, double p) {
         if (n <= 0 || p <= 0 || p>= 1) {
-            throw new IllegalArgumentException("Wrong n or p");
+            throw new IllegalArgumentException("错误的 n 或 p");
         }
         double ln2 = Math.log(2);
-        bitSize = (int) (- (n * Math.log(p)) / (ln2 * ln2));
-        hashSize = (int) (bitSize * ln2 / n);
-        bits = new long[(bitSize + Long.SIZE - 1) / Long.SIZE]; // Long.Size = 64
+        bitSize = (int) (- (n * Math.log(p)) / (ln2 * ln2)); // 计算二进制大小
+        hashSize = (int) (bitSize * ln2 / n); // 计算哈希函数大小
+        bits = new long[(bitSize + Long.SIZE - 1) / Long.SIZE]; // 初始化位数组
         System.out.println(bitSize + " " + hashSize);
     }
+
     /**
-     * To add a  new ele
+     * 添加一个新元素
      * @param value
      */
     public boolean put (T value) {
-        nullCheck(value);
-        int hash1 = value.hashCode();
-        int hash2 = hash1 >>> 16;
+        nullCheck(value); // 检查值是否为null
+        int hash1 = value.hashCode(); // 计算哈希值1
+        int hash2 = hash1 >>> 16; // 计算哈希值2
         boolean result = false;
         for (int i = 1; i <= hashSize; i++) {
-            int combinedHash = hash1 + (i * hash2);
+            int combinedHash = hash1 + (i * hash2); // 计算组合哈希值
             if (combinedHash < 0) {
-                combinedHash = ~combinedHash;
+                combinedHash = ~combinedHash; // 如果组合哈希值为负数，取反
             }
-            int index = combinedHash % bitSize;
-            if(set(index)) result = true;
+            int index = combinedHash % bitSize; // 计算索引
+            if(set(index)) result = true; // 设置位数组的指定索引为1
         }
         return result;
     }
 
     /**
-     * If value existing or not.
+     * 检查值是否存在
      * @param value
-     * @return true -> existing, false -> not existing
+     * @return true -> 存在, false -> 不存在
      */
     public boolean contains(T value) {
-        nullCheck(value);
-        int hash1 = value.hashCode();
-        int hash2 = hash1 >>> 16;
+        nullCheck(value); // 检查值是否为null
+        int hash1 = value.hashCode(); // 计算哈希值1
+        int hash2 = hash1 >>> 16; // 计算哈希值2
         for (int i = 1; i <= hashSize; i++) {
-            int combinedHash = hash1 + (i * hash2);
+            int combinedHash = hash1 + (i * hash2); // 计算组合哈希值
             if (combinedHash < 0) {
-                combinedHash = ~combinedHash;
+                combinedHash = ~combinedHash; // 如果组合哈希值为负数，取反
             }
-            int index = combinedHash % bitSize;
-            if (!get(index)) return false;
+            int index = combinedHash % bitSize; // 计算索引
+            if (!get(index)) return false; // 如果位数组的指定索引为0，返回false
         }
         return true;
     }
 
     private void nullCheck(T value) {
         if (value == null) {
-            throw new IllegalArgumentException("Value must not be null");
+            throw new IllegalArgumentException("值不能为null"); // 如果值为null，抛出异常
         }
     }
 
     /**
-     * Set bits index as 1
+     * 设置位数组的指定索引为1
      * @param index
      */
     private boolean set(int index) {
-        long chunk = bits[index / Long.SIZE];
-        int pointer = index % Long.SIZE;
-        int bitValue = 1 << pointer;
-        bits[index / Long.SIZE] = chunk | bitValue;
-        return (chunk & bitValue) == 0;
+        long chunk = bits[index / Long.SIZE]; // 获取位数组的指定块
+        int pointer = index % Long.SIZE; // 计算指针位置
+        int bitValue = 1 << pointer; // 计算位值
+        bits[index / Long.SIZE] = chunk | bitValue; // 使用位运算符OR设置位数组的指定索引为1
+        return (chunk & bitValue) == 0; // 如果原来的位值为0，返回true，否则返回false
     }
 
     /**
-     * Get bits index value and reture true for 1, false for 0
+     * 获取位数组的指定索引的值，1返回true，0返回false
      * @param index
      * @return
      */
     private boolean get(int index) {
-        long chunk = bits[index / Long.SIZE];
-        int pointer = index % Long.SIZE;
-        long value = chunk & ( 1 << pointer );
-        return value != 0;
+        long chunk = bits[index / Long.SIZE]; // 获取位数组的指定块
+        int pointer = index % Long.SIZE; // 计算指针位置
+        long value = chunk & ( 1 << pointer ); // 使用位运算符AND获取位数组的指定索引的值
+        return value != 0; // 如果位值为1，返回true，否则返回false
     }
 }
