@@ -1,5 +1,9 @@
 package emma.dp;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class _II_2707_Extra_Characters_In_A_String {
     public int minExtraChar(String s, String[] dictionary) {
       int n = s.length(); // Get the length of the string

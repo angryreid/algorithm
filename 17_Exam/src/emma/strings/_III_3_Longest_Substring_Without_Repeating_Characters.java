@@ -42,4 +42,27 @@ public class _III_3_Longest_Substring_Without_Repeating_Characters {
         }
         return ans; // 返回最长子串长度
     }
+
+    public int lengthOfLongestSubstring3(String s) {
+        if (s == null) return 0; // If the string is null, return 0
+        char[] chars = s.toCharArray(); // Convert the string to a character array
+        if (chars.length == 0) return 0; // If the string is empty, return 0
+        int[] prevIdxes = new int[128]; // Create an array to store the previous indices of each character
+        for (int i = 0; i < 128; i++) {
+            prevIdxes[i] = -1; // Initialize the array with -1
+        }
+        prevIdxes[chars[0]] = 0; // Set the previous index of the first character to 0
+        int li = 0; // Initialize the left index of the current substring
+        int max = 1; // Initialize the maximum length of a substring without repeating characters
+        for (int i = 1; i < chars.length; i++) { // Iterate over the character array from the second character
+            char curChar = chars[i]; // Get the current character
+            int pi = prevIdxes[curChar]; // Get the previous index of the current character
+            if (li <= pi) { // If the left index is less than or equal to the previous index
+                li = pi + 1; // Update the left index to the previous index plus one
+            }
+            prevIdxes[curChar] = i; // Update the previous index of the current character to the current index
+            max = Math.max(max, i - li + 1); // Update the maximum length if necessary
+        }
+        return max; // Return the maximum length of a substring without repeating characters
+    }
 }
