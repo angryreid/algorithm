@@ -38,3 +38,5 @@
 Sample Input: _II_2707_Extra_Characters_In_A_String
 -->
 | `_II_2707_Extra_Characters_In_A_String` | Extra Characters In A String | https://leetcode-cn.com/problems/extra-characters-in-a-string/description/?envType=daily-question&envId=2024-01-09 | Medium |
+<!-- 礼物的最大价值 -->
+| `_II_47_Gift_Max_Value` | Gift Max Value | https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/ | Medium |
