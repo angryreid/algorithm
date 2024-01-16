@@ -59,6 +59,25 @@ public class _I_121_Best_Time_To_Buy_And_Sell_Stock {
         return max;
     }
 
+
+    public int maxProfit4(int[] prices) {
+        int len = prices.length;
+        if (len == 1) return 0;
+        int dp = prices[1] - prices[0];
+        int max = Math.max(0, dp);
+        for (int i = 1; i < len - 1; i++) {
+            int prev = dp;
+            int profit = prices[i + 1] - prices[i];
+            if (prev > 0) {
+                dp = prev + profit;
+            } else {
+                dp = profit;
+            }
+            max = Math.max(max, dp);
+        }
+        return max;
+    }
+
 //    var maxProfit = function(prices) {
 //        if (prices.length == 1) return 0;
 //        let min = prices[0];
