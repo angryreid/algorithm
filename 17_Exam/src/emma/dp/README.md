@@ -42,3 +42,5 @@ Sample Input: _II_2707_Extra_Characters_In_A_String
 | `_II_47_Gift_Max_Value` | Gift Max Value | https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/ | Medium |
 <!-- 121 easy -->
 | `_I_121_Best_Time_To_Buy_And_Sell_Stock` | Best Time To Buy And Sell Stock | https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/ | Easy |
+<!-- 72 -->
+| `_II_72_Edit_Distance` | Edit Distance | https://leetcode-cn.com/problems/edit-distance/ | Medium |
