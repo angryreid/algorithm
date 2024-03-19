@@ -25,7 +25,10 @@ public class EmailMasker {
       maskedEmail.append("***");
     } else {
       maskedEmail.append(firstPart.charAt(0));
-      maskedEmail.append("*".repeat(Math.max(0, firstPart.length() - 2)));
+      int length = Math.max(0, firstPart.length() - 2);
+      for (int i = 0; i < length; i++) {
+        maskedEmail.append("*");
+      }
       maskedEmail.append(firstPart.charAt(firstPart.length() - 1));
     }
     maskedEmail.append("@").append(secondPart);
