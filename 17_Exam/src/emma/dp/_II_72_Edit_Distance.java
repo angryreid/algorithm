@@ -20,11 +20,9 @@ public class _II_72_Edit_Distance {
             for (int j = 1; j < col; j++) {
                 int delete = 1 + dp[i][j - 1]; // word1[0, i) -> word1[0, i - 1) -> word2[0, j)
                 int insert = dp[i - 1][j] + 1; // word1[0, i) -> word2[0, j - 1) -> word2[0, j)
-                int replace = 0;
-                if (cs1[i - 1] == cs2[j - 1]) {
-                    replace = dp[i - 1][j - 1];
-                } else {
-                    replace = dp[i - 1][j - 1] + 1;
+                int replace = dp[i - 1][j - 1];;
+                if (cs1[i - 1] != cs2[j - 1]) {
+                    replace++;
                 }
                 dp[i][j] = Math.min(delete, Math.min(insert, replace));
             }
