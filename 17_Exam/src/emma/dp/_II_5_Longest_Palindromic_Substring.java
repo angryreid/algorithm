@@ -1,6 +1,11 @@
 package emma.dp;
 
 public class _II_5_Longest_Palindromic_Substring {
+    /**
+     * Nick's solution
+     * @param s input string
+     * @return longest palindromic substring
+     */
     public String longestPalindrome(String s) {
         if (s == null) return null;
         String res = "";
