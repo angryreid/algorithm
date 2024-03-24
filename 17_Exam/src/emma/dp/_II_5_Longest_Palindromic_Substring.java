@@ -18,13 +18,14 @@ public class _II_5_Longest_Palindromic_Substring {
         boolean[][] dp = new boolean[len][len];
         for (int i = len - 1; i >= 0 ; i--) {
             for (int j = i; j < len; j++) {
-                int subLen = j - i + 1;
+                int subLen = j - i;
                 boolean headIsTail = stringList[i] == stringList[j];
-                if (subLen <= 2) {
-                    dp[i][j] = headIsTail;
-                } else {
-                    dp[i][j] = dp[i + 1][j - 1] && headIsTail;
-                }
+//                if (subLen <= 2) {
+//                    dp[i][j] = headIsTail;
+//                } else {
+//                    dp[i][j] = dp[i + 1][j - 1] && headIsTail;
+//                }
+                dp[i][j] = headIsTail && (subLen <= 1 || dp[i + 1][j - 1]);
                 if (dp[i][j] && subLen > max) {
                     max = subLen;
                     res = s.substring(i, j + 1); // end index in substring is exclusive
@@ -32,5 +33,25 @@ public class _II_5_Longest_Palindromic_Substring {
             }
         }
         return res;
+    }
+
+    public String longestPalindrome2(String s) {
+        if (s == null) return null;
+        String res = "";
+        char[] stringList = s.toCharArray();
+        int len = stringList.length, left = 0, maxLen = 1;
+        boolean[][] dp = new boolean[len][len];
+        for (int i = len - 1; i >= 0 ; i--) {
+            for (int j = i; j < len; j++) {
+                int subLen = j - i + 1;
+                boolean headIsTail = stringList[i] == stringList[j];
+                dp[i][j] = headIsTail && (subLen <= 2 || dp[i + 1][j - 1]);
+                if (dp[i][j] && subLen > maxLen) {
+                    maxLen = subLen;
+                    left = i;
+                }
+            }
+        }
+        return new String(stringList, left, maxLen);
     }
 }
