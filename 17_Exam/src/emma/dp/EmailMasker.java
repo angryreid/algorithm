@@ -34,4 +34,21 @@ public class EmailMasker {
     maskedEmail.append("@").append(secondPart);
     return maskedEmail.toString();
   }
+
+  public static String maskEmail2(String email) {
+        if (email == null || email.length() == 0) {
+            return "";
+        }
+        String[] parts = email.split("@");
+        String firstPart = parts[0];
+        String secondPart = parts[1];
+        if (firstPart.length() <= 3) {
+            return "***" + "@" + secondPart;
+        } else {
+            // return firstPart.charAt(0) + "***" + firstPart.charAt(firstPart.length() - 1) + "@" + secondPart;
+            // the first character and the last character of the first part is visible
+            // the rest characters of the first part is "*"
+            return firstPart.charAt(0) + new String(new char[firstPart.length() - 2]).replace("\0", "*") + firstPart.charAt(firstPart.length() - 1) + "@" + secondPart;
+        }
+    }
 }
