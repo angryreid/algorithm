@@ -54,4 +54,25 @@ public class _II_5_Longest_Palindromic_Substring {
         }
         return new String(stringList, left, maxLen);
     }
+
+    // 1d array
+    public String longestPalindrome3(String s) {
+        if (s == null) return null;
+        String res = "";
+        char[] stringList = s.toCharArray();
+        int len = stringList.length, left = 0, maxLen = 1;
+        boolean[] dp = new boolean[len];
+        for (int i = len - 1; i >= 0 ; i--) {
+            for (int j = len - 1; j >= i; j--) {
+                int subLen = j - i + 1;
+                boolean headIsTail = stringList[i] == stringList[j];
+                dp[j] = headIsTail && (subLen <= 2 || dp[j - 1]);
+                if (dp[j] && subLen > maxLen) {
+                    maxLen = subLen;
+                    left = i;
+                }
+            }
+        }
+        return new String(stringList, left, maxLen);
+    }
 }
