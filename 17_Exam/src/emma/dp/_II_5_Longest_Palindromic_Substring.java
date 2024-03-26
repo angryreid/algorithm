@@ -101,5 +101,44 @@ public class _II_5_Longest_Palindromic_Substring {
         return right - left - 1;
     }
 
-    
+    // Manacher's Algorithm
+    public String longestPalindrome5(String s) {
+        if (s == null) return null;
+        char[] stringList = s.toCharArray();
+        int len = stringList.length;
+        if (len == 0) return "";
+        char[] newString = new char[2 * len + 1];
+        for (int i = 0; i < len; i++) {
+            newString[2 * i] = '#';
+            newString[2 * i + 1] = stringList[i];
+        }
+        newString[2 * len] = '#';
+        int[] p = new int[2 * len + 1];
+        int center = 0, right = 0;
+        for (int i = 1; i < 2 * len; i++) {
+            int mirror = 2 * center - i;
+            if (right > i) {
+                p[i] = Math.min(right - i, p[mirror]);
+            }
+            int left = i - p[i] - 1, right1 = i + p[i] + 1;
+            while (left >= 0 && right1 < 2 * len + 1 && newString[left] == newString[right1]) {
+                p[i]++;
+                left--;
+                right1++;
+            }
+            if (i + p[i] > right) {
+                center = i;
+                right = i + p[i];
+            }
+        }
+        int maxLen = 0, centerIndex = 0;
+        for (int i = 0; i < 2 * len + 1; i++) {
+            if (p[i] > maxLen) {
+                maxLen = p[i];
+                centerIndex = i;
+            }
+        }
+        int start = (centerIndex - maxLen) / 2;
+        return s.substring(start, start + maxLen);
+    }
 }
