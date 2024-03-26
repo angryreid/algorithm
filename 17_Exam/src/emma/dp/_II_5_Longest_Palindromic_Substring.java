@@ -75,4 +75,31 @@ public class _II_5_Longest_Palindromic_Substring {
         }
         return new String(stringList, left, maxLen);
     }
+
+    // expand around center
+    public String longestPalindrome4(String s) {
+        if (s == null) return null;
+        char[] stringList = s.toCharArray();
+        int len = stringList.length, left = 0, maxLen = 1;
+        for (int i = 0; i < len; i++) {
+            int len1 = expandAroundCenter(stringList, i, i);
+            int len2 = expandAroundCenter(stringList, i, i + 1);
+            int max = Math.max(len1, len2);
+            if (max > maxLen) {
+                maxLen = max;
+                left = i - (max - 1) / 2;
+            }
+        }
+        return new String(stringList, left, maxLen);
+    }
+
+    private int expandAroundCenter(char[] s, int left, int right) {
+        while (left >= 0 && right < s.length && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+
+    
 }
