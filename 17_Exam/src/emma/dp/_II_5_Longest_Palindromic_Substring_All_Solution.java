@@ -2,9 +2,11 @@ package emma.dp;
 
 public class _II_5_Longest_Palindromic_Substring_All_Solution {
     /**
-     * Nick's solution
+     * Nick's solution (Dynamic Programming)
      * @param s input string
      * @return longest palindromic substring
+     * Time complexity: O(n^2)
+     * Space complexity: O(n^2)
      */
     public String longestPalindrome(String s) {
         if (s == null) return null;
@@ -35,6 +37,13 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         return res;
     }
 
+    /**
+     * Dynamic Programming (Space Optimized)
+     * @param s input string
+     * @return longest palindromic substring
+     * Time complexity: O(n^2)
+     * Space complexity: O(n^2)
+     */
     public String longestPalindrome2(String s) {
         if (s == null) return null;
         String res = "";
@@ -55,7 +64,13 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         return new String(stringList, left, maxLen);
     }
 
-    // 1d array
+    /**
+     * Dynamic Programming (Space Optimized) 
+     * @param s input string
+     * @return longest palindromic substring
+     * Time complexity: O(n^2)
+     * Space complexity: O(n)
+     */
     public String longestPalindrome3(String s) {
         if (s == null) return null;
         String res = "";
@@ -76,7 +91,14 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         return new String(stringList, left, maxLen);
     }
 
-    // expand around center
+    /**
+     * Expand Around Center
+     * @param s input string
+     * @return longest palindromic substring
+     * Time complexity: O(n^2)
+     * Space complexity: O(1)   
+     * Reference: https://leetcode.com/problems/longest-palindromic-substring/solution/
+     */
     public String longestPalindrome4(String s) {
         if (s == null) return null;
         char[] stringList = s.toCharArray();
@@ -101,7 +123,14 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         return right - left - 1;
     }
 
-    // Manacher's Algorithm
+    /**
+     * Manacher's Algorithm
+     * @param s input string
+     * @return longest palindromic substring
+     * Time complexity: O(n)
+     * Space complexity: O(n)
+     * Reference: https://www.felix021.com/blog/read.php?2040
+     */
     public String longestPalindrome5(String s) {
         if (s == null) return null;
         char[] stringList = s.toCharArray();
@@ -140,5 +169,34 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         }
         int start = (centerIndex - maxLen) / 2;
         return s.substring(start, start + maxLen);
+    }
+
+    /**
+     * violent solution
+     * @param s input string
+     * @return longest palindromic substring
+     * Time complexity: O(n^3)
+     * Space complexity: O(1)
+     */
+    public String longestPalindrome6(String s) {
+        if (s == null) return null;
+        char[] stringList = s.toCharArray();
+        int len = stringList.length, left = 0, maxLen = 1;
+        for (int i = 0; i < len; i++) {
+            for (int j = i; j < len; j++) {
+                if (isPalindrome(stringList, i, j) && j - i + 1 > maxLen) {
+                    maxLen = j - i + 1;
+                    left = i;
+                }
+            }
+        }
+        return new String(stringList, left, maxLen);
+    }
+
+    private boolean isPalindrome(char[] s, int left, int right) {
+        while (left < right) {
+            if (s[left++] != s[right--]) return false;
+        }
+        return true;
     }
 }
