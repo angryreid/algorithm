@@ -167,18 +167,14 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         while (i < len) {
             int start = i, end = i;
             // Skip duplicate characters.
-            while (++end < len && stringList[end] == stringList[i]);
-            i = end; // Move i to the next different character.
-            int len1 = expandAroundCenter(stringList, start, end - 1); // odd or even length, start to end is the center
-            // int len1 = expandAroundCenter(stringList, start - 1, end); //Error: odd or even length, start to end is the center
-            /**
-             * The issue in your code is that you are expanding around the center from start - 1 to end. This could cause an ArrayIndexOutOfBoundsException if start is 0.
-
-To fix this, you should expand around the center from start to end. Here is the corrected code:
-             */
+            while (end < len - 1 && stringList[end] == stringList[end + 1]) {
+                end++;
+            }
+            i = end + 1; // Move i to the next different character.
+            int len1 = expandAroundCenter(stringList, start, end); // odd or even length, start to end is the center
             if (len1 > maxLen) {
                 maxLen = len1;
-                left = start - (len1 - end + start - 1) / 2; // (len1 - end + start - 1) / 2 is the half of the length of the palindrome
+                left = start - (len1 - end + start - 1) / 2;// (len1 - end + start - 1) / 2 is the half of the length of the palindrome
             }
         }
         return new String(stringList, left, maxLen);
