@@ -180,6 +180,29 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
         return new String(stringList, left, maxLen);
     }
 
+    public String longestPalindrome4_dot_3(String s) {
+        if (s == null) return null;
+        char[] cs = s.toCharArray();
+        int len = cs.length, l = 0, maxLen = 1;
+        int i = 0;
+        while (i < len) {
+            int li = i - 1, r = i;
+            while (++r < len && cs[i] == cs[r]);
+            i = r;
+            while (li >= 0 && r < len && cs[li] == cs[r]) {
+                li--;
+                r++;
+            }
+            li++;
+            int subLen = r - li;
+            if (subLen > maxLen) {
+                maxLen = subLen;
+                l = li;
+            }
+        }
+        return new String(cs, l, maxLen);
+    }
+
     /**
      * Manacher's Algorithm
      * @param s input string
