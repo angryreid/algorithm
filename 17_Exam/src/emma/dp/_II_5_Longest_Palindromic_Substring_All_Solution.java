@@ -152,6 +152,34 @@ public class _II_5_Longest_Palindromic_Substring_All_Solution {
     }
 
     /**
+     * Enhancement based on expand Around Center
+     * @param s input string
+     * @return longest palindromic substring
+     * Time complexity: O(n^2)
+     * Space complexity: O(1)
+     * Reference: https://leetcode.com/problems/longest-palindromic-substring/solution/
+     */
+    public String longestPalindrome4_dot_2(String s) {
+        if (s == null) return null;
+        char[] stringList = s.toCharArray();
+        int len = stringList.length, left = 0, maxLen = 1;
+        for (int i = 0; i < len; ) {
+            int start = i, end = i;
+            // Skip duplicate characters.
+            while (end < len - 1 && stringList[end] == stringList[end + 1]) {
+                end++;
+            }
+            i = end + 1; // Move i to the next different character.
+            int len1 = expandAroundCenter(stringList, start, end); // odd or even length, start to end is the center
+            if (len1 > maxLen) {
+                maxLen = len1;
+                left = start - (len1 - end + start - 1) / 2; // (len1 - end + start - 1) / 2 is the half of the length of the palindrome
+            }
+        }
+        return new String(stringList, left, maxLen);
+    }
+
+    /**
      * Manacher's Algorithm
      * @param s input string
      * @return longest palindromic substring
