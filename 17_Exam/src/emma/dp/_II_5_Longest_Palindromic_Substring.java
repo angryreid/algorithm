@@ -95,14 +95,39 @@ public class _II_5_Longest_Palindromic_Substring {
     static public String longestPalindrome4(String s) {
         if (s == null) return null;
         char[] cs = s.toCharArray();
-        int len = cs.length, l = 0, maxLen = 1;
+        int len = cs.length;
+        if (len <= 1) return s;
         char[] mncs = processManacherString(cs, len);
-        System.out.println(mncs);
-        return new String(cs, l, maxLen);
+        int[] m = new int[mncs.length];
+        m[2] = 1;
+        int c = 1, r = 1, last = m.length - 2;
+        int idx = 0, maxLen = 0;
+        for (int i = 2; i < last; i++) {
+            if (r > i) {
+                int li = (c << 1) - i;
+                if (i + m[li] <= r) {
+                    m[i] = m[li];
+                } else {
+                    m[i] = r - i;
+                }
+            }
+            while (mncs[i + m[i] + 1] == mncs[i - m[i] - 1]) {
+                m[i]++;
+            }
+            if (i + m[i] > r) {
+                c = i;
+                r = i + m[i];
+            }
+            if (m[i] > maxLen) {
+                maxLen = m[i];
+                idx = i;
+            }
+        }
+        return new String(cs, (idx - maxLen) >> 1, maxLen);
     }
 
     public static void main(String[] args) {
-        String s = "abcaabaa";
+        String s = "abcaabaa"; // ^#a#b#c#a#a#b#a#a#$
         System.out.println(longestPalindrome4(s));;
     }
 }
