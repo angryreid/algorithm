@@ -54,4 +54,55 @@ public class _II_5_Longest_Palindromic_Substring {
         }
         return new String(stringList, left, maxLen);
     }
+
+    public String longestPalindrome3(String s) {
+        if (s == null) return null;
+        char[] cs = s.toCharArray();
+        int len = cs.length, l = 0, maxLen = 1;
+        int i = 0;
+        while (i < len) {
+            int li = i - 1, r = i;
+            while (++r < len && cs[i] == cs[r]);
+            i = r;
+            while (li >= 0 && r < len && cs[li] == cs[r]) {
+                li--;
+                r++;
+            }
+            li++;
+            int subLen = r - li;
+            if (subLen > maxLen) {
+                maxLen = subLen;
+                l = li;
+            }
+        }
+        return new String(cs, l, maxLen);
+    }
+
+    static char[] processManacherString(char[] chars, int len) {
+        int csLen = 2 * len + 3;
+        char[] cs = new char[csLen];
+        cs[0] = '^';
+        cs[1] = '#';
+        cs[csLen - 1] = '$';
+        for (int i = 0; i < len; i++) {
+            int idx = (i + 1) * 2;
+            cs[idx] = chars[i];
+            cs[idx + 1] = '#';
+        }
+        return cs;
+    }
+
+    static public String longestPalindrome4(String s) {
+        if (s == null) return null;
+        char[] cs = s.toCharArray();
+        int len = cs.length, l = 0, maxLen = 1;
+        char[] mncs = processManacherString(cs, len);
+        System.out.println(mncs);
+        return new String(cs, l, maxLen);
+    }
+
+    public static void main(String[] args) {
+        String s = "abcaabaa";
+        System.out.println(longestPalindrome4(s));;
+    }
 }

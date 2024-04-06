@@ -1,7 +1,5 @@
 package emma.pointer;
 
-import com.sun.jmx.snmp.SnmpUnknownMsgProcModelException;
-
 public class _II_16_16_sub_sort_lcci {
   // LeetCode 16.16 link: https://leetcode.com/problems/sub-sort-lcci/
 
