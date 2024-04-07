@@ -8,7 +8,27 @@ import java.util.Random;
 public class TestMorris {
     public static class MorrisTree extends BinarySearchTree<Integer> {
         public void inOrder() {
-            inOrder(root);
+            Node<Integer> node = root;
+            while (node != null) {
+                if (node.left != null) {
+                    Node<Integer> pred = node.left;
+                    while(pred.right != null && pred.right != node) {
+                        pred = pred.right;
+                    }
+                    if(pred.right == null) {
+                        pred.right = node;
+                        node = node.left;
+                    } else {
+                        // pred.right == node
+                        System.out.print(node.element + " ->");
+                        pred.right = null;
+                        node = node.right;
+                    }
+                } else {
+                    System.out.print(node.element + " ->");
+                    node = node.right;
+                }
+            }
         }
 
         public void inOrder(Node<Integer> node) {
