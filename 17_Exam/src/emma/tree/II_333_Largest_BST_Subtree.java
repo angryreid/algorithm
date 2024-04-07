@@ -8,10 +8,60 @@ public class II_333_Largest_BST_Subtree {
     private int nodes(TreeNode root) {
         return 0;
     }
-
-    public int largestBSTSubtree(TreeNode root) {
+    /**
+     * Preorder traversal -> root, left, right
+     * This solution is not correct, but it is a good starting point, it will have much more duplicated cases
+     * Method to find the largest BST subtree
+     * @param root The root of the tree
+     * @return The size of the largest BST subtree
+     */
+    public int largestBSTSubtree2(TreeNode root) {
         if (root == null) return 0;
         if (isBST(root)) return nodes(root);
         return Math.max(largestBSTSubtree(root.left), largestBSTSubtree(root.right));
+    }
+
+    public static class Result {
+        int size;
+        int lower;
+        int upper;
+        boolean isBST;
+
+        public Result() {
+            this.size = 0;
+            this.lower = Integer.MAX_VALUE;
+            this.upper = Integer.MIN_VALUE;
+            this.isBST = false;
+        }
+    }
+
+    private Result largestBSTSubtreeHelper(TreeNode root) {
+        if (root == null) {
+            Result r = new Result();
+            r.isBST = true; // An empty tree is a BST
+            return r;
+        }
+
+        Result left = largestBSTSubtreeHelper(root.left);
+        Result right = largestBSTSubtreeHelper(root.right);
+
+        Result r = new Result();
+        // An invalid subtree will cause the whole tree to be invalid.
+        if (!left.isBST || !right.isBST || root.val <= left.upper || root.val >= right.lower) {
+            r.isBST = false;
+            r.size = Math.max(left.size, right.size); // Return the size of the largest BST
+            return r;
+        }
+
+        r.isBST = true;
+        r.size = left.size + 1 + right.size;
+        r.lower = root.left != null ? left.lower : root.val;
+        r.upper = root.right != null ? right.upper : root.val;
+
+        return r;
+    }
+
+    public int largestBSTSubtree(TreeNode root) {
+        return largestBSTSubtreeHelper(root).size;
     }
 }
