@@ -13,7 +13,7 @@
    5. Zigzag-order
    6. Vertical-order
    7. Topological-order
-   8. Morris-traversal
+   8. Morris-traversal is a way to traverse a tree without using recursion and extra space
    9. Iterative-traversal
    10. Recursive-traversal
    11. Iterative-traversal
