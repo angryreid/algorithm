@@ -2,22 +2,26 @@
 
 ## Pre-requisites
 
-### How to define a Tree problem ?
+### How to solve a Tree problem ?
 
-1. Define the objective function
-2. Identify the base cases
-3. Write down a recurrence relation for the optimized objective function
-4. What's the order of execution ?
-5. Where to look for the answer ?
-6. What's the time complexity ?
-7. What's the space complexity ?
-8. Optimize the solution by using a memoization table (top-down[recursion] / bottom-up[iteration])
-9. Write code from the recurrence relation
-10. Test the solution with edge cases
+1. Recurrence relation
+2. Order of execution
+   1. Pre-order
+   2. In-order
+   3. Post-order
+   4. Level-order
+   5. Zigzag-order
+   6. Vertical-order
+   7. Topological-order
+   8. Morris-traversal
+   9. Iterative-traversal
+   10. Recursive-traversal
+   11. Iterative-traversal
+
 
 ## Exams
 
-<!-- create markdown tabble with following columns -->
+<!-- create mark down table with following columns -->
 
 <!-- 1. Exam Solution Class
 1. Exam Name

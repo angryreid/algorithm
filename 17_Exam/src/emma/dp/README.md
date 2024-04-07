@@ -23,7 +23,7 @@
 
 ## Exams
 
-<!-- create markdown tabble with following columns -->
+<!-- create markdown table with following columns -->
 
 <!-- 1. Exam Solution Class
 1. Exam Name

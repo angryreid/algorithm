@@ -19,7 +19,7 @@ Binary search is a search algorithm that finds the position of a target value wi
 
 ## Exams
 
-<!-- create markdown tabble with following columns -->
+<!-- create markdown table with following columns -->
 
 <!-- 1. Exam Solution Class
 2. Exam Name
