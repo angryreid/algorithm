@@ -18,7 +18,6 @@
    10. Recursive-traversal
    11. Iterative-traversal
 
-
 ## Exams
 
 <!-- create mark down table with following columns -->
@@ -34,3 +33,5 @@
 | --- | --- | --- | --- |
 <!-- 236 -->
 | `_II_236_Lowest_Common_Ancestor_Of_A_Binary_Tree` | Lowest Common Ancestor Of A Binary Tree | https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/ | Medium |
+<!-- 99 -->
+| `_II_99_Recover_Binary_Search_Tree` | Recover Binary Search Tree | https://leetcode-cn.com/problems/recover-binary-search-tree/ | Hard |
