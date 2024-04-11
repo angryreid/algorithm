@@ -19,3 +19,4 @@
 | --- | --- | --- | --- |
 <!-- 26 -->
 | _I_26_RemoveDuplicatesFromSortedArray | Remove Duplicates from Sorted Array | [Leetcode](https://leetcode.com/problems/remove-duplicates-from-sorted-array/) | Easy |
+| _I_27_RemoveElement | Remove Element | [Leetcode](https://leetcode.com/problems/remove-element/) | Easy |
