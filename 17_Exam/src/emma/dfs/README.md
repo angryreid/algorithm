@@ -42,3 +42,5 @@
 | --- | --- | --- | --- |
 <!-- 17 Medium https://leetcode.cn/problems/letter-combinations-of-a-phone-number/description/ -->
 | _II_LetterCombinationsOfAPhoneNumber | Letter Combinations of a Phone Number | [LeetCode](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | Medium |
+<!-- 46 -->
+| _II_Permutations | Permutations | [LeetCode](https://leetcode.com/problems/permutations/) | Medium |
