@@ -44,3 +44,5 @@
 | _II_LetterCombinationsOfAPhoneNumber | Letter Combinations of a Phone Number | [LeetCode](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | Medium |
 <!-- 46 -->
 | _II_Permutations | Permutations | [LeetCode](https://leetcode.com/problems/permutations/) | Medium |
+<!-- 22 -->
+| _II_GenerateParentheses | Generate Parentheses | [LeetCode](https://leetcode.com/problems/generate-parentheses/) | Medium |
