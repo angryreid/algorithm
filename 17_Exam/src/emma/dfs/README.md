@@ -52,5 +52,7 @@
 | _II_Permutations | Permutations | [LeetCode](https://leetcode.com/problems/permutations/) | Medium |
 <!-- 22 -->
 | _II_GenerateParentheses | Generate Parentheses | [LeetCode](https://leetcode.com/problems/generate-parentheses/) | Medium |
+<!-- 112 easy -->
+| _II_PathSum | Path Sum | [LeetCode](https://leetcode.com/problems/path-sum/) | Medium |
 <!-- 113 -->
 | _II_PathSumII | Path Sum II | [LeetCode](https://leetcode.com/problems/path-sum-ii/) | Medium |
