@@ -28,6 +28,12 @@
 22. **Understand** : Understand the code of the problem. How to understand the solution of the problem.
 23. **Implement** : Implement the code of the problem. How to implement the solution of the problem.
 
+## Solution
+
+1. Define the state of the problem.
+2. What's the condition to return the result of the state.
+3. How to set the loop to iterate over the choices.
+
 ## Exams
 
 <!-- create markdown table with following columns -->
