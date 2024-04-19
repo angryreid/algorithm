@@ -44,26 +44,24 @@ public class _II_3Sum { // exceded time limit
      * Time complexity: O(n^2)
      */
     public List<List<Integer>> threeSum2(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList();
         Arrays.sort(nums);
         int len = nums.length;
         for (int i = 0; i < len - 2; i++) {
-            // Skip the same numbers to avoid duplicate combinations
             if (i > 0 && nums[i] == nums[i - 1]) continue;
-            int j = i + 1, k = len - 1;
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
+            int l = i + 1, r = len - 1;
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
                 if (sum == 0) {
-                    res.add(Arrays.asList(nums[i], nums[j], nums[k]));
-                    // Skip the same numbers to avoid duplicate combinations
-                    while (j < k && nums[j] == nums[j + 1]) j++;
-                    while (j < k && nums[k] == nums[k - 1]) k--;
-                    j++;
-                    k--;
+                    res.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                    while (l < r && nums[l] == nums[l + 1]) l++;
+                    while (l < r && nums[r] == nums[r - 1]) r--;
+                    l++;
+                    r--;
                 } else if (sum < 0) {
-                    j++;
+                    l++;
                 } else {
-                    k--;
+                    r--;
                 }
             }
         }
