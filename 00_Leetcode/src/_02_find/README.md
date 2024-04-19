@@ -2,8 +2,6 @@
 
 ## Pre-requisites
 
-
-
 ## Exams
 
 <!-- create markdown table with following columns -->
