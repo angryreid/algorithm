@@ -5,6 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class _II_3Sum { // exceded time limit
+    /**
+     * @param nums: Give an array nums of n integer
+     * @return: Find all unique triplets in the array which gives the sum of zero.
+     *
+     * Time complexity: O(n^3)
+     */
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> path = new ArrayList<>();
@@ -31,6 +37,12 @@ public class _II_3Sum { // exceded time limit
     }
 
 
+    /**
+     * @param nums: Give an array nums of n integer
+     * @return: Find all unique triplets in the array which gives the sum of zero.
+     *
+     * Time complexity: O(n^2)
+     */
     public List<List<Integer>> threeSum2(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(nums);
