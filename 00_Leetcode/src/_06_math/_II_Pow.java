@@ -30,16 +30,32 @@ public class _II_Pow {
     }
 
     public double myPow2(double x, int n) {
-        if (n == 0)
-            return 1;
+        if (n == 0) return 1;
+        if (n == -1) return 1 / x;
         boolean odd = (n & 1) == 1;
-        double half = myPow(x, n >> 1);
+        double half = myPow2(x, n >> 1);
         half *= half;
         if (odd) {
             half *= x;
         }
+        // if (n < 0) {
+        //     half = half / x;
+        // }
+        return half;
+    }
+
+    public double myPow3(double x, int n) {
+        if (n == 0)
+            return 1;
         if (n < 0) {
-            half = half / x;
+            x = 1 / x;
+            n = -n;
+        }
+        boolean odd = (n & 1) == 1;
+        double half = myPow3(x, n >> 1);
+        half *= half;
+        if (odd) {
+            half *= x;
         }
         return half;
     }
