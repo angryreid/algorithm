@@ -29,6 +29,14 @@ public class _II_Pow {
         return res;
     }
 
+    /**
+     * optimized solution to calculate x^n
+     * @param x  base
+     * @param n  power
+     * @return x^n
+     * 
+     * Time complexity: O(logn)
+     */
     public double myPow2(double x, int n) {
         if (n == 0) return 1;
         if (n == -1) return 1 / x;
