@@ -57,7 +57,7 @@ public class _II_Pow {
             return 1;
         if (n < 0) {
             x = 1 / x;
-            n = -n;
+            n = -n; // this line will have stack overflow
         }
         boolean odd = (n & 1) == 1;
         double half = myPow3(x, n >> 1);
@@ -66,5 +66,19 @@ public class _II_Pow {
             half *= x;
         }
         return half;
+    }
+
+    public double myPow4(double x, int n) {
+        double res = 1.0;
+        boolean neg = n < 0;
+        long y = neg ? -((long) n) : n;
+        while (y > 0) {
+            if ((y & 1) == 1) {
+                res *= x;
+            }
+            x *= x;
+            y >>= 1;
+        }
+        return neg ? (1 / res) : res;
     }
 }
