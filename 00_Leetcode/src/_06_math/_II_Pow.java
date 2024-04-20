@@ -28,4 +28,19 @@ public class _II_Pow {
 
         return res;
     }
+
+    public double myPow2(double x, int n) {
+        if (n == 0)
+            return 1;
+        boolean odd = (n & 1) == 1;
+        double half = myPow(x, n >> 1);
+        half *= half;
+        if (odd) {
+            half *= x;
+        }
+        if (n < 0) {
+            half = half / x;
+        }
+        return half;
+    }
 }
