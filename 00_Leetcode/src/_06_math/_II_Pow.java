@@ -49,6 +49,8 @@ public class _II_Pow {
         // if (n < 0) {
         //     half = half / x;
         // }
+        // -5 >> 1 = -3
+        // 5 >> 1 = 2
         return half;
     }
 
