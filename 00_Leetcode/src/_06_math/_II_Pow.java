@@ -83,4 +83,26 @@ public class _II_Pow {
         }
         return neg ? (1 / res) : res;
     }
+
+    // Method to calculate (x^y) mod p
+    public int myPowMod(int x, int y, int p) {
+        // If x, y, or p is less than or equal to 0, return 0
+        if (x < 0 || y < 0 || p <=0) return 0;
+        // Initialize the result to 1
+        int pow = 1;
+        // While y is greater than 0
+        while (y > 0) {
+            // If y is odd
+            if ((y & 1) == 1) {
+                // Multiply pow by x and reduce the result modulo p
+                pow = (pow * x) % p;
+            }
+            // Square x and reduce the result modulo p
+            x = (x * x) % p;
+            // Divide y by 2
+            y >>= 1;
+        }
+        // Return the result
+        return pow;
+    }
 }
