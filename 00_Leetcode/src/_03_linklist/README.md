@@ -17,3 +17,5 @@
 | --- | --- | --- | --- |
 <!-- 19 Medium -->
 | _II_19_RemoveNthNodeFromEndOfList | Remove Nth Node From End of List | [Leetcode](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | Medium |
+<!-- 146 -->
+| _II_LRUCache | LRU Cache | [Leetcode](https://leetcode.com/problems/lru-cache/) | Medium |
