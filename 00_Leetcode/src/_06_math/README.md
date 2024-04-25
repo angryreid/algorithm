@@ -46,3 +46,5 @@ In summary, fast power is an efficient power operation algorithm that is very us
 | _II_SpiralMatrix | Spiral Matrix | [LeetCode](https://leetcode.com/problems/spiral-matrix/) | Medium |
 <!-- 7 -->
 | _I_ReverseInteger | Reverse Integer | [LeetCode](https://leetcode.com/problems/reverse-integer/) | Easy |
+<!-- 252 https://leetcode.cn/problems/meeting-rooms/description/ -->
+| _I_MeetingRooms | Meeting Rooms | [LeetCode](https://leetcode.com/problems/meeting-rooms/) | Easy |
