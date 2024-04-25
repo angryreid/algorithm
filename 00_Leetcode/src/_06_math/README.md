@@ -44,3 +44,5 @@ Fast power is an efficient algorithm for calculating power operations. It has th
 In summary, fast power is an efficient power operation algorithm that is very useful in scenarios requiring power operations with large exponents. It greatly improves the computation efficiency through the divide-and-conquer approach. |
 <!-- 54 -->
 | _II_SpiralMatrix | Spiral Matrix | [LeetCode](https://leetcode.com/problems/spiral-matrix/) | Medium |
+<!-- 7 -->
+| _I_ReverseInteger | Reverse Integer | [LeetCode](https://leetcode.com/problems/reverse-integer/) | Easy |
