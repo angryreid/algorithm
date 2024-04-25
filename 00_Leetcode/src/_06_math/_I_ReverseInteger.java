@@ -24,4 +24,15 @@ public class _I_ReverseInteger {
         }
         return (int) res;
     }
+
+    public int reverse3(int x) {
+        int res = 0;
+        while (x != 0) {
+            int pre = res;
+            res = pre * 10 + x % 10;
+            if ((res - x % 10) / 10 != pre) return 0;
+            x = x / 10;
+        }
+        return res;
+    }
 }
