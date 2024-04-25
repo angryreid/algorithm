@@ -7,14 +7,11 @@ public class _I_ReverseInteger {
      * @return
      */
     public int reverse(int x) {
-        boolean negtive = x < 0;
-        x = negtive ? -x : x;
         int res = 0;
         while (x != 0) {
-            int tail = x % 10;
-            res = res * 10 + tail;
+            res = res * 10 +  x % 10;
             x = x / 10;
         }
-        return negtive ? -res : res;
+        return res;
     }
 }
