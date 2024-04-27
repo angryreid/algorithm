@@ -1,5 +1,7 @@
 package _06_math;
 
+import java.util.Arrays;
+
 public class _I_MeetingRooms {
     public boolean canAttendMeetings(int[][] intervals) {
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
