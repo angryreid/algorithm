@@ -6,6 +6,9 @@ import java.util.PriorityQueue;
 
 public class _II_MeetingRoomsII {
     // Method to find the minimum number of meeting rooms needed
+    /**
+     * Time complexity: O(nlogn) for sorting the intervals array
+     */
     public int minMeetingRooms(int[][] intervals) {
         // If the intervals array is null or empty, return 0
         if (intervals == null || intervals.length == 0) return 0;
