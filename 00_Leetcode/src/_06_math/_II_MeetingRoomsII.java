@@ -35,4 +35,27 @@ public class _II_MeetingRoomsII {
         // The size of the min heap is the minimum number of meeting rooms needed
         return minHeap.size();
     }
+
+    public int minMeetingRooms2(int[][] intervals) {
+        // If the intervals array is null or empty, return 0
+        if (intervals == null || intervals.length == 0) return 0;
+        int len = intervals.length;;
+        int[] startTimes = new int[len];
+        int[] endTimes = new int[len];
+        for (int i = 0; i < len; i++) {
+            startTimes[i] = intervals[i][0];
+            endTimes[i] = intervals[i][1];
+        }
+        Arrays.sort(startTimes);
+        Arrays.sort(endTimes);
+        int room = 0, endIdx = 0;
+        for (int start : startTimes) {
+            if (start < endTimes[endIdx]) {
+                room++;
+            } else {
+                endIdx++;
+            }
+        }
+        return room;
+    }
 }
