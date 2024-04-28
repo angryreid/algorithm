@@ -13,7 +13,17 @@ public class _II_ContainerWithMostWater {
                 l++;
             }
         }
+        return max;
+    }
 
+    public int maxArea2(int[] height) {
+        int len = height.length;
+        int l = 0, r = len - 1;
+        int max = 0;
+        while (l < r) {
+            int minH = height[l] < height[r] ? height[l++] : height[r--];
+            max = Math.max(max, minH * (r - l + 1));
+        }
         return max;
     }
 }
