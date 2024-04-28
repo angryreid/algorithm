@@ -75,4 +75,26 @@ public class _II_ContainerWithMostWater {
         // Return the maximum area
         return max;
     }
+
+    public int maxArea4(int[] height) {
+        // Get the length of the height array
+        int len = height.length;
+        // Initialize two pointers at the two ends of the array
+        int l = 0, r = len - 1;
+        // Initialize the maximum area to 0
+        int max = 0;
+        // While the two pointers have not met
+        while (l < r) {
+            // Get the heights at the two pointers
+            int minH = Math.min(height[l], height[r]);
+            // Update the maximum area with the maximum of the current maximum area and the area of the current container
+            max = Math.max(max, minH * (r - l));
+            // While the right pointer is greater than the left pointer and the height at the right pointer is less than or equal to the previous height at the right pointer, decrement the right pointer
+            while (r > l && height[r] <= minH) r--;
+            // While the left pointer is less than the right pointer and the height at the left pointer is less than or equal to the previous height at the left pointer, increment the left pointer
+            while (l < r && height[l] <= minH) l++;
+        }
+        // Return the maximum area
+        return max;
+    }
 }
