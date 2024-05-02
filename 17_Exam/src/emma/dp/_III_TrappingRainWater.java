@@ -40,7 +40,7 @@ public class _III_TrappingRainWater {
         int leftMax = 0;
         for (int i = 1; i < len - 1; i++) {
             leftMax = Math.max(leftMax, height[i - 1]);
-            int min = Math.min(leftMax[i], rightMax[i]);
+            int min = Math.min(leftMax, rightMax[i]);
             if (min <= height[i])
                 continue;
             res += min - height[i];
