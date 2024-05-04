@@ -47,4 +47,3 @@ Sample Input: _II_2707_Extra_Characters_In_A_String
 <!-- 5 -->
 | `_II_5_Longest_Palindromic_Substring` | Longest Palindromic Substring | https://leetcode-cn.com/problems/longest-palindromic-substring/ | Medium |
 | _III_TrappingRainWater | Trapping Rain Water | [LeetCode](https://leetcode.com/problems/trapping-rain-water/) | Hard |
-

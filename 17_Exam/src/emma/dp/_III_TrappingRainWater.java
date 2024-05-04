@@ -47,4 +47,19 @@ public class _III_TrappingRainWater {
         }
         return res;
     }
+
+    public int maxArea3(int[] height) {
+        if (height == null)
+            return 0;
+        int len = height.length;
+        if (len <= 2)
+            return 0;
+        int l = 0, r = len - 1, res = 0, lowerMax = 0;
+        while (l < r) {
+            int lower = height[height[l] <= height[r] ? l++ : r--];
+            lowerMax = Math.max(lowerMax, lower);
+            res += lowerMax - lower;
+        }
+        return res;
+    }
 }
