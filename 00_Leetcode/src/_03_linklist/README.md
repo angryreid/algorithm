@@ -19,3 +19,5 @@
 | _II_19_RemoveNthNodeFromEndOfList | Remove Nth Node From End of List | [Leetcode](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | Medium |
 <!-- 146 -->
 | _II_LRUCache | LRU Cache | [Leetcode](https://leetcode.com/problems/lru-cache/) | Medium |
+<!-- 24 -->
+| _II_24_SwapNodesInPairs | Swap Nodes in Pairs | [Leetcode](https://leetcode.com/problems/swap-nodes-in-pairs/) | Medium |
